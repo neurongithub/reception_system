@@ -1,0 +1,196 @@
+
+[+] [solider reception project] - [Documentation!]
+
+[+] Project Planing
+
+projcet phases :
+
+     #0- problem discovery [Done]
+
+     #1- MVP thinking [Done]
+
+     #2- workflow modeling [Done]
+
+     #3- UI modeling [Done]
+
+     #4- Entity modeling [Done]
+
+     #5- relationship modeling [Done]
+
+     #6- ER design [Done]
+
+     #7- DataBase design [Done]
+
+     #8- architectutre design [Done]
+
+     #9- technology selection [Done]
+
+     #10- setup development enviroment [Done]
+
+     #11- file system structure project [Done]
+
+     #12- Development
+
+     #After Development :
+
+        #13- testing
+
+        #14- deployment
+
+
+[+] project start date: june 2026 - khordad 1405
+
+[-] Section #0- discovery problem:
+
+    - create a reception web application system to Streamlining and faster the process of accepting training soldiers
+
+    - present realtime process state to other units with using a local network {Main Problem}
+
+    - solve problem working  with a excel file [fiel can be deleted,broken,excel bugs, ]
+
+    - Increased system stability - in excample what happen if computer suddenly turning of?
+
+
+[-] Section #1- MVP thinking:
+
+    - application featurs in first version (v1): GUI(wireframe style), Basic login form(basic authentication), file upload(to upload excel file),form handel,parse excel file to database format,application result(export)(with excel format) ,reception panel , viewer panel
+
+    - application featurs in future versions (v2...)[back_log]: Better GUI(progress bar+theme changer ligth/dark + date&time, callnder, Hamburger menu) , front-end validation,session & cookie, export to print on paper(output in any time and any state on spefic selection of data),
+
+
+
+[-] Section #2- workflow modeling:
+
+    - I create project workflow with online diagram tool and save it an png file in project_documents
+
+[-] Section #3- UI modeling:
+
+    - Design 3 wireframe pages in first project version : 1- login page 2-create course page 3- reception page
+
+[-] Section #4- Entity modeling :
+
+    -Models specified for the initial version of the program:‌
+
+        entity_1 -> Reception(course) -->[properties] >> id,name,course_code, start_date,capacity
+        entity_2 -> solder --> [properties] >> id , name , lastName ,father_name ,national_id ,age,health_status,city,Phone_number,education,etc..
+        entity_3 -> user --> [properties] >> id ,user_name, password, roel (in this project we have 1 admin_user and 5 regular user[just for view ing])
+        entity_4 -> battalion [properties] >> name
+        entity_5 -> company [properties] >> id,name
+
+[-] Section #5 relationship modeling:
+
+    - user 1:N reception
+    - reception 1:N solder
+    - company 1:N solder
+    - battalion 1:N company
+
+[-] Section #6 ER modeling:
+
+    - I desing ERD modle with helping entity and relationships onthe  paper
+
+
+[-] Sectionn #7 DataBase design :
+
+    -The initial database tables were drawn on paper.
+
+[-] Section #8 architectutre desing :
+
+    - agent: web browser
+    - web app: apache web_server +python + Flask + other libraries + sql database like sqlalchemy
+    - max user :6 min users :1 -> 1 admin , 5 viewer
+    - local network with ip local,and ethernet cable
+    - server: linux server(arch)
+
+[-] Section #9 technology selection:
+
+    -python + mysql + flsk + apche + html/css + javascript + git & github , library:panda
+
+
+[-] Section #10- setup development enviroment:
+
+    -os: arch linux
+    -editor: vscode
+
+[-] Section #11- file system structure project (project Layout):
+
+    /home/user/Projects/solider_reception
+
+        app/  ==> (main project directory )
+
+            templates/ (contains templates)
+
+                    index.html
+                    base.html ==> (contains html layout)
+
+            statics/ (contains statics file's like js,css )
+                js/
+                css/
+                images/
+                
+            __init.py ==> (Initializes the Flask app)
+            models.py ==> (contains dtatbase models)
+            routes.py ==> (contains application routes)
+            
+            
+
+        tests/
+            __init__.py
+            test_auth.py
+            test_modules.py
+        
+
+        .venv/  ==> (containe virtual enviroment)
+        settings.py (config.py) ==>(containe application settings)
+        run.py ==> (Entry point to run app)
+
+        project_documents/
+        requirements.txt
+        wsgi.py
+        README.md
+
+
+
+========================================================== [-] Development ===================================================
+# qute: The development methodology in this project is that when building a feature, we go to the end or a good level and then move on to the next feature.
+
+feature_1: develope a athentication system (login)
+
+    step #1 -> routes & views for login page [Done]
+    (learning add project to git )
+
+    setp #2 -> create simplest UI based on wireframe
+
+    step #3 -> models & setup dataBase
+
+    step #4 -> develope logic of auth system
+
+    other steps[in future] -> seesion, cookie, password hasing, autofiling forms, better UI , supported farsi fonts , 
+
+
+
+
+
+
+
+feature_2: create a index page (in admin(oprator) view )
+
+
+feature_3: develope making course page
+
+
+feature_4: develope a reception page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
