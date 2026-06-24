@@ -1,0 +1,91 @@
+*{
+    margin: 0px;
+    padding: 0px;
+   
+}
+html ,body{
+    height: 100%;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main {
+  flex: 1;  /* main grows to fill any leftover space */
+}
+
+.welecom-login { 
+    text-align: center;
+}
+
+.login-box { 
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 200;
+    height: 200;
+    border: 4px solid #ccc;
+    padding: 30px;
+    margin-top: 50 px;
+    margin-left: 500px;
+    margin-right: 500px;
+    display: flex;
+
+}
+
+.login-forms { 
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+
+}
+.username-input {
+    
+    font-size: 16px;
+    width: 300px;
+    height: 35px;
+}
+.password-input {
+    width: 300px;
+    font-size: 16px;
+    height: 35px;
+    margin-bottom: 30px;
+}
+
+.submit-button{
+    font-size: 16px;
+    font-style: oblique;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    width: 100px;
+    height: 30px;
+}
+
+
+
+
+/* footbar nav  */
+
+.foot-nav { 
+    display: flex;
+    border: 5px #ccc solid;
+    align-items: center;
+    align-content: center;
+    /* justify-content: space-between;
+    justify-content: space-between; */
+    margin-top: 100px;
+    padding: 30px 30px;
+    background: #ffff;
+    justify-content: center;
+}
+
+.foot-nav-links{
+    display: flex;
+    gap: 50px;
+
+    
+}

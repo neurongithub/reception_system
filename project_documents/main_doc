@@ -156,15 +156,14 @@ projcet phases :
 feature_1: develope a athentication system (login)
 
     step #1 -> routes & views for login page [Done]
-    (learning add project to git )
 
-    setp #2 -> create simplest UI based on wireframe
+    setp #2 -> create simplest UI based on wireframe[Done]
 
     step #3 -> models & setup dataBase
 
     step #4 -> develope logic of auth system
 
-    other steps[in future] -> seesion, cookie, password hasing, autofiling forms, better UI , supported farsi fonts , 
+    step #[back log] -> seesion, cookie, password hasing, autofiling forms, better UI , supported farsi fonts , responsive page,username & password checking
 
 
 
