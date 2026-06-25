@@ -163,7 +163,7 @@ feature_1: develope a athentication system (login)
 
     step #4 -> develope logic of auth system [Done]
 
-    step #[back log] -> seesion[Done], cookie[Done], password hasing[Done], autofiling forms, better UI , supported farsi fonts , responsive page,username & password checking
+    step #[back log] -> seesion[Done], cookie[Done], password hasing[Done], autofiling forms, better UI , supported farsi fonts[Done] ,username & password checking
 
 
 
