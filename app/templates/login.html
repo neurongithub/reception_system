@@ -8,27 +8,41 @@
 
 {# ================================ main body content ============================================= #}
 {% block content %}
+
 <br><br><br>
 <div class = 'welecom-login'>
-    <h2>soldier reception system - V 0.0.2 </h2>
-    <h3>Login to see dashboard</h3>
+    <h2> سامانه پذیرش و مدیریت سربازان آموزشی - نسخه ۰.۰۳ </h2><br>
+    <h3>ورود به سامانه</h3>
 </div> <br>
 
 <div class='login-box'>
 
     <div class='login-forms'>
-        
-        <input class= 'username-input' type="text" name= 'username' placeholder="Username"><br><br>
-        
-        <input class='password-input' type="pasword" name="password" placeholder="Password"> <br><br>
-        
-        <button class="submit-button" name="submit" type="submit">
-            <b>Login</b>
-        </button>
+        <form action="/login/" method="POST">
+            <input class= 'username-input' type="text" name= 'username' placeholder="نام کاربری"><br><br>
+            
+            <input class='password-input' type="pasword" name="password" placeholder="رمز عبور"> <br><br>
+            
+            <button class="submit-button" name="submit" type="submit">
+                <b>ورود</b>
+            </button>
+        </form>
         
 
     </div>
 </div>
+{# ============= alert box (show errors) ===================== #}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert {{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{# =============================================================== #}
 
  {% endblock content %}
 
@@ -37,8 +51,8 @@
  {% block footer %}
 <nav class='foot-nav'>
             <ul class='foot-nav-links'>
-                <li>About application</li><br><br>
-                <li>About developer</li><br><br>
+                <li>درباره اپلیکیشن</li><br><br>
+                <li>درباره توسعه دهنده</li><br><br>
                 <li>test link</li>
             </ul>
 

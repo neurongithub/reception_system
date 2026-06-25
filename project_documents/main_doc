@@ -157,21 +157,17 @@ feature_1: develope a athentication system (login)
 
     step #1 -> routes & views for login page [Done]
 
-    setp #2 -> create simplest UI based on wireframe[Done]
+    setp #2 -> create simplest UI based on wireframe [Done]
 
-    step #3 -> models & setup dataBase
+    step #3 -> models & setup dataBase [Done]
 
-    step #4 -> develope logic of auth system
+    step #4 -> develope logic of auth system [Done]
 
-    step #[back log] -> seesion, cookie, password hasing, autofiling forms, better UI , supported farsi fonts , responsive page,username & password checking
-
-
+    step #[back log] -> seesion[Done], cookie[Done], password hasing[Done], autofiling forms, better UI , supported farsi fonts , responsive page,username & password checking
 
 
 
-
-
-feature_2: create a index page (in admin(oprator) view )
+feature_2: create a dashboard (index) page (just for admin  )
 
 
 feature_3: develope making course page
