@@ -165,9 +165,16 @@ feature_1: develope a athentication system (login)
 
     step #[back log] -> seesion[Done], cookie[Done], password hasing[Done], autofiling forms, better UI , supported farsi fonts[Done] ,username & password checking
 
-
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 feature_2: create a dashboard (index) page (just for admin  )
+    step #1 -> route and view [Done]
+    step #2 -> create wireframe UI
+            . create a simple alwasy display side bar [Done]
+            .create a application usage inside dashboard panel [Done]
+    step #3 -> develope page logic [Done] + logout button [DOne]
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 feature_3: develope making course page

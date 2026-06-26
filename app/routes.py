@@ -20,10 +20,10 @@ def login_page () :
         user = User.query.filter_by(username=username).first()
         
         if not user : 
-            flash("[x] user_name or password invalid....", "error")
+            flash("خطا:‌ نام کاربری یا رمزعبور اشتباه وارد شده است", "error")
             return redirect(url_for("main.login_page"))
             
-        
+       
         #cheeck on username & password 
         if user and check_password_hash(user.password_hashed , password): 
             if user.role =="admin" : 
@@ -68,7 +68,6 @@ def view():
     return render_template("view.html")
     
 
-
 #Dashboard route (retun to admin only )
 @main_bp.route("/dashboard/")
 def dashboard () : 
@@ -79,3 +78,46 @@ def dashboard () :
         abort(403)
     
     return render_template("dashboard.html")
+
+
+#create course rooute  ==> open create course page
+@main_bp.route('/dashboard/create_course/')
+def create_course ()  :
+    
+    if "user_id" not in session : 
+        return redirect(url_for("main.login_page"))
+    if session.get("role")!="admin" : 
+        abort(403)
+    
+    return render_template('create_coures.html')
+
+#reception route ==> open reception page 
+@main_bp.route('/dashboard/reception//')
+def reception () : 
+    if "user_id" not in session : 
+        return redirect(url_for("main.login_page"))
+    if session.get("role")!="admin" : 
+        abort(403)
+    
+    return render_template('reception.html')
+
+#last courses ==> open last courses page [back log now]
+@main_bp.route('/dashboard/last_courses/')
+def last_courses () : 
+    
+    if "user_id" not in session : 
+        return redirect(url_for("main.login_page"))
+    if session.get("role")!="admin" : 
+        abort(403)
+    
+    return render_template('last_courses.html')
+
+#logout button endpoint 
+@main_bp.route("/dashboard/logout/") 
+def logout () :
+    
+    session.pop('user_id',None)
+    session.clear()
+    return redirect(url_for("main.login_page"))
+
+

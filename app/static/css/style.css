@@ -1,3 +1,6 @@
+
+/* style file for base.html */
+
 @font-face {
     font-family: "Vazir";
     src: url("../fonts/Vazirmatn-Regular.woff2") format("woff2");
@@ -38,11 +41,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border: 5px #ccc solid;
-        background: #ffffff;
-        border: 2px soid #999;
+        border: 1px #ccc solid;
+        background: #ccc;
+        border: solid #555;
+        border-radius: 0px;
         padding: 30px 30px ;
-
+        margin: 0px;
+        border:  hidden;
     }
     
 
