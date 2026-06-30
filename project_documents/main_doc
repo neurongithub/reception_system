@@ -178,8 +178,20 @@ feature_2: create a dashboard (index) page (just for admin  )
 
 
 feature_3: develope making course page
+    #1:excel & data_base
+        3-1: [+] get excel file as input and sen it to web application
+        3-2:[+] parsing the excel 
+        3-3:[+] create a data_base(table) using excel records (in each record must have two empty colums for battalion &company)
+        3-4:[+] move excel's data in to data_base
+        3-5:[+] show message if parse and creating data_base is ok
+    #2: mapping 
+        3-6:[+] get course information as input
+        3-7:[+] save that info's in json file 
+            3-7-1 [+]
 
 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 feature_4: develope a reception page
 
 

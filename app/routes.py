@@ -121,3 +121,9 @@ def logout () :
     return redirect(url_for("main.login_page"))
 
 
+@main_bp.route("/dashboard/help/")
+def test() : 
+    
+    return render_template("help.html")
+
+

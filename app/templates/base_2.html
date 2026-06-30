@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title dir="rtl">{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static' , filename='css/base_2.css') }}">
+    {% block extra_css_2 %}{% endblock extra_css_2 %}
+</head>
+
+<body>
+
+    {# store base nav-bar  #}
+    <header >
+        <div class="nav-bar-container">
+
+        <nav dir="rtl" class = "navbar">
+            <div class="nav-logo">Application LOGO</div>
+            <ul class="nav-links">
+                {# <li><a href="#">test0</a> </li>
+                <li><a href="#">test1</a></li>
+                <li><a href="#">test2</a></li> #}
+                <p>سامانه یکپارچه پذیرش فراگیران </p>
+            </ul>
+            <div class='date-time'>Date/time</div>             
+
+        </nav>
+
+    </header>
+
+
+
+    {# hold main content #}
+    <div class="main-div-container" dir="rtl">
+
+        {# sidebar #}
+        <div class="side-bar-container">
+            <div class="sidebar">
+
+                <div class="side-bar-intro">
+                    <h2>گزینه ها</h2> 
+                    <input id="search-input" type="text" placeholder="جستجو">
+                </div>
+                
+                <div class="side-bar-buttons">
+                    <div class="create_course"><a id="create_course_id" href="/dashboard/create_course/">ایجاد دوره جدید</a></div>
+                    <div class="reception"><a id="reception_a" href="/dashboard/reception/">پذیرش</a></div>
+                    <div class="last_courses"><a id="last_course_a" href="/dashboard/last_courses/">همه دوره ها</a></div>
+                    <div class="usage"><a id="usage" href="/dashboard/help/">راهنما</a></div>
+                </div>
+
+            </div>
+        </div>
+
+        {# content #}
+        <div class="content-container">
+        
+            <main dir="rtl">
+                {% block content %}
+                {% endblock  %} 
+            </main>
+        </div>
+
+        
+
+
+    </div>
+
+
+
+    {# hold base footer #}
+    <footer>
+
+    </footer>
+
+
+
+
+
+    <script src="{{ url_for('static' , filename='js/script.js') }}""></script>
+</body>
+
+
+</html>
