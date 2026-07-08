@@ -2,6 +2,10 @@
 from flask import Blueprint,render_template , request , redirect , url_for , session ,abort , flash
 from app.models import User
 from werkzeug.security import check_password_hash
+from werkzeug.utils import secure_filename
+from pathlib import Path
+from flask import current_app
+import os 
 
 #main Blueprint
 main_bp = Blueprint('main', __name__)
@@ -125,5 +129,47 @@ def logout () :
 def test() : 
     
     return render_template("help.html")
+
+
+@main_bp.route("/dashboard/upload/" ,methods=["GET","POST"])
+def upload() : 
+    
+     # file extension checking 
+    ALLOWED_EXTENSIONS ={
+        "xls", 
+        "xlsx"
+    }
+    if request.method =='POST': 
+        
+        
+        def allowed_file (filename) : 
+            return ("." in filename and filename.rsplit(".",1)[1].lower() in ALLOWED_EXTENSIONS)
+        
+        #basic validation
+        if "excel_file" not in request.files:
+            flash("خطا : فایل اکسل را انتخاب کنید" ,'error')
+            return redirect(url_for("main.create_course"))
+
+        file = request.files["excel_file"]
+
+        if file.filename == "":
+            flash("[Error]-فایل اکسل انتخاب نشده است ابتدا فایل اکسل را وارد کنید" , 'error')
+            print("choose file please ") #just show me on server log in testsing 
+            return redirect(url_for("main.create_course"))
+        
+        if not allowed_file(file.filename):
+            print("invalid input type")
+            flash("Invalid file type ",'error')
+            return redirect(url_for("main.create_course"))
+        
+    
+        upload_folder = current_app.config["UPLOAD_FOLDER"]
+        upload_folder.mkdir(parents=True, exist_ok=True)
+        file.save(upload_folder / file.filename)
+        print("File uploaded successfully")
+        flash("آپلود فایل اکسل با موفقیت انجام شد!!!", "success")
+        
+    return redirect(url_for("main.create_course"))
+    
 
 

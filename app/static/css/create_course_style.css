@@ -6,8 +6,189 @@
 
 .container{
     display: flex;
+    flex-direction: row;
     margin: 0;
     padding: 0;
-    
-    
 }
+
+.advance-data-container{
+    display: flex;
+    border: 2px solid green hidden;
+    border-radius: 10px;
+    margin: 15px;
+    width: 100vh;
+    height: 68vh;
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s ease;
+    box-shadow: 0 20px 15px rgba(5, 5, 5, 0.08);
+    border-radius: 7px;
+    color: black;
+    background: linear-gradient(180deg, #d4d4d4 0%, #ffff 100%);
+    box-shadow: 0 20px 15px rgb(5, 5, 5, 0.08);
+    transition: all 0.3s ease;
+
+}
+
+.basic-data-container{
+    display: flex;
+    flex-direction: column;
+    border: solid rgb(46, 46, 158) 2px hidden;
+    border-radius: 15px;
+    height: 68vh;
+    width: 25vh;
+    margin: 15px;
+    margin-right: 5px;
+    gap: 5px;
+}
+
+.basic-data{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s ease;
+    box-shadow: 0 20px 15px rgba(5, 5, 5, 0.08);
+    border-radius: 7px;
+    color: black;
+    height: 1000vh;
+    width: 120%;
+    background: linear-gradient(180deg, #d4d4d4 0%, #ffff 100%);
+    box-shadow: 0 20px 15px rgb(5, 5, 5, 0.08);
+    transition: all 0.3s ease;
+}
+h4 {
+    margin-top: 10px;
+    margin-right: 70px;
+    margin-left: 40px;
+    margin-bottom: 10px;
+}
+hr{
+    margin-right: 30px;
+    margin-left: 30px;
+}
+.input-excel-container{
+    display: flex;
+    border: 2px solid #e0e0e0;
+    height: 1000vh;
+  width: 120%;
+  border-radius: 7px;
+  color: black; 
+background: linear-gradient(180deg, #d4d4d4 0%, #ffff 100%);
+  box-shadow: 0 20px 15px rgb(5, 5, 5, 0.08);
+  transition: all 0.3s ease;
+}
+
+.excel-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+#excel-submit-button{
+    display: flex;
+    width: 10vh;
+    height: 4vh;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 3px;
+    border-color: #1399e6;;
+    background-color:dodgerblue;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+
+.course-name{
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    color: black;
+    font-size: 15px;
+     justify-content: center;
+    align-items: center;
+}
+#course-name-input{
+    width: 80%;
+    height: 3.5vh;
+    border-radius: 5px;
+    border-color: #555;
+    color: black;
+}
+
+.course_code{
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    color: black;
+    justify-content: center;
+    align-items: center;
+}
+#course-code-input{
+     width: 80%;
+    height: 3.5vh;
+    border-radius: 5px;
+    border-color: #555;
+    color: black;
+}
+.course_date{
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    color: black;
+     justify-content: center;
+    align-items: center
+}
+#course-date-input{
+     width: 80%;
+    height: 3.5vh;
+    border-radius: 5px;
+    border-color: #555;
+    color: black;
+}
+.sub-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   margin-top: 20px;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+#send-button{
+    display: flex;
+    width: 10vh;
+    height: 4vh;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 3px;
+    border-color: #198754;;
+    background-color: #157347;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#cancel-button{
+    display: flex;
+    width: 10vh;
+    height: 4vh;
+     justify-content: center;
+     align-items: center;
+     color: white;
+     border-radius: 3px;
+     border-color: #b02a37;
+    background-color: #bb2d3b;
+     font-size: 15px;
+     font-weight: 600;
+    cursor: pointer;
+}
+
+
+
+
+

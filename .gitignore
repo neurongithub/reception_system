@@ -28,4 +28,11 @@ config.local.py
 *.tmp
 .DS_Store
 
+*.xlsx
+*.xls
+
+app/uploads/
+
+tests/
+
 

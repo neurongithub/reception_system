@@ -1,2 +1,5 @@
 Flask
 flask-migrate
+pandas
+SQLAlchemy 
+openpyxl

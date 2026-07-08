@@ -6,6 +6,9 @@ from datetime import datetime , timedelta
 
 # BASE_DIR = Path(__file__).resolve().parent
 class Config :
+        
+        BASE_DIR =Path(__file__).resolve().parent
+        
         #=========== database configs  = ================
         #set database path to root directory 
         SQLALCHEMY_DATABASE_URI  ="sqlite:///database.db"
@@ -18,6 +21,12 @@ class Config :
         #when using real domain
         # SESSION_COOKIE_DOMAIN = ".example.com"
         #=================================
+        
+        # ================ file upload configs==================
+        UPLOAD_FOLDER= BASE_DIR / "app/uploads"
+        
+       
+       
         
 
     

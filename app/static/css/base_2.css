@@ -146,7 +146,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 40px;
-    background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 100%);
+    background: linear-gradient(180deg, #d4d4d4 0%, #ffff 100%);
     color: black;
     
 }
@@ -187,30 +187,31 @@ body {
     justify-content: center;
     align-items: center;
     border:solid 2px;
-    border-color: #2d7fd3;
+    border-color: #1399e6;;
+    background-color:dodgerblue;
     border-radius: 10px;
     width: 90%;
     height: 55px;
     cursor: pointer ;
 }
 #create_course_id{
-    color: rgb(10, 10, 10);
+    color: white;
     font-weight: 600;
     text-decoration: none;
 }
 
 #reception_a{
-    color: rgb(10, 10, 10);
+    color: white;
     font-weight: 600;
     text-decoration: none;
 }
 #last_course_a{
-    color: rgb(10, 10, 10);
+    color: white;
     font-weight: 600;
     text-decoration: none;
 }
 #usage{
-    color: rgb(10, 10, 10);
+    color: white;
     font-weight: 600;
     text-decoration: none;
 }
@@ -220,7 +221,8 @@ body {
     justify-content: center;
     align-items: center;
     border:solid 2px;
-    border-color: #d3af2d;
+   border-color: #1399e6;;
+    background-color:dodgerblue;
     border-radius: 10px;
     width: 90%;
     height: 55px;
@@ -233,7 +235,8 @@ body {
     justify-content: center;
     align-items: center;
     border:solid 2px;
-    border-color: #0b9931;
+    border-color: #1399e6;;
+    background-color:dodgerblue;
     border-radius: 10px;
     width: 90%;
     height: 55px;
@@ -245,7 +248,8 @@ body {
     justify-content: center;
     align-items: center;
     border:solid 2px;
-    border-color: #d32d3b;
+     border-color: #1399e6;;
+    background-color:dodgerblue;
     border-radius: 10px;
     width: 90%;
     height: 55px;
@@ -268,4 +272,50 @@ body {
     margin-top: 20px;
     margin-left: 10px;
     margin-right: 5px;
+}
+
+
+/* flash messages style  */
+
+.flash-container {
+    margin: 20px 0;
+}
+
+.flash {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Green */
+.success {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left:400px;
+    margin-right: 400px;
+    background-color: #28a745;
+}
+
+/* Red */
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left:400px;
+    margin-right: 400px;
+    background-color: #dc3545;
+}
+
+/* Orange */
+.warning {
+    background-color: #ffc107;
+    color: #333;
+}
+
+/* Blue */
+.info {
+    background-color: #007bff;
 }

@@ -2,6 +2,7 @@
 
 {% block title %}create course{% endblock title %}
 
+
 {% block extra_css_2 %}
 <link rel="stylesheet" href="{{ url_for('static' , filename='css/create_course_style.css') }}">
 {% endblock extra_css_2 %}
@@ -10,10 +11,66 @@
 {% block content %}
 
 
+
 <div class="container">
+    <div class="advance-data-container">
+        
+    </div> 
     
+    
+    <div class="basic-data-container">
+            {# excel input #}
+            <div class="input-excel-container">
+                <form id="form-excel" action="/dashboard/upload/" method="POST" enctype="multipart/form-data" >
+                    <div class="excel-container">
+                        <h4>فایل اکسل:</h4>
+                        <input id ="excel_file_input" type="file"  name="excel_file" accept=".xlsx,.xls" required><br>
+                        <button id="excel-submit-button" type="submit" >upload</button>
+                    </div>
+                </form>
+            </div> 
+
+            {# basic course data #}
+            <div class="basic-data">
+                <form action="">
+                    <div class="basic-info">
+                        <h4>اطلاعات دوره:</h4><hr>
+                    </div>
+                    <div class="course-name">
+                        <p>نام دوره:</p>
+                        <input id="course-name-input" type="text" >
+                    </div>
+                    <div class="course_code">
+                        <p>کد دوره:</p>
+                        <input id="course-code-input" type="number" >
+                    </div>
+                    <div class="course_date">
+                        <p>تاریخ دوره:</p>
+                        <input id="course-date-input" type="date" >
+                    </div>
+                    <div class="sub-buttons">
+                        <button type="submit" id="send-button">ثبت</button>
+                        <button id="cancel-button">لغو</button>
+                    </div>
+                </form>
+                
+                {# <h4 for="course_code">کد دوره:</h4>
+                <input type="number" id="course_code" name="course_code" >
+
+                <h4 for="course_code">نام دوره:</h4>
+                <input type="text" id="course_name" name="course_name">
+
+                <h4 for="course_date">تاریخ برگزاری:</h4>
+                <input type="date" id="course_date" name="course_date"> #}
+
+            </div>
+    </div>
 
 </div>
 
 
 {% endblock content %}
+
+{% block extra_script %}
+<script src="{{ url_for('static',filename='js/create_course.js') }}"></script>
+{% endblock extra_script %}
