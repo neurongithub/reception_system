@@ -176,32 +176,46 @@ feature_2: create a dashboard (index) page (just for admin  )
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-feature_3: develope making course page
-    #1:excel & data_base
-        3-1: [+] get excel file as input and sen it to web application [Done]
-                - create UI to get excel file (form handeling) [Done]
-                - send excel file overhttp  [Done]
-                - validation excel file[Done]
-                - store excel file [Done]
+feature_3: making_course page
 
-        3-2:[+] parsing the excel 
-            3-2-1:[+] read the excel file 
-            3-2-2:[+] extract data from excel file 
-            3-2-3:[+] validation 
-            3-2-4:[+] convert extracted data to (python data file )
+    backlogs :
+        [+] 
 
-        3-3:[+] create a data_base(table) using excel records (in each record must have two empty colums for battalion &company)
-        3-4:[+] move excel's data in to data_base
-        3-5:[+] show message if parse and creating data_base is ok
-    #2: mapping 
-        3-6:[+] get course information as input
-        3-7:[+] save that info's in json file 
-            3-7-1 [+]
+    steps:
+        #0:create courses table 
+            - create course model [Done]
+            - create a courses table using model(flask-migrate) [Done]
+            - handel input with html form [Done]
+            - create a test course in courses table using input data's [Done]
+
+        #1:excel & data_base
+            3-1: [+] get excel file as input and sen it to web application [Done]
+                    - create UI to get excel file (form handeling) [Done]
+                    - send excel file overhttp  [Done]
+                    - validation excel file[Done]
+                    - store excel file [Done]
+        #2: parsing
+            3-2:[+] parsing the excel 
+                3-2-1:[+] read the excel file [Done]
+                3-2-2:[+] extract data from excel file [Done]
+                3-2-3:[+] validation data_frame [Done]
+                3-2-4:[+] convert extracted data to (python data file ) [Done]
+        #3: mapping & importing 
+            3-3:[+] create table for => courses(saving course info), soldier (saving soldier info) [Done]
+            3-4:[+] move data_fram in to data_base (mapping)[Done]
+            3-5:[+] show message if parse and creating data_base is ok [Done]
+        
+        #4: Json handeling 
+            4-1:‌[+] get battalion & company information with html form [Done]
+            4-2:[+] convert & save python object(<dict>) to json file [Done]
+            4-3:[+] parse json file [Done]
+            4-4:[+] mappe the json data farame [Done]
+            4-5:[+] return parsing result to response (Return response as html web page ) [Done]
 
 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-feature_4: develope a reception page
+feature_4: Reception page 
 
 
 

@@ -22,9 +22,10 @@ class Config :
         # SESSION_COOKIE_DOMAIN = ".example.com"
         #=================================
         
-        # ================ file upload configs==================
+        # ================ excel file upload configs==================
         UPLOAD_FOLDER= BASE_DIR / "app/uploads"
-        
+        #================= json folder path config ==================
+        JSON_FOLDER = BASE_DIR / "json_folder"
        
        
         

@@ -4,7 +4,7 @@ from datetime import datetime
 #database modles (every modle is a class)
 
 
-#model: users table 
+#model #1: users table 
 class User(db.Model) :  
     __tablename__ = 'users'
     
@@ -15,7 +15,7 @@ class User(db.Model) :
     create_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     
 
-#model:a model for courses table 
+#model #2:a model for courses table 
 class Course (db.Model):
     __tablename__ = 'courses'
 
@@ -23,13 +23,15 @@ class Course (db.Model):
     course_name = db.Column(db.String(100),nullable=False)
     course_code = db.Column(db.String(30), unique=True , nullable=False) 
     course_date = db.Column(db.Date,nullable=False)
-    create_at = db.Column(db.DATETIME, erver_default=db.func.now())
+    create_at = db.Column(db.DATETIME, default=datetime.utcnow , nullable=False)
     soldiers = db.relationship("Soldier" , backref="Course" , lazy=True ,  cascade="all, delete-orphan")
+    excel_file = db.Column(db.String(255),nullable=True)
+    
     
 
 
 
-#model:model for soldier informations
+#model #3:model for soldier informations
 # discreption:‌this tabel fill with data_frame (parsing result)
 class Soldier(db.Model):
     __tablename__='soldiers'
@@ -44,6 +46,15 @@ class Soldier(db.Model):
     education = db.Column(db.String(50))
     health_status = db.Column(db.String(50))
     phone = db.Column(db.String(20))
+    province = db.Column(db.String(50), nullable=True)
+    city = db.Column(db.String(50), nullable=True)
+    address= db.Column(db.Text, nullable=True)
+    is_marriage = db.Column(db.String(50), nullable=True,) 
+    battalion = db.Column(db.String(50),nullable=True)
+    company = db.Column(db.String(50),nullable=True)
+    status = db.Column(db.String(50), nullable=False, default="pending")
+    is_green = db.Column(db.Boolean, nullable=True, default=False)
+    create_at = db.Column(db.DATETIME, erver_default=db.func.now())
 
 
 

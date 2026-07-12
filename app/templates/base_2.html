@@ -29,7 +29,7 @@
 
         </nav>
 
-        {# ============= flash messages =================== #}
+        {# ============= flash messages & progress bar =================== #}
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <div class="flash-container">
@@ -41,6 +41,28 @@
                 </div>
             {% endif %}
         {% endwith %}
+
+        {# fake progress bar #}
+
+    <div id="progress-container" style="display:none;">
+
+        <div id="progress-message">
+            در حال ایجاد دوره...
+        </div>
+
+
+        <div class="progress-box">
+
+            <div id="progress-bar">
+                0%
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
 
     </header>
 
@@ -94,7 +116,7 @@
 
 
     <script >
-        {# auto hide flash message after afew secend #}
+        //  auto hide flash message after afew secend 
         setTimeout(() => {
     document.querySelectorAll(".flash").forEach(msg => {
         msg.style.display = "none";
