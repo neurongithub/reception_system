@@ -12,18 +12,58 @@
     {# web site header #}
     <header>
         
-        <nav dir="rtl" class = "navbar">
-            <div class="nav-logo">Application LOGO</div>
-            <ul class="nav-links">
-                {# <li><a href="#">test0</a> </li>
-                <li><a href="#">test1</a></li>
-                <li><a href="#">test2</a></li> #}
-                <p>سامانه یکپارچه پذیرش فراگیران </p>
-            </ul>
-            <div class='date-time'>Date/time</div>
-             
+        <div class="navbar-container" dir="rtl">
 
-        </nav>
+            <div class="logo-info" dir="rtc">
+                <div id="logo">
+                    <a href="/dashboard/">
+                    <img style="width: 100px; height: 80px; display: flex; justify-content: center;border-radius: 10px;" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="">
+                    </a>
+                </div>
+                <div id="logo-text">
+                    <p style="font-size: 18px;">سامانه ثبت و پذیرش فراگیران</p><hr>
+                    <p style="font-size: 14px;">مدیریت دورهای آموزشی و فرآیند پذیرش  Version 0.7</p>
+                </div>
+            </div>
+
+            <div class="nav-buttons" dir="rtl">
+                <div id="home">
+                        <a href="/dashboard" style="text-decoration: none;"><button id="home-btn" type="button" >
+                            <span style="color: white;">داشبورد</span>
+                            <img style="width: 25px; height: 25px;" src="{{ url_for('static', filename='icons/home3.svg') }}" alt="home-button">
+                        </button> </a>
+                </div>
+                <div id="exit">
+                    <a href="/dashboard/logout" style="text-decoration: none;">
+                        <button id="exit-btn">
+                            <span style="color: white;">خروج از حساب کاربری</span>
+                            <img style="width: 30px; height: 30px;" src="{{ url_for('static', filename='icons/exit2.svg') }}" alt="exit-button">
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="date-time" dir="rtl">
+                 <div class="user-info-box">
+                
+                
+            </div>
+                
+                <div id="date">
+                    
+                    <span id="date-title">{{ date }}</span>
+                    <img src="{{ url_for('static', filename='icons/date.svg') }}"  alt="date" width="25px; height:25px; ">
+                </div>
+                <div id="time">
+
+                    <span id="live-time">{{ time }}</span>
+                    <img src="{{ url_for('static', filename='icons/time.svg') }}" alt="time" width="25px; height25px;">
+
+                </div>
+            </div>
+
+
+        </div>
        
 
     </header>
@@ -43,6 +83,6 @@
 
 
 
-    <script src="{{ url_for('static' , filename='js/script.js') }}""></script>
+    <script src="{{ url_for('static' , filename='js/script.js') }}"></script>
 </body>
 </html>

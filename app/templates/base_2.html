@@ -1,133 +1,395 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title dir="rtl">{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static' , filename='css/base_2.css') }}">
-    {% block extra_css_2 %}{% endblock extra_css_2 %}
+
+    <title>
+        {% block title %}
+        سامانه پذیرش فراگیران
+        {% endblock %}
+    </title>
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base_2.css') }}">
+
+
+    {% block extra_css %}
+    {% endblock %}
+
+
 </head>
+
 
 <body>
 
-    {# store base nav-bar  #}
-    <header >
-        <div class="nav-bar-container">
-            
 
-        <nav dir="rtl" class = "navbar">
-            <div class="nav-logo">Application LOGO</div>
-            <ul class="nav-links">
-                {# <li><a href="#">test0</a> </li>
-                <li><a href="#">test1</a></li>
-                <li><a href="#">test2</a></li> #}
-                
-                <p>سامانه یکپارچه پذیرش فراگیران </p>
-                
-            </ul>
-            <div class='date-time'>Date/time</div>             
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+
+    <div class="navbar-container">
+
+
+        <!-- Logo Section -->
+
+        <div class="logo-section">
+
+
+            <div class="logo-image">
+
+                <a href="{{ url_for('main.dashboard') }}">
+
+                    <img src="{{ url_for('static', filename='images/logo.jpg') }}"
+                         alt="logo">
+
+                </a>
+
+            </div>
+
+
+
+            <div class="logo-text">
+
+                <h3>
+                    سامانه ثبت و پذیرش فراگیران
+                </h3>
+
+                <p>
+                    مدیریت دوره‌های آموزشی و فرآیند پذیرش
+                </p>
+
+            </div>
+
+
+        </div>
+
+        <!-- Navigation Buttons -->
+
+
+        <nav class="nav-buttons">
+
+
+            <a href="{{ url_for('main.dashboard') }}" class="nav-btn">
+
+
+                <span>
+                    داشبورد
+                </span>
+
+
+                <img src="{{ url_for('static', filename='icons/home3.svg') }}"
+                     alt="home">
+
+
+            </a>
+
+
+
+
+            <a href="{{ url_for('main.logout') }}" class="nav-btn">
+
+
+                <span>
+                    خروج از حساب
+                </span>
+
+
+                <img src="{{ url_for('static', filename='icons/exit2.svg') }}"
+                     alt="logout">
+
+
+            </a>
+
+
 
         </nav>
 
-        {# ============= flash messages & progress bar =================== #}
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="flash-container">
-                    {% for category, message in messages %}
-                        <div class="flash {{ category }}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
-
-        {# fake progress bar #}
-
-    <div id="progress-container" style="display:none;">
-
-        <div id="progress-message">
-            در حال ایجاد دوره...
-        </div>
 
 
-        <div class="progress-box">
 
-            <div id="progress-bar">
-                0%
+
+        <!-- Date Time -->
+
+
+        <div class="datetime-box">
+
+
+            <div class="datetime-item">
+
+
+                <img src="{{ url_for('static', filename='icons/date.svg') }}"
+                     alt="date">
+
+
+                <span>
+
+                    {{ date }}
+
+                </span>
+
+
             </div>
 
+
+
+
+            <div class="datetime-item">
+
+
+                <img src="{{ url_for('static', filename='icons/time.svg') }}"
+                     alt="time">
+
+
+                <span id="live-time">
+
+                    {{ time }}
+
+                </span>
+
+
+            </div>
+
+
+
         </div>
+
+
+
+    </div>
+
+
+
+</header>
+
+
+
+
+
+<!-- ================= FLASH MESSAGE ================= -->
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+
+    <div class="flash-container">
+
+
+    {% for category, message in messages %}
+
+
+    <div class="flash {{ category }}">
+
+        {{ message }}
+
+    </div>
+
+
+{% endfor %}
+
+
+</div>
+
+
+{% endif %}
+
+
+{% endwith %}
+
+
+
+
+
+
+
+<!-- ================= MAIN LAYOUT ================= -->
+
+
+<div class="layout">
+
+
+
+
+
+<!-- ================= SIDEBAR ================= -->
+
+
+<aside class="sidebar-container">
+
+
+<div class="sidebar">
+
+
+
+    <div class="sidebar-header">
+
+
+    <h3>
+        گزینه‌ها
+    </h3>
+
+
+    <input type="text"
+        id="search-input"
+        placeholder="جستجو">
+
+
+    </div>
+
+
+    <div class="sidebar-menu">
+
+
+
+    <a href="{{ url_for('main.create_course') }}"
+    class="sidebar-btn">
+
+
+        ایجاد دوره جدید
+
+
+    </a>
+
+
+    <a href="{{ url_for('main.reception') }}"
+    class="sidebar-btn">
+
+
+        پذیرش
+
+
+    </a>
+
+    <a href="{{ url_for('main.last_courses') }}"
+    class="sidebar-btn">
+
+
+        همه دوره‌ها
+
+
+    </a>
+
+    <a href="{{ url_for('main.help') }}"
+    class="sidebar-btn">
+        راهنما
+    </a>
+
+
+     </div>
+
+    </div>
+
+
+</aside>
+
+
+<!-- ================= PAGE CONTENT ================= -->
+
+
+<main class="content-container">
+
+
+{% block content %}
+
+{% endblock %}
+
+
+
+</main>
+
+
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+
+<footer class="footer">
+
+
+<div class="footer-text">
+
+
+سامانه ثبت و پذیرش فراگیران
+
+
+</div>
+
+
+</footer>
+
+<!-- ================= PROGRESS BAR ================= -->
+
+
+<div id="progress-container">
+
+
+    <div id="progress-message">
+
+    در حال پردازش...
+
+    </div>
+
+
+    <div class="progress-box">
+
+
+    <div id="progress-bar">
+
+    0%
+
+    </div>
+
 
     </div>
 
 
 </div>
 
-    </header>
+
+
+<script>
+
+
+// Auto hide flash messages
+
+setTimeout(()=>{
+
+
+document.querySelectorAll(".flash").forEach(
+    
+    item=>{
+
+        item.style.display="none";
+
+    }
+
+);
+
+
+},4000);
 
 
 
-    {# hold main content #}
-    <div class="main-div-container" dir="rtl">
-
-        {# sidebar #}
-        <div class="side-bar-container">
-            <div class="sidebar">
-
-                <div class="side-bar-intro">
-                    <h2>گزینه ها</h2> 
-                    <input id="search-input" type="text" placeholder="جستجو">
-                </div>
-                
-                <div class="side-bar-buttons">
-                    <div class="create_course"><a id="create_course_id" href="/dashboard/create_course/">ایجاد دوره جدید</a></div>
-                    <div class="reception"><a id="reception_a" href="/dashboard/reception/">پذیرش</a></div>
-                    <div class="last_courses"><a id="last_course_a" href="/dashboard/last_courses/">همه دوره ها</a></div>
-                    <div class="usage"><a id="usage" href="/dashboard/help/">راهنما</a></div>
-                </div>
-
-            </div>
-        </div>
-
-        {# content #}
-        <div class="content-container">
-        
-            <main dir="rtl">
-                {% block content %}
-                {% endblock  %} 
-            </main>
-        </div>
-
-        
-
-
-    </div>
-
-
-
-    {# hold base footer #}
-    <footer>
-
-    </footer>
+</script>
 
 
 
 
 
-    <script >
-        //  auto hide flash message after afew secend 
-        setTimeout(() => {
-    document.querySelectorAll(".flash").forEach(msg => {
-        msg.style.display = "none";
-    });
-}, 4000);
-    </script>
-    {# for spific script js files for each pages  #}
-   {% block extra_script %}
-   
-   
-   {% endblock extra_script %}
+{% block extra_script %}
+
+{% endblock %}
+
+
+
 </body>
 
 

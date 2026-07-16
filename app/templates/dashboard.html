@@ -1,3 +1,368 @@
 {% extends 'base_2.html' %}
 
-{% block title %}dashboard{% endblock title %}dashboard
+{% block title %}
+داشبورد
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard_style.css') }}">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="dashboard-page">
+
+    <div class="dashboard-header">
+        <h3 style="color: rgb(8, 115, 8)">کاربر(Admin) خوش آمدید</h3>
+        <h3>داشبورد مدیریت سامانه پذیرش فراگیران - نسخه 0.1 </h3>
+
+        <p style="font-size: 12px; ;">
+         شما به عنوان ادمین سامانه قادر خواهید بود که به مدیریت کاربران، دوره‌ها، پذیرش، گزارش‌ها و تنظیمات سامانه با استفاده از این داشبورد دسترسی داشته باشید
+        </p>
+
+    </div>
+
+
+    <div class="dashboard-grid">
+
+
+        <!-- ===================== Card 1 ===================== -->
+
+        <a href="/dashboard/users/" class="dashboard-card">
+
+            <div class="card-header" id="card-header-1">
+
+                <div class="card-icon">
+
+                    <img src="{{ url_for('static', filename='icons/card1.svg') }}"
+                         alt="card1">
+
+                </div>
+
+                <div class="card-title">
+
+                    مدیریت کاربران
+
+                </div>
+
+            </div>
+
+            <div class="card-body">
+
+                ایجاد کاربر جدید، حذف کاربران، تغییر اطلاعات،
+                مدیریت دسترسی‌ها و تغییر رمز عبور.
+
+            </div>
+
+            <div class="card-footer">
+
+                ورود →
+
+            </div>
+
+        </a>
+
+
+
+        <!-- ===================== Card 2 ===================== -->
+
+        <a href="/dashboard/last_courses/" class="dashboard-card">
+
+            <div class="card-header" id="card-header-2">
+
+                <div class="card-icon">
+
+                    <img src="{{ url_for('static', filename='icons/card2.svg') }}"
+                         alt="card2">
+
+                </div>
+
+                <div class="card-title">
+
+                    مدیریت دوره‌ها
+
+                </div>
+
+            </div>
+
+            <div class="card-body">
+
+                مشاهده، ویرایش، حذف و مدیریت تمامی دوره‌های آموزشی.
+
+            </div>
+
+            <div class="card-footer">
+
+                ورود →
+
+            </div>
+
+        </a>
+
+
+
+        <!-- ===================== Card 3 ===================== -->
+
+        <a href="/dashboard/reports/" class="dashboard-card">
+
+            <div class="card-header" id="card-header-3">
+
+                <div class="card-icon">
+
+                    <img src="{{ url_for('static', filename='icons/card3.svg') }}"
+                         alt="card3">
+
+                </div>
+
+                <div class="card-title">
+
+                    دریافت خروجی‌ها
+
+                </div>
+
+            </div>
+
+            <div class="card-body">
+
+                دریافت فایل‌های Excel، PDF و گزارش‌های مختلف سامانه.
+
+            </div>
+
+            <div class="card-footer">
+
+                ورود →
+
+            </div>
+
+        </a>
+
+
+
+        <!-- ===================== Card 4 ===================== -->
+
+        <a href="/dashboard/create_course/" class="dashboard-card">
+
+            <div class="card-header" id="card-header-4">
+
+                <div class="card-icon">
+
+                    <img src="{{ url_for('static', filename='icons/card4.svg') }}"
+                         alt="card4">
+
+                </div>
+
+                <div class="card-title">
+
+                    ایجاد دوره جدید
+
+                </div>
+
+            </div>
+
+            <div class="card-body">
+
+                تعریف دوره جدید و بارگذاری فایل اکسل فراگیران.
+
+            </div>
+
+            <div class="card-footer">
+
+                ورود →
+
+            </div>
+
+        </a>
+
+
+
+        <!-- ===================== Card 5 ===================== -->
+
+        <a href="/dashboard/reception/" class="dashboard-card">
+
+            <div class="card-header" id="card-header-5">
+
+                <div class="card-icon">
+
+                    <img src="{{ url_for('static', filename='icons/card5.svg') }}"
+                         alt="card5">
+
+                </div>
+
+                <div class="card-title">
+
+                    پذیرش
+
+                </div>
+
+            </div>
+
+            <div class="card-body">
+
+                انجام فرآیند پذیرش فراگیران و ثبت اطلاعات.
+
+            </div>
+
+            <div class="card-footer">
+
+                ورود →
+
+            </div>
+
+        </a>
+
+
+
+        <!-- ===================== Card 6 ===================== -->
+
+        <a href="/dashboard/statistics/" class="dashboard-card">
+
+            <div class="card-header" id="card-header-6">
+
+                <div class="card-icon">
+
+                    <img src="{{ url_for('static', filename='icons/card6.svg') }}"
+                         alt="card6">
+
+                </div>
+
+                <div class="card-title">
+
+                    آمار و گزارش
+
+                </div>
+
+            </div>
+
+            <div class="card-body">
+
+                نمایش وضعیت دوره‌ها، تعداد فراگیران و آمار کلی سامانه.
+
+            </div>
+
+            <div class="card-footer">
+
+                ورود →
+
+            </div>
+
+        </a>
+
+
+
+        <!-- ===================== Card 7 ===================== -->
+
+        <a href="/dashboard/settings/" class="dashboard-card" >
+
+            <div class="card-header" id="card-header-7">
+
+                <div class="card-icon">
+
+                    <img src="{{ url_for('static', filename='icons/card7.svg') }}"
+                         alt="card7">
+
+                </div>
+
+                <div class="card-title">
+
+                    تنظیمات سامانه
+
+                </div>
+
+            </div>
+
+            <div class="card-body">
+
+                تنظیمات عمومی، پشتیبان‌گیری و مدیریت سیستم.
+
+            </div>
+
+            <div class="card-footer">
+
+                ورود →
+
+            </div>
+
+        </a>
+
+
+
+        <!-- ===================== Card 8 ===================== -->
+
+        <a href="/dashboard/help/" class="dashboard-card">
+
+            <div class="card-header" id="card-header-8">
+
+                <div class="card-icon">
+
+                    <img src="{{ url_for('static', filename='icons/card8.svg') }}"
+                         alt="card8">
+
+                </div>
+
+                <div class="card-title">
+
+                    راهنما
+
+                </div>
+
+            </div>
+
+            <div class="card-body">
+
+                آموزش کار با سامانه و پاسخ به سوالات متداول.
+
+            </div>
+
+            <div class="card-footer">
+
+                ورود →
+
+            </div>
+
+        </a>
+
+
+
+        <!-- ===================== Card 9 ===================== -->
+
+        <a href="/dashboard/profile/" class="dashboard-card">
+
+            <div class="card-header" id="card-header-9">
+
+                <div class="card-icon">
+
+                    <img src="{{ url_for('static', filename='icons/card9.svg') }}"
+                         alt="card9">
+
+                </div>
+
+                <div class="card-title">
+
+                    حساب کاربری
+
+                </div>
+
+            </div>
+
+            <div class="card-body">
+
+                مشاهده اطلاعات حساب، تغییر رمز عبور و مدیریت پروفایل.
+
+            </div>
+
+            <div class="card-footer">
+
+                ورود →
+
+            </div>
+
+        </a>
+
+
+    </div>
+
+</div>
+
+{% endblock %}

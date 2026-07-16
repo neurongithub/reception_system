@@ -9,28 +9,77 @@
 {# ================================ main body content ============================================= #}
 {% block content %}
 
-<br><br><br>
-<div class = 'welecom-login'>
-    <h2> سامانه پذیرش و مدیریت سربازان آموزشی - نسخه ۰.۰۳ </h2><br>
-    <h3>ورود به سامانه</h3>
-</div> <br>
+    <div class="login-container">
+        <div class="login-box">
 
-<div class='login-box'>
+            <div class="intro">
+                <div class="box-icon">
+                    <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="box-icon" style="width: 100px;margin-top: 10px;height: 80px; border-radius: 13px;">
+                </div>
+                <div class="box-text">
+                    <h2>ورود به سامانه</h2>
+                    <p>لطفا نام کاربری و رمز عبور خود را واردکنید</p>
+                </div>
+            </div>
 
-    <div class='login-forms'>
-        <form action="/login/" method="POST">
-            <input dir="ltr" class= 'username-input' type="text" name= 'username' placeholder="نام کاربری"><br><br>
-            
-            <input dir="ltr" class='password-input' type="pasword" name="password" placeholder="رمز عبور"> <br><br>
-            
-            <button class="submit-button" name="submit" type="submit">
-                <b>ورود</b>
-            </button>
-        </form>
-        
+            <div class="inputs">
+                <form action="/login/" method="POST" autocomplete="off">
+                    <input dir="ltr" type="text" class="username-input" name="username" placeholder="نام کاربری" autofocus>
+                    <input dir="ltr" type="password" class="password-input" name="password" placeholder="رمز عبور">
+                    <div class="remmber" dir="ltr">
+                        <input type="checkbox" name="remember" >
+                        <label for="remember">مرا به خاطر بسپار</label><br>
+                    </div>
 
+                </div>
+                <div class="buttons">
+                    <button class="submit-button" type="submit" name="submit">
+                        <b>ورود به سامانه</b>
+                    </button>
+                    
+                    <button type="button" class="password-change-btn" id="open-modal">
+                        <b>تغییر رمز عبور</b>
+                    </button>
+                    
+                </form>
+                        
+
+                    <div id="modal" class="modal">
+
+                        <div class="modal-content">
+
+                            <br><h3>تغییر رمز عبور</h3><hr><br>
+                            
+
+                            <form action="/dashboard/changepassword" method="POST" autocomplete="off" >
+
+                                <input type="text" placeholder="نام کاربری" name="username" autofocus>
+
+                                <input type="text" placeholder="رمز فعلی" name="old-password">
+
+                                <input type="text" placeholder="رمز جدید" name="new-password">
+
+                                <input type="text" placeholder="تکرار رمز جدید" name="again-password">
+
+                                <button type="submit" id="change-pass-submit">ثبت</button>
+
+                                <button type="button" id="close-modal">
+                                    انصراف
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+        </div>
     </div>
-</div>
+<script src="{{ url_for('static' , filename='js/login.js') }}"></script>
 {# ============= flash box (show errors) ===================== #}
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -50,11 +99,24 @@
 {# ============================================ footer page ======================================= #}
  {% block footer %}
 <nav class='foot-nav'>
-            <ul class='foot-nav-links'>
-                <li>درباره اپلیکیشن</li><br><br>
-                <li>درباره توسعه دهنده</li><br><br>
-                <li>test link</li>
-            </ul>
+            <div class='footer-elements'>
+                <div class="about-dev">
+                    <a href="https://github.com" target="_blank" style="text-decoration: none; cursor: pointer; "><div class="dev-logo"><img src=" {{ url_for('static', filename='icons/dev.svg') }} " alt="dev-icon" style="width: 30px;height: 30px;margin-right: 10px;"></div></a>
+                    <div class="dev-text" style="color: white; font-size: 14px;"><p style="font-size: 16px; display: flex; justify-content: center; font-weight: 600;">درباره توسعه دهنده</p><br><p>طراحی و توسعه این وب اپلیکیشن تماما توسط یک نفر انجام گرفته برای دیدن گیت هابم  روی آیکون کناری کلیک کن</p></div>
+                </div>
+                <div class="about-app">
+                    <div class="app-logo"><img src=" {{ url_for('static',filename='icons/about-app.svg') }} " alt="about-app-icon" style="width: 30px;height: 30px;margin-right: 10px;"></div>
+                    <div class="about-app-text"><p style="font-size: 16px;display: flex;justify-content: center;font-weight: 600;">درباره اپلیکیشن</p><br><p style="font-size: 14px;">وب اپلیکیشن پذیرش و ثبت فراگیران به منظور نرمال سازی و کاهش خطای انسانی در فرآیند پذیرش طراحی شده است </p></div>
+                </div>
+                
+                <div class="links">
+                    
+                    <div class="app-logo"><img src=" {{ url_for('static',filename='icons/link.svg') }} " alt="about-app-icon" style="width: 30px;height: 30px;margin-right: 10px;"></div>
+                    <div class="about-app-text"><p style="font-size: 16px;display: flex;justify-content: center;font-weight: 600;">لینک های مفید</p><br><div style="font-size: 14px;display: flex;gap: 5px;"><a href="/dashboard/create_course">دوره جدید</a>||<a href="/dashboard/reception">پذیرش</a>||<a href="/dashboard/help">راهنما</a>||<a href="/dashboard/logout">خروج</a></div></div>
+                
+                </div>
+                
+            </div>
 
         </nav>
     {% endblock %}

@@ -1,0 +1,28 @@
+{
+    "course_id": 1,
+    "course_code": "123",
+    "course_name": "test",
+    "battalions": {
+        "1": {
+            "1": "option5",
+            "2": "option1",
+            "3": "option6",
+            "4": "option0",
+            "5": "option0"
+        },
+        "2": {
+            "1": "option0",
+            "2": "option6",
+            "3": "option0",
+            "4": "option9",
+            "5": "option6"
+        },
+        "3": {
+            "1": "option0",
+            "2": "option5",
+            "3": "option0",
+            "4": "option5",
+            "5": "option0"
+        }
+    }
+}

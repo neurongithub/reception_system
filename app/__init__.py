@@ -8,7 +8,7 @@ db = SQLAlchemy()
 migrate = Migrate() 
 
 
-#Application factory (main function in project)
+#[Application factory] function
 def create_app () : 
     app = Flask(__name__)
     
@@ -31,7 +31,7 @@ def create_app () :
     
         
         
-    
+
     
     return app 
 

@@ -3,12 +3,13 @@
 {% block title %}create course{% endblock title %}
 
 
-{% block extra_css_2 %}
+{% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static' , filename='css/create_course_style.css') }}">
-{% endblock extra_css_2 %}
+{% endblock extra_css %}
 
 
 {% block content %}
+
 
 
 
@@ -19,7 +20,7 @@
         
             {# basic course data #}
             <div class="basic-data">
-                <!-- <form action="{{ url_for('main.upload') }}" method="POST" enctype="multipart/form-data"> -->
+                
                         
                     <div class="basic-info">
                         <h4>اطلاعات دوره:</h4><hr>
@@ -47,7 +48,6 @@
                     </div>
                 
                 
-
             </div>
     </div>
 
@@ -60,7 +60,7 @@
             <!-- =============================================================================== -->
                                                 <!-- گردان ۱ battalion 1 -->
             <!-- ================================================================================ -->
-            <div class="battalion-1-box">
+             <div class="battalion-1-box">
                 <div id="battalion-1-title"><p>گردان ۱</p></div>
 
                 <div class="battalion-1-options">
@@ -143,11 +143,11 @@
 
                 </div>
                 
-            </div>
+            </div> 
             <!-- =============================================================================== -->
                                                  <!-- گردان ۲ battalion ۲ -->
             <!-- ================================================================================ -->
-            <div class="battalion-2-box">
+             <div class="battalion-2-box">
                 <div id="battalion-2-title"><p>گردان ۲ </p></div>
                 <div id="battalion-2-options">
                     <div class="battalion-2-options">
@@ -232,7 +232,7 @@
             <!-- =============================================================================== -->
                                                 <!-- گردان ۳ battalion ۳ -->
             <!-- ================================================================================ -->
-            <div class="battalion-3-box">
+             <div class="battalion-3-box">
                 <div id="battalion-3-title"><p>گردان ۳ </p></div>
                 <div id="battalion-3-options">
                     <div class="battalion-3-options">
@@ -268,7 +268,7 @@
                     <div class="company-holder2">
                         <label for="b3-c2">گروهان ۲</label>
                         <select name="b3-c2" >
-                            <<option value="option0"></option>
+                            <option value="option0"></option>
                             <option value="option1">تحصیلاتی-شیعه-سالم</option>
                             <option value="option2">دیپلم-شیعه-سالم</option>
                             <option value="option3">تحصیلاتی-سنی-سالم</option>
@@ -312,25 +312,18 @@
                         </select>
                     </div>
                 </div>
-            </div>
-            <!-- <div class="button-box">
-                
-                <div>
-                    <button type="reset">
-                        clean
-                    </button>
-                </div>
-            </div> -->
+            </div> 
+            
 
         </div>
             
-    </div>  
+    </div>   
 {% if result %}
 
-<div class="result-container">
+<div class="result-container"> 
 
     <!-- Course information -->
-    <div class="course-result">
+     <div class="course-result">
 
         <div id="course-name-result">
             <p>نام دوره:  {{ result.course_name }}</p>
@@ -342,12 +335,12 @@
             
         </div>
 
-    </div>
+    </div> 
     
 
 
     <!-- Battalions -->
-    {% for battalion_id, companies in result.battalions.items() %}
+     {% for battalion_id, companies in result.battalions.items() %}
 
     <div class="battalion-result">
 
@@ -388,7 +381,7 @@
 
 {% endif %}
 </div>
-</form>
+</form> 
 
 
 {% endblock content %}

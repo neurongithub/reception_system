@@ -1,7 +1,7 @@
+#this file hold DataBase models (every modle is a class)
+
 from app import db 
 from datetime import datetime
-
-#database modles (every modle is a class)
 
 
 #model #1: users table 
@@ -12,6 +12,7 @@ class User(db.Model) :
     username= db.Column(db.String(50) , unique=True , nullable=False, )
     password_hashed = db.Column(db.String(255) , nullable=False)
     role = db.Column(db.String(20), nullable=False)
+    full_name = db.Column(db.String(100) , nullable=True )
     create_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     
 
@@ -54,7 +55,6 @@ class Soldier(db.Model):
     company = db.Column(db.String(50),nullable=True)
     status = db.Column(db.String(50), nullable=False, default="pending")
     is_green = db.Column(db.Boolean, nullable=True, default=False)
-    create_at = db.Column(db.DATETIME, erver_default=db.func.now())
-
+    create_at = db.Column(db.DATETIME, server_default=db.func.now())
 
 

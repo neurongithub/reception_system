@@ -11,7 +11,7 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-image: url("../images/bc4.jpg");
+    background-image: url("../images/bc5.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -21,78 +21,179 @@ main {
   flex: 1;  /* main grows to fill any leftover space */
 }
 
-.welecom-login { 
-    text-align: center;
-}
+/* ========= login box sytels============= */
 
-.login-box { 
+.login-container{
     display: flex;
     justify-content: center;
-    text-align: center;
     align-items: center;
-    width: 200;
-    height: 200;
-    border: 4px solid #ccc;
-    padding: 30px;
-    margin-top: 50 px;
-    margin-left: 500px;
-    margin-right: 500px;
+    gap: 5px;
+   
+}
+
+.login-box{
     display: flex;
+    flex-direction: column;
+    border: white solid 2px;
+    border-radius: 25px;
+    background-color: #f0f0f0;
+    width: 35%;
+    height: 60vh;
+    gap: 10px;
 
 }
-
-.login-forms { 
-    text-align: center;
+.intro{
+    display: flex;
+    flex-direction: column  ;
+    justify-content: center;
     align-items: center;
-    justify-items: center;
-
-}
-.username-input {
+    flex: 1;
     
-    font-size: 16px;
-    width: 300px;
-    height: 35px;
 }
-.password-input {
-    width: 300px;
-    font-size: 16px;
-    height: 35px;
-    margin-bottom: 30px;
-}
-
-.submit-button{
-    font-family: "Vazir";
-    font-size: 18px;
-    text-align: center;
+.box-icon{
+    display: flex;
+    flex-direction: column;
+    flex: 2;
     justify-content: center;
-    justify-items: center;
-    width: 100px;
-    height: 30px;
+    align-items: center;
+}
+.box-text{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
 }
 
+.inputs{
+    display: flex;
+    flex: 1;
+    flex-direction: column  ;
+    
+}
 
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: black;
+    
+}
+.username-input{
+    display: flex;
+    width: 80%;
+    height: 7vh;
+    border: 2.5px solid #e3e9e3;
+    border-radius: 8px;
+    font-size: 15px;
+    color: black;
+}
+.password-input{
+    display: flex;
+    width: 80%;
+  height: 7vh;
+  border: 2.5px solid #e3e9e3;
+  border-radius: 8px;
+  font-size: 15px;
+  color: black;
+}
+.remmber{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
 
+.buttons{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column  ;
+   
+}
+.submit-button{
+    display: flex;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+    width: 80%;
+    height: 7vh;
+    border: 2.5px solid #e3e9e3;
+    background-color: #1b4332;
+    border-radius: 8px;
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    
+}
+.submit-button:active {
+    transform: scale(0.96);
+}
 
 /* footbar nav  */
 
 .foot-nav { 
     display: flex;
-    border: 5px #ccc solid;
+    border: 5px #ccc solid hidden;
     align-items: center;
     align-content: center;
     /* justify-content: space-between;
     justify-content: space-between; */
-    margin-top: 100px;
-    padding: 30px 30px;
-    background: #ffff;
+    /* padding: 30px 30px; */
     justify-content: center;
+    height: 18vh; 
+    color: white;
+    background-color: #032503;
 }
 
-.foot-nav-links{
+.footer-elements{
     display: flex;
-    gap: 50px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* border: solid 1px red; */
+    width: 100%;
+    height: 100%;
+    gap: 5px;
+}
 
-    
+.about-dev{
+     display: flex;
+     flex: 1;
+     /* border: solid blue 1px; */
+     width: 100%;
+     height: 100%;
+     justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.about-app{
+    display: flex;
+    flex: 1;
+    /* border: solid rgb(255, 149, 0) 1px; */
+     width: 100%;
+     height: 100%;
+     justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.links{
+     display: flex;
+     flex: 1;
+    /* border: solid rgb(200, 255, 0) 1px; */
+     width: 100%;
+     height: 100%;
+     justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+a{
+    text-decoration: none;
+    color: white;
 }
 
 /* alert error box style */
@@ -115,10 +216,93 @@ main {
     display: flex;
     background: #fff;
     color: rgb(139, 4, 4);
-   
+   font-weight: 400;
 }
 
 .success {
     background: #fff;
     color: #080;
+}
+
+
+/* ================== change password modal box style =========================== */
+
+.modal{
+    display: none;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background:rgba(0,0,0,.5);
+
+}
+
+.modal-content{
+    background: #d4d7d4;
+    width: 400px;
+    margin: 120px auto;
+    padding:20px;
+    border-radius:10px;
+
+}
+.password-change-btn{
+    display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 7vh;
+    border: 2.5px solid #bdbfbd;
+    background-color:#bdbfbd     ;
+    border-radius: 8px;
+    font-size: 15px;
+    color: black;
+    cursor:pointer;
+    transition: transform 0.1s ease;
+}
+.password-change-btn:active {
+    transform: scale(0.96);
+}
+
+#change-pass-submit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #1b4332;
+    font-weight: 600;
+    width: 30%;
+    border-radius: 8px ;
+    border-color: #1b4332;
+    cursor:pointer;
+    transition: transform 0.1s ease;
+}
+#change-pass-submit:active {
+    transform: scale(0.96);
+}
+
+#close-modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    width: 30%;
+    border-radius: 8px ;
+    background-color: #ea5665;
+    border-color: #ea5665;
+    cursor:pointer;
+    transition: transform 0.1s ease;
+    
+}
+#close-modal:active {
+    transform: scale(0.96);
+}
+.modal-content input {
+    background-color: white;
+    border-color: rgb(77, 95, 250);
+    border-radius: 5px;
+    border: 2px solid;
+    width: 50%;
+    height: 4vh;
 }

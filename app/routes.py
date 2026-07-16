@@ -1,10 +1,9 @@
 #All routes & views & blueprints
-from flask import Blueprint,render_template , request , redirect , url_for , session ,abort , flash
+from flask import Blueprint,render_template , request , redirect , url_for , session ,abort , flash , current_app
 from app.models import User, Course , Soldier
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash ,generate_password_hash
 from werkzeug.utils import secure_filename
 from pathlib import Path
-from flask import current_app
 from app.excel.parser import ExcelParser
 from app.excel.validator import ExcelValidator
 from app.excel.mapper import SoldierMapper
@@ -15,7 +14,6 @@ from app.json_parse.responder import JsonResponser
 from datetime import datetime
 from app import db
 from uuid import uuid4
-from pathlib import Path
 import os
 import json
 
@@ -26,13 +24,30 @@ main_bp = Blueprint('main', __name__)
 #login route - http://host.com/login/
 @main_bp.route('/login/' , methods = ["GET" ,"POST"])
 def login_page () : 
+
     
+    #get server time zone and date to show in UI
+    current_time = datetime.now()
+    formated_time =current_time.strftime("%H:%M:%S")
+    current_date = datetime.now().strftime("%Y/%m/%d")
+
     if request.method == "POST" : 
         
+        # remember me check box (default==True)
+        remember =bool(request.form.get("remember"))
+
         #saving value of username & password 
         username = request.form.get("username")
         password = request.form.get("password")
-        
+
+        #checing on username & password is require!!!
+        if not username : 
+            flash ("وارد کردن نام کاربری اجباری میباشد" ,'error')
+            return redirect(url_for('main.login_page'))
+        if not password :
+            flash("وارد کردن پسورد اجباری میباشد" , 'error')
+            return redirect(url_for('main.login_page'))
+
         #search query on username 
         user = User.query.filter_by(username=username).first()
         
@@ -46,31 +61,91 @@ def login_page () :
             if user.role =="admin" : 
                 
                 #Set session 
-                session.permanent = True # session expire time 
+                session.permanent = remember # session expire time 
                 session['user_id']  = user.id 
                 session ['role'] = user.role
                 
                 
                 #if is admin return darboard page
                 return redirect(url_for('main.dashboard'))
+           
                 
             
             elif user.role=="viewer" : 
+
+                session.permanent = remember
                 session["user_id"] = user.id
                 session["role"] = user.role
 
-                print("SESSION AFTER LOGIN:", dict(session))
+                # print("SESSION AFTER LOGIN:", dict(session))
 
                 return redirect(url_for("main.view"))
                
                #if invalid user return Error  with alert box 
             else :
                 return "<h1></h1>"
-        
+        else :
+            flash("خطا: نام کاربری یا رمز عبور اشتباه وارد شده است", "error")
+            return redirect(url_for("main.login_page"))
             
     
     
-    return render_template('login.html')
+    return render_template('login.html', time=formated_time , date=current_date  )
+
+
+#Change password functionality 
+@main_bp.route("/dashboard/changepassword/", methods=["POST"])
+def change_pass():
+
+    # Get form inputs
+    username = request.form.get("username", "").strip()
+    old_pass = request.form.get("old-password", "").strip()
+    new_pass = request.form.get("new-password", "").strip()
+    again_new_pass = request.form.get("again-password", "").strip()
+
+    # 1. Check empty inputs
+    if not username or not old_pass or not new_pass or not again_new_pass:
+        flash("برای تغییر رمز عبور همه مقادیر را وارد کنید", "error")
+        return redirect(url_for("main.login_page"))
+
+    # 2. Find user
+    user = User.query.filter_by(username=username).first()
+
+    if not user:
+        flash("نام کاربری یافت نشد", "error")
+        return redirect(url_for("main.login_page"))
+
+    # 3. Check current password
+    if not check_password_hash(user.password_hashed, old_pass):
+        flash("رمز عبور فعلی صحیح نمی باشد", "error")
+        return redirect(url_for("main.login_page"))
+
+    # 4. Check new password confirmation
+    if new_pass != again_new_pass:
+        flash("رمز جدید و تکرار آن یکسان نیست", "error")
+        return redirect(url_for("main.login_page"))
+
+    # 5. Check new password is different from old password
+    if check_password_hash(user.password_hashed, new_pass):
+        flash("رمز جدید نباید با رمز قبلی یکسان باشد", "error")
+        return redirect(url_for("main.login_page"))
+
+    # 6. Check password length
+    if len(new_pass) < 4:
+        flash("طول رمز جدید نباید از ۸ کاراکتر کمتر باشد", "error")
+        return redirect(url_for("main.login_page"))
+
+    # 7. Hash new password
+    hashed_new_pass = generate_password_hash(new_pass)
+
+    # 8. Save new password
+    user.password_hashed = hashed_new_pass
+    db.session.commit()
+
+    flash("رمز عبور با موفقیت بروزرسانی شد", "success")
+
+    return redirect(url_for("main.login_page"))
+
 
 
 # view route (commen users see this )
@@ -88,47 +163,68 @@ def view():
 #Dashboard route (retun to admin only )
 @main_bp.route("/dashboard/")
 def dashboard () : 
+
+
+    current_time = datetime.now()
+    formated_time =current_time.strftime("%H:%M:%S")
+    current_date = datetime.now().strftime("%Y/%m/%d")
+
     if "user_id" not in session : 
         return redirect(url_for("main.login_page"))
     
     if session.get("role") != "admin":
         abort(403)
     
-    return render_template("dashboard.html")
+    return render_template("dashboard.html" ,time=formated_time ,date=current_date)
 
 
 #create course rooute  ==> open create course page
 @main_bp.route('/dashboard/create_course/')
 def create_course ()  :
-    
+
+    #real time and date server     
+    current_time = datetime.now()
+    formated_time =current_time.strftime("%H:%M:%S")
+    current_date = datetime.now().strftime("%Y/%m/%d")
+
     #check user session 
     if "user_id" not in session : 
         return redirect(url_for("main.login_page"))
     if session.get("role")!="admin" : 
         abort(403)
     
-    return render_template('create_coures.html' , result=None)
+    return render_template('create_coures.html' , result=None ,time=formated_time, date=current_date)
 
 #reception route ==> open reception page 
 @main_bp.route('/dashboard/reception//')
 def reception () : 
+
+    #real time and date server     
+    current_time = datetime.now()
+    formated_time =current_time.strftime("%H:%M:%S")
+    current_date = datetime.now().strftime("%Y/%m/%d")
+
     if "user_id" not in session : 
         return redirect(url_for("main.login_page"))
     if session.get("role")!="admin" : 
         abort(403)
     
-    return render_template('reception.html')
+    return render_template('reception.html' , time=formated_time,date=current_date)
 
 #last courses ==> open last courses page [back log now]
 @main_bp.route('/dashboard/last_courses/')
 def last_courses () : 
+    #real time and date server     
+    current_time = datetime.now()
+    formated_time =current_time.strftime("%H:%M:%S")
+    current_date = datetime.now().strftime("%Y/%m/%d")
     
     if "user_id" not in session : 
         return redirect(url_for("main.login_page"))
     if session.get("role")!="admin" : 
         abort(403)
     
-    return render_template('last_courses.html')
+    return render_template('last_courses.html', time=formated_time , date=current_date)
 
 #logout button endpoint 
 @main_bp.route("/dashboard/logout/") 
@@ -140,15 +236,32 @@ def logout () :
 
 
 @main_bp.route("/dashboard/help/")
-def test() : 
+def help() : 
+
+    #real time and date server     
+    current_time = datetime.now()
+    formated_time =current_time.strftime("%H:%M:%S")
+    current_date = datetime.now().strftime("%Y/%m/%d")
+
+    try:
+        if "user_id" not in session:
+            flash("برای دسترسی به راهنما اپلیکیشن ابتدا وارد شوید" , 'error')
+            return redirect(url_for("main.login_page"))
+            
+    except Exception as e:
+        return redirect(url_for("main.login_page"))
+            
+        
     
-    return render_template("help.html")
+    
+    return render_template("help.html" , time=formated_time,date=current_date)
 
 
 @main_bp.route("/dashboard/upload/" ,methods=["GET","POST"])
 # upload functionality 
 def upload() : 
-# 1.save the excel file 
+# 1.upolad function in upload route
+    # 1.save the excel file 
      # file extension checking 
     ALLOWED_EXTENSIONS ={
         "xls", 
@@ -339,5 +452,4 @@ def upload() :
         
     return redirect(url_for("main.create_course"))
     
-
 

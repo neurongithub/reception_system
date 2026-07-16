@@ -16,10 +16,10 @@
     flex-direction: row;
     border: 2px solid green hidden;
     border-radius: 10px;
-    margin: 15px;
+    margin: 5px;
     margin-right: 40px;
-    width: 105vh;
-    height: 68vh;
+    width: 140vh;
+    height: 71vh;
     border: 2px solid #e0e0e0;
     transition: all 0.3s ease;
     box-shadow: 0 20px 15px rgba(5, 5, 5, 0.08);
@@ -56,6 +56,7 @@
     background: linear-gradient(180deg, #d4d4d4 0%, #ffff 100%);
     box-shadow: 0 20px 15px rgb(5, 5, 5, 0.08);
     transition: all 0.3s ease;
+    margin: -10px;
 }
 h4 {
     margin-top: 10px;
@@ -207,8 +208,10 @@ hr{
     align-items: center;
     gap: 5px;
     width: 65%;
-    
+    height: 100%;
 }
+    
+
 
 .result-container{
     display: flex;
@@ -325,7 +328,7 @@ hr{
     font-size: 15px;
     font-weight: bold;
     border-radius: 5px;
-    width: 100%;
+    width: 90%;
 }
 .battalion-2-options{
     display: flex;
@@ -352,7 +355,7 @@ hr{
     background-color: dodgerblue;
     font-size: 15px;
     border-radius: 5px;
-    width: 100%;
+    width: 90%;
 
 }
 .button-box{
@@ -369,7 +372,7 @@ hr{
     font-size: 15px;
     font-weight: bold;
     border-radius: 5px;
-    width: 100%;
+    width: 90%;
     justify-content: center;
 }
 

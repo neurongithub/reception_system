@@ -1,0 +1,326 @@
+/* =====================================================
+   DASHBOARD STYLE
+   Modern Flex Layout
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.dashboard-page{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    height:100%;
+    padding:20px;
+    gap:25px;
+}
+
+/* =====================================================
+                    Header
+===================================================== */
+
+.dashboard-header{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:8px;
+    padding-bottom:15px;
+    border-bottom:2px solid #e5e5e5;
+}
+
+.dashboard-header h2{
+    font-size:28px;
+    color:#17432d;
+    font-weight:700;
+}
+
+.dashboard-header p{
+    font-size:15px;
+    color:#666;
+}
+
+/* =====================================================
+                Cards Container
+===================================================== */
+
+.dashboard-grid{
+
+    display:flex;
+    flex-wrap:wrap;
+
+    gap:25px;
+
+    justify-content:center;
+
+    align-items:stretch;
+
+    width:100%;
+
+    flex:1;
+}
+
+/* =====================================================
+                    Card
+===================================================== */
+
+.dashboard-card{
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    width:320px;
+
+    min-height:220px;
+
+    padding:20px;
+
+    border-radius:16px;
+
+    text-decoration:none;
+
+    color:#222;
+
+    background:linear-gradient(180deg,#ffffff,#f7f7f7);
+
+    border:1px solid #dddddd;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.25s ease;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.18);
+
+    border-color:#198754;
+
+}
+
+/* =====================================================
+                Card Header
+===================================================== */
+
+.card-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    border: solid 1px #e3e4e6;
+    border-radius: 10px;
+    gap: 20px;
+    backdrop-filter:blur(10px);
+    background:linear-gradient(
+        to bottom,
+        rgba(255,255,255,.28),
+        rgba(255,255,255,.08)
+    );
+    color:white;
+
+font-size:18px;
+
+font-weight:700;
+}
+
+.card-title{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    color:#17432d;
+
+    flex:1;
+
+}
+
+.card-icon{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:65px;
+
+    height:65px;
+
+    border-radius: 8px;
+
+    background:#e8f5ee;
+
+}
+
+.card-icon img{
+
+    width:34px;
+
+    height:34px;
+
+}
+
+/* =====================================================
+                Card Body
+===================================================== */
+
+.card-body{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    flex:1;
+
+    line-height:2;
+
+    color:#666;
+
+    font-size:14px;
+
+}
+
+/* =====================================================
+                Footer
+===================================================== */
+
+.card-footer{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    margin-top:20px;
+
+    padding-top:15px;
+
+    border-top:1px solid #eeeeee;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    color:#198754;
+
+}
+
+/* =====================================================
+            Different Card Colors
+===================================================== */
+
+.dashboard-card:nth-child(1) .card-icon{
+    background:#e8f5ee;
+}
+
+.dashboard-card:nth-child(2) .card-icon{
+    background:#e6f0ff;
+}
+
+.dashboard-card:nth-child(3) .card-icon{
+    background:#fff2de;
+}
+
+.dashboard-card:nth-child(4) .card-icon{
+    background:#eef8ff;
+}
+
+.dashboard-card:nth-child(5) .card-icon{
+    background:#ffeceb;
+}
+
+.dashboard-card:nth-child(6) .card-icon{
+    background:#f0ebff;
+}
+
+.dashboard-card:nth-child(7) .card-icon{
+    background:#eef9e8;
+}
+
+.dashboard-card:nth-child(8) .card-icon{
+    background:#fff8dc;
+}
+
+.dashboard-card:nth-child(9) .card-icon{
+    background:#e8f3ff;
+}
+
+/* =====================================================
+                Responsive
+===================================================== */
+
+@media (max-width:1200px){
+
+    .dashboard-grid{
+        justify-content:center;
+    }
+
+    .dashboard-card{
+        width:300px;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .dashboard-page{
+        padding:15px;
+    }
+
+    .dashboard-grid{
+
+        flex-direction:column;
+
+        align-items:center;
+    }
+
+    .dashboard-card{
+
+        width:100%;
+
+        max-width:500px;
+    }
+
+    .dashboard-header h2{
+        font-size:24px;
+    }
+
+}
+#card-header-1{
+    background-color: #2563EB;
+}
+#card-header-2{
+    background-color: #16A34A;
+}
+#card-header-3{
+    background-color:#F59E0B ;
+}
+#card-header-4{
+    background-color: #4B5563;
+}
+
+#card-header-5{
+    background-color: #3A5A40;
+}
+#card-header-6{
+    background-color: #7C3AED;
+}
+#card-header-7{
+    background-color:#0891B2 ;
+}
+#card-header-8{
+    background-color: #0F766E;
+}
+#card-header-9{
+    background-color: #B91C1C;
+}
