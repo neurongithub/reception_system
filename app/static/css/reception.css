@@ -1,0 +1,603 @@
+/* =====================================================
+   RECEPTION PAGE
+   FLEX LAYOUT
+=====================================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    font-family:"Vazirmatn",sans-serif;
+    background:#eef3f8;
+}
+
+/* =====================================================
+    PAGE
+=====================================================*/
+
+.reception-container{
+
+    display:flex;
+    flex-direction:column;
+
+    width:100%;
+    min-height:100%;
+
+    /* padding:20px; */
+
+    gap:20px;
+}
+
+
+/* =====================================================
+    COMMON CARD
+=====================================================*/
+
+.reception-header,
+.b-c-panel,
+.search-area,
+.result-panel{
+    display:flex;
+    background:#ffffff;
+    border-radius:16px;
+    padding:10px;
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.08);
+    margin: 10px;
+}
+
+/* =====================================================
+    HEADER
+=====================================================*/
+
+.reception-header{
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.reception-title h2{
+
+    color:#010710;
+
+    font-size:20px;
+
+    font-weight:500;
+
+}
+
+.course-info{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.course-info span{
+
+    padding:8px 15px;
+
+    border-radius:8px;
+
+    background:#edf5ff;
+
+    color:#0d6efd;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+
+/* =====================================================
+    BATTALION PANEL
+=====================================================*/
+
+.b-c-panel{
+
+    gap:20px;
+
+}
+
+.b-c-result{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+.b-c-result label{
+
+    font-weight:bold;
+
+    color:#198754;
+
+}
+
+.result-company{
+    display:flex;
+    gap:10px;
+}
+.result-company span{
+    flex:1;
+    background:#eaf7ef;
+
+    color:black;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    text-align:center;
+
+    
+    font-size: 15px;
+
+}
+
+.b-c-chooser{
+
+    flex:2;
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+.battalion-choose,
+.company-choose{
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+    gap:10px;
+
+}
+
+.battalion-choose label,
+.company-choose label{
+
+    font-weight:bold;
+
+    color:#444;
+
+}
+
+.battalion-choose select,
+.company-choose select{
+
+    height:48px;
+
+    border:1px solid #d7dde5;
+
+    border-radius:10px;
+
+    padding:0 12px;
+
+    background:#fff;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+.battalion-choose select:focus,
+.company-choose select:focus{
+
+    outline:none;
+
+    border-color:#0d6efd;
+
+    box-shadow:0 0 8px rgba(13,110,253,.2);
+
+}
+
+
+/* =====================================================
+    SEARCH
+=====================================================*/
+
+.search-area{
+
+    align-items:flex-end;
+
+    gap:20px;
+
+}
+
+.input-box{
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+    gap:8px;
+
+}
+
+.input-box label{
+
+    font-weight:600;
+
+    color:#444;
+
+}
+
+.input-box input{
+
+    height:50px;
+
+    border:1px solid #d8d8d8;
+
+    border-radius:10px;
+
+    padding:0 15px;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+.input-box input:focus{
+
+    outline:none;
+
+    border-color:#198754;
+
+    box-shadow:0 0 8px rgba(25,135,84,.2);
+
+}
+
+.search-area button{
+
+    width:170px;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#198754;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.search-area button:hover{
+
+    background:#157347;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* =====================================================
+    RESULT PANEL
+=====================================================*/
+
+.result-panel{
+
+    flex-direction:column;
+
+}
+
+.person-informations{
+
+    display:flex;
+
+    gap:18px;
+
+}
+
+
+/* =====================================================
+    PERSON CARD
+=====================================================*/
+
+.person-card-1,
+.person-card-2,
+.person-card-3{
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+    border:1px solid #e4e7eb;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    background:#fff;
+
+}
+
+
+/* =====================================================
+    STATUS CARD
+=====================================================*/
+
+.status-card{
+
+    width:260px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    background:#fff8e8;
+
+    border:1px solid #ffd87c;
+
+}
+
+
+/* =====================================================
+    CARD TITLE
+=====================================================*/
+
+.card-title{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:48px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+}
+
+
+/* =====================================================
+    ROW
+=====================================================*/
+
+.info-row,
+.status-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:12px 16px;
+
+    border-bottom:1px solid #f0f0f0;
+
+    font-size:14px;
+
+}
+
+.info-row:last-child,
+.status-row:last-child{
+
+    border-bottom:none;
+
+}
+
+.info-row span:first-child{
+
+    color:#666;
+
+    font-weight:600;
+
+}
+
+.info-row span:last-child{
+
+    color:#222;
+
+    font-weight:700;
+
+}
+
+.status-row span:first-child{
+
+    color:#9a6b00;
+
+    font-weight:bold;
+
+}
+
+.status-row span:last-child{
+
+    color:#d63384;
+
+    font-weight:bold;
+
+}
+
+
+/* =====================================================
+    BUTTON SECTION
+=====================================================*/
+
+.button-section{
+    display:flex;   
+    justify-content:center;
+    gap:15px;
+
+}
+
+.button-section button{
+
+    height:48px;
+
+    min-width:150px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    transition:.25s;
+
+}
+
+/* دکمه‌ها */
+
+.button-section button:nth-child(1){
+    background: #198754;
+    color: white;
+}
+.button-section button:nth-child(1):disabled{
+    background: #198754;
+    color: white;
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.button-section button:nth-child(2){
+
+    background:#1473e6;
+    color:white;
+
+}
+
+.button-section button:nth-child(3){
+
+    background:#1473e6;
+    color:white;
+
+}
+
+.button-section button:nth-child(4){
+
+   
+    background:#dc3545;
+    color:white;
+
+}
+
+.button-section button:nth-child(5){
+ background:#ffc107;
+    color:#222;
+    
+
+}
+
+.button-section button:hover{
+
+    transform:translateY(-2px);
+
+    filter:brightness(.95);
+
+}
+
+
+/* =====================================================
+    RESPONSIVE
+=====================================================*/
+
+@media(max-width:1200px){
+
+    .person-informations{
+
+        flex-wrap:wrap;
+
+    }
+
+    .status-card{
+
+        width:100%;
+
+    }
+
+}
+
+@media(max-width:900px){
+
+    .b-c-panel{
+
+        flex-direction:column;
+
+    }
+
+    .b-c-chooser{
+
+        flex-direction:column;
+
+    }
+
+}
+
+@media(max-width:700px){
+
+    .search-area{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .search-area button{
+
+        width:100%;
+
+    }
+
+    .button-section{
+
+        flex-direction:column;
+
+    }
+
+    .button-section button{
+
+        width:100%;
+
+    }
+
+}
+

@@ -1,0 +1,286 @@
+{% extends 'base_2.html' %}
+
+
+
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/final_reception.css') }}">{% endblock %}
+
+{% block content %}
+
+<div class="page-wrapper">
+
+
+
+  <!-- ── Main ── -->
+  <main class="main-content">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="topbar-right">
+        <h1 class="page-title">ثبت نهایی فراگیران</h1>
+        <div class="breadcrumb">
+          <span>داشبورد</span>
+          <span class="bc-sep">›</span>
+          <span>پذیرش</span>
+          <span class="bc-sep">›</span>
+          <span class="bc-current">ثبت نهایی</span>
+        </div>
+      </div>
+      <div class="topbar-left">
+        <div class="stat-chip">
+          <span class="stat-dot pending"></span>
+          <span id="totalCount">۴</span> نفر در انتظار ثبت نهایی
+        </div>
+      </div>
+    </header>
+
+    <!-- Controls bar -->
+    <div class="controls-bar">
+      <!-- Search -->
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="none">
+          <circle cx="9" cy="9" r="5.5" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="جستجو بر اساس نام، نام خانوادگی یا کدملی..." />
+      </div>
+
+      <!-- Filters -->
+      <div class="filter-group">
+        <select class="filter-select" id="battalionFilter">
+          <option value="">همه گردان‌ها</option>
+          <option value="1">گردان ۱</option>
+          <option value="2">گردان ۲</option>
+          <option value="3">گردان ۳</option>
+        </select>
+        <select class="filter-select" id="companyFilter">
+          <option value="">همه گروهان‌ها</option>
+          <option value="1">گروهان ۱</option>
+          <option value="2">گروهان ۲</option>
+          <option value="3">گروهان ۳</option>
+          <option value="4">گروهان ۴</option>
+          <option value="5">گروهان ۵</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Table card -->
+    <div class="table-card">
+      <div class="table-card-header">
+        <div class="selection-info" id="selectionInfo">
+          <span id="selectedCount">۰</span> نفر انتخاب شده
+        </div>
+        <div class="table-actions" id="tableActions" style="opacity:0.35; pointer-events:none;">
+          <button class="action-btn danger" id="finalSubmitBtn" type="button">
+            <svg viewBox="0 0 18 18" fill="none"><path d="M3 9l4.5 4.5L15 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            ثبت نهایی انتخاب‌شده‌ها
+          </button>
+          <button class="action-btn ghost" id="printBtn">
+            <svg viewBox="0 0 18 18" fill="none"><rect x="3" y="6" width="12" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M5 6V3.5A.5.5 0 015.5 3h7a.5.5 0 01.5.5V6" stroke="currentColor" stroke-width="1.6"/><path d="M6 13v2h6v-2" stroke="currentColor" stroke-width="1.6"/><circle cx="13.5" cy="9.5" r=".75" fill="currentColor"/></svg>
+            چاپ لیست
+          </button>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table class="reg-table" id="regTable">
+          <thead>
+            <tr>
+              <th class="col-chk">
+                <label class="checkbox-wrap">
+                  <input type="checkbox" id="selectAll" />
+                  <span class="checkmark"></span>
+                </label>
+              </th>
+              <th class="col-num">#</th>
+              <th>کدملی</th>
+              <th>نام</th>
+              <th>نام خانوادگی</th>
+              <th>گردان</th>
+              <th>گروهان</th>
+              <th>وضعیت</th>
+              <th class="col-action"></th>
+            </tr>
+          </thead>
+            <tbody id="tableBody">
+
+          {% for s in soldier %}
+          <tr
+              data-id="{{ s.id }}"
+              data-battalion="{{ s.battalion }}"
+              data-company="{{ s.company }}">
+
+              <td class="col-chk">
+                  <label class="checkbox-wrap">
+                      <input type="checkbox" class="row-check">
+                      <span class="checkmark"></span>
+                  </label>
+              </td>
+
+              <td class="col-num row-num">{{ loop.index }}</td>
+
+              <td class="cell-mono">{{ s.national_code }}</td>
+
+              <td>{{ s.first_name }}</td>
+
+              <td>{{ s.last_name }}</td>
+
+              <td>{{ s.battalion }}</td>
+
+              <td>{{ s.company }}</td>
+
+              <td>
+                  <span class="badge initial">{{ s.status }}</span>
+              </td>
+
+              <td class="col-action">
+                  <button class="row-detail-btn" title="جزئیات">›</button>
+              </td>
+
+          </tr>
+          {% endfor %}
+
+          </tbody>
+        </table>
+
+        <!-- Empty state -->
+        <div class="empty-state" id="emptyState" style="display:none;">
+          <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="28" stroke="#D0CEC5" stroke-width="2"/><path d="M22 32h20M32 22v20" stroke="#D0CEC5" stroke-width="2.5" stroke-linecap="round"/></svg>
+          <p>رکوردی یافت نشد</p>
+          <span>فیلتر یا جستجو را تغییر دهید</span>
+        </div>
+      </div>
+
+      <!-- Table footer -->
+      <div class="table-footer">
+        <span class="total-label">    <strong id="visibleCount"> </strong>  </span>
+        <button class="back-btn" onclick="history.back()">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M11 4l-5 5 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          بازگشت
+        </button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ── Checkbox logic ──
+const selectAll   = document.getElementById('selectAll');
+const tableBody   = document.getElementById('tableBody');
+const selInfo     = document.getElementById('selectedCount');
+const tableActions= document.getElementById('tableActions');
+
+function updateSelection() {
+  const checks = tableBody.querySelectorAll('.row-check:not([data-hidden="true"])');
+  const checked = tableBody.querySelectorAll('.row-check:checked');
+  selInfo.textContent = toPersianNum(checked.length);
+  const hasSelection = checked.length > 0;
+  tableActions.style.opacity = hasSelection ? '1' : '0.35';
+  tableActions.style.pointerEvents = hasSelection ? 'auto' : 'none';
+  // highlight rows
+  tableBody.querySelectorAll('tr').forEach(tr => {
+    const cb = tr.querySelector('.row-check');
+    if (cb) tr.classList.toggle('row-selected', cb.checked);
+  });
+  selectAll.indeterminate = checked.length > 0 && checked.length < checks.length;
+  selectAll.checked = checks.length > 0 && checked.length === checks.length;
+}
+
+selectAll.addEventListener('change', () => {
+  tableBody.querySelectorAll('.row-check:not([data-hidden="true"])').forEach(cb => cb.checked = selectAll.checked);
+  updateSelection();
+});
+
+tableBody.addEventListener('change', e => {
+  if (e.target.classList.contains('row-check')) updateSelection();
+});
+
+// ── Search + Filter ──
+function filterTable() {
+  const q    = document.getElementById('searchInput').value.trim().toLowerCase();
+  const bat  = document.getElementById('battalionFilter').value;
+  const comp = document.getElementById('companyFilter').value;
+  const rows = tableBody.querySelectorAll('tr');
+  let visible = 0;
+
+  rows.forEach(tr => {
+    const text    = tr.textContent.toLowerCase();
+    const batMatch  = !bat  || tr.dataset.battalion === bat;
+    const compMatch = !comp || tr.dataset.company   === comp;
+    const qMatch    = !q    || text.includes(q);
+    const show = batMatch && compMatch && qMatch;
+    tr.style.display = show ? '' : 'none';
+    const cb = tr.querySelector('.row-check');
+    if (cb) cb.dataset.hidden = show ? 'false' : 'true';
+    if (show) visible++;
+  });
+
+  document.getElementById('visibleCount').textContent = toPersianNum(visible);
+  document.getElementById('emptyState').style.display = visible === 0 ? 'flex' : 'none';
+  updateSelection();
+  renumberRows();
+}
+
+function renumberRows() {
+  let n = 1;
+  tableBody.querySelectorAll('tr').forEach(tr => {
+    if (tr.style.display !== 'none') {
+      tr.querySelector('.row-num').textContent = toPersianNum(n++);
+    }
+  });
+}
+
+document.getElementById('searchInput').addEventListener('input', filterTable);
+document.getElementById('battalionFilter').addEventListener('change', filterTable);
+document.getElementById('companyFilter').addEventListener('change', filterTable);
+
+function toPersianNum(n) {
+  return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);}
+
+document.getElementById("finalSubmitBtn").addEventListener("click", () => {
+
+    let ids = [];
+
+    document.querySelectorAll(".row-check:checked").forEach(cb => {
+
+        let row = cb.closest("tr");
+
+        ids.push(row.dataset.id);
+        
+
+
+    });
+    fetch('/dashboard/update_status/', {
+        method: 'POST',
+
+        headers: {
+            'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify({
+            ids: ids,
+            status: "پذیرش-شده"
+        })
+
+    })
+    .then(response => response.json())
+    .then(data => {
+
+        
+    
+    if (data.success) {
+        location.reload();
+    }
+
+    })
+    .catch(error => {
+
+        console.log(error);
+
+    });
+
+});
+
+
+</script>
+{%endblock content%}

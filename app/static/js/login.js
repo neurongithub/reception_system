@@ -1,3 +1,5 @@
+// Handeling change password modal 
+
 const modal = document.getElementById("modal") ; 
 const openBtn =  document.getElementById("open-modal")
 

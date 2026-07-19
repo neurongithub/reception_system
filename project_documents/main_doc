@@ -217,9 +217,32 @@ feature_3: making_course page
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 feature_4: Reception page 
 
+    [feature goal] -> this feature with using solider's data in DataBase & jsone file (battalion-company configs) compelet the reception process   
+
+    [files design] -> route: /dashboard/reception 
+                   -> feature folder: reception directory in app/reception/file & modules here ....
+                   -> templates: reception.html , a modal_box (adding user manualy)
+                   -> files: finder.py , formater.py , updater.py validator.py
+
+    [steps] :
+            #1. front-end [Done]
+                1-1:[+] create a UI for reception web page [Done]
+                1-2:[+] improvement 
 
 
-
+            #2.reception logic 
+                2-1:[+] input handeling -> get national_code as input from reception page [Done]
+                    2-1-1: send -> national_code , selected_battalion_type, selected_company_type[Done]
+                2-2:[+] validation input [Done]
+                    2-2: a function to validation -> national_code(not empty),check data type (must be string ), check lenght(10 digit), check battalion &company is selected -> if any of those is incorrect retrun flash message and return to main page [Done]
+                2-3:[+] search solider 
+                    2-3-1:[+] srach national_code in database usign flask-sqlalchemy ORM [Done]
+                
+                2-4:[+] Check Reception Status (formater)
+                    2-4-1:[+] 
+                4-5:[+] Business Rules
+                4-6:[+] format result 
+                4-7:[+] render page 
 
 
 

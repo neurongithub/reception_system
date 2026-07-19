@@ -31,8 +31,10 @@ config.local.py
 *.xlsx
 *.xls
 
+*.json
+
 app/uploads/
 
 tests/
-
+json_folder/
 

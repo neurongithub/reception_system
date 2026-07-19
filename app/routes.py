@@ -16,6 +16,11 @@ from app import db
 from uuid import uuid4
 import os
 import json
+#=======reception imports===============
+from app.reception.validator import ReceptionValidator 
+from app.reception.finder import ReceptionFinder
+from app.reception.formater import ReceptionFormatter
+from app.reception.updater import ReceptionUpdater
 
 
 #main Blueprint
@@ -196,8 +201,9 @@ def create_course ()  :
     return render_template('create_coures.html' , result=None ,time=formated_time, date=current_date)
 
 #reception route ==> open reception page 
-@main_bp.route('/dashboard/reception//')
+@main_bp.route('/dashboard/reception/' , methods=["GET", "POST"])
 def reception () : 
+
 
     #real time and date server     
     current_time = datetime.now()
@@ -207,9 +213,116 @@ def reception () :
     if "user_id" not in session : 
         return redirect(url_for("main.login_page"))
     if session.get("role")!="admin" : 
-        abort(403)
+        abort(403) 
+
+    open_modal=False
+    soldiers = []
+    enable_first_initial = False
+    national_code = ""
+    Result=None
+    # ===============reception logic code here but imported from different modules =============
+    if request.method =='POST':
+        
+        
+        national_code = request.form.get("national_code").strip()
+        battalion_option = request.form.get("battalion_option")
+        company_option = request.form.get("company_option")
+        action = request.form.get("action")
     
-    return render_template('reception.html' , time=formated_time,date=current_date)
+        if battalion_option :
+            session["battalion_option"]=battalion_option
+        if company_option:
+            session["company_option"] = company_option
+
+        
+        #---------------------
+        ##1. Validation 
+        #---------------------
+        reception_validator , national_code,message = ReceptionValidator.request_validator(national_code, battalion_option, company_option)
+
+        if not reception_validator :
+            flash(message, 'error')
+            return render_template('reception.html',open_modal=open_modal,enable_first_initial = False, national_code=national_code, Result=None,time=formated_time,date=current_date,  battalion_option=session.get("battalion_option", ""),company_option=session.get("company_option", ""))
+        
+        reception_validator, national_code,message = ReceptionValidator.national_code_validator(national_code)
+        if not reception_validator:
+            flash(message,'error')
+            return render_template('reception.html' ,open_modal=open_modal,enable_first_initial = False,national_code=national_code, Result=None,time=formated_time,date=current_date,  battalion_option=session.get("battalion_option", ""),company_option=session.get("company_option", ""))    
+
+        # -----------------------
+        #2.Find Soldier
+        # -----------------------
+        soldier = ReceptionFinder.find_soldier(national_code)
+        if soldier is None: 
+            flash("فرد یافت نشد" ,'error')
+            return render_template('reception.html',open_modal=open_modal,enable_first_initial = False ,national_code=national_code, Result=None,time=formated_time,date=current_date,  battalion_option=session.get("battalion_option", ""),company_option=session.get("company_option", ""))    
+        
+        
+        # -----------------------
+        # 3.Format Result
+        # -----------------------
+        Result = ReceptionFormatter.prepare(soldier)
+        enable_first_initial = (soldier is not None and battalion_option and company_option and soldier.status=="پذیرش-نشده")
+
+        # -----------------------
+        # 4.Update Database(first initial)
+        # -----------------------
+        if action == "first_initial" :
+            ReceptionUpdater.assign_battalion_company_status(soldier=soldier, battalion_option=battalion_option,company_option=company_option,status='ثبت-اولیه')
+            flash("ثبت اولیه انجام شد" , "success")
+            national_code = ""
+
+
+    return render_template('reception.html' ,open_modal=open_modal,soldiers=soldiers,enable_first_initial=enable_first_initial, national_code=national_code,Result=Result,time=formated_time,date=current_date,  battalion_option=session.get("battalion_option", ""),company_option=session.get("company_option", ""))
+
+#final_reception route => open final inital page 
+@main_bp.route("/dashboard/final_reception/" ,methods=["GET"])
+def final_reception ():
+
+    #real time and date server     
+    current_time = datetime.now()
+    formated_time =current_time.strftime("%H:%M:%S")
+    current_date = datetime.now().strftime("%Y/%m/%d")
+
+    if "user_id" not in session : 
+        return redirect(url_for("main.login_page"))
+    if session.get("role")!="admin" : 
+        abort(403) 
+
+   
+    #find all solider with status="ثبت-اولیه"
+    soldier = ReceptionFinder.find_first_initial()
+    
+    
+
+    return render_template('final_reception.html', soldier=soldier)
+
+
+#This route updated status to status="پذیرش-شده"
+@main_bp.route("/dashboard/update_status/", methods=["POST"])
+def update_status():
+
+    data = request.get_json()
+
+    ids = data["ids"]
+    status = data["status"]
+
+    Soldier.query\
+        .filter(Soldier.id.in_(ids))\
+        .update(
+            {
+                Soldier.status: status
+            },
+            synchronize_session=False
+        )
+
+    db.session.commit()
+
+    flash("ثبت نهایی سربازان با موفقیت انجام شد.", "success")
+
+    return {"success": True}
+
+
 
 #last courses ==> open last courses page [back log now]
 @main_bp.route('/dashboard/last_courses/')

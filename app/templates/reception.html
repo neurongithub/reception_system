@@ -2,11 +2,265 @@
 
 {% block title %}reception{% endblock title %}
 
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/reception.css') }}">{% endblock %}
 
 {% block content %}
 
 
-<h2>recepton</h2>
+<main class="reception-container">
+    
+    <form action="/dashboard/reception" class="reception-form" method="POST">
+    <!-- reception header -->
+     <section class="reception-header">
+
+        <div class="reception-title">
+            <h2>پنل ثبت و پذیرش فراگیران</h2>
+        </div>
+        {% if Result %}
+        <div class="course-info">
+            <span>نام دوره:{{ Result.course_name }}</span>
+            <span>کد دوره:{{ Result.course_code }}</span>
+            <span>تاریخ برگزاری: {{ Result.course_date }}</span>
+        </div>
+        {% endif %}
+     </section>
+
+    <!-- battalion & company area  -->
+     <section class="b-c-panel">
+        <div class="b-c-resutl">
+            <div class="resutl-battalion">
+                <label for="">گردان :</label>
+                <span>
+                    { 1 }
+                </span>
+            </div>
+            <div class="result-company">
+                <label for="">گروهان:</label>
+                <span>
+                    { 2 }
+                </span>
+                <span>نوع تخصیصی : تحصیلاتی - معاف از رزم -شیعه</span>
+            </div>
+        
+        </div>
+
+        <div class="b-c-chooser">
+            <div class="battalion-choose">
+                <label for="">انتخاب گردان</label>
+                <select name="battalion_option" id="">
+                        <option value=""></option>
+                    
+                        <option value="1"
+                            {% if battalion_option == "1" %}selected{% endif %}>
+                            گردان 1
+                        </option>
+
+                        <option value="2"
+                            {% if battalion_option == "2" %}selected{% endif %}>
+                            گردان 2
+                        </option>
+                        <option value="3"
+                            {% if battalion_option == "3" %}selected{% endif %}>
+                            گردان 3
+                        </option>
+                </select>
+
+            </div>
+
+            <div class="company-choose">
+                <label for="">انتخاب گروهان</label>
+                <select name="company_option" id="">
+                   <option value=""></option>
+                     <option value="1"
+                        {% if company_option == "1" %}selected{% endif %}>
+                        گروهان 1
+                    </option>
+
+                    <option value="2"
+                        {% if company_option == "2" %}selected{% endif %}>
+                        گروهان 2
+                    </option>
+                     <option value="3"
+                            {% if company_option == "3" %}selected{% endif %}>
+                            گروهان 3
+                        </option>
+
+                        <option value="4"
+                            {% if company_option == "4" %}selected{% endif %}>
+                            گروهان 4
+                        </option>
+                         <option value="5"
+                            {% if company_option == "5" %}selected{% endif %}>
+                            گروهان 5
+                        </option>
+                </select>
+
+            </div>
+        </div>
+     </section>
+
+     <!-- search area  -->
+    <section class="search-area">
+        <span style="font-size: 18px;">کدملی:</span>
+        <div class="input-box">
+            <input type="text" placeholder="جستجو کد ملی..." name="national_code" value="{{ national_code }}">
+        </div>
+        <button type="submit" name="action" value="search">
+            جستجو
+        </button>
+    </section>
+
+    <!-- result area  -->
+     <section class="result-panel">
+        <div class="person-informations">
+          {% if Result %}  
+        <div class="person-card-1">
+            
+            <div class="info-row">
+                <span>کدملی</span>
+                <span>{{ Result.national_code }}</span>
+            </div>
+            <div class="info-row">
+                <span>نام</span>
+                <span>{{ Result.first_name }} </span>
+            </div>
+            <div class="info-row">
+                <span>نام خانوادگی</span>
+                <span>{{ Result.last_name }}</span>
+            </div>
+
+            <div class="info-row">
+                <span>نام پدر</span>
+                <span> {{ Result.father_name }}</span>
+            </div>
+            <div class="info-row">
+                <span>تاریخ تولد</span>
+                <span>{{ Result.birth_date }} </span>
+            </div>
+        </div>
+            {% endif %}
+
+        <div class="person-card-2">
+            {% if Result %} 
+            <div class="info-row">
+                <span>مدرک تحصیلی</span>
+                <span>{{ Result.education }}</span>
+            </div>
+            <div class="info-row">
+                <span>رشته تحصیلی</span>
+                <span>{{ Result.field }}</span>
+            </div>
+            <div class="info-row">
+                <span>دین</span>
+                <span>اسلام</span>
+            </div>
+            <div class="info-row">
+                <span>مذهب</span>
+                <span>{{ Result.religion }}</span>
+            </div>
+            <div class="info-row">
+                <span> وضعیت سلامت</span>
+                <span>{{ Result.health }}</span>
+            </div>
+
+        </div>
+        {% endif %}
+        <div class="person-card-3">
+            {% if Result %} 
+            <div class="info-row">
+                <span>وضعیت تاهل</span>
+                <span>{{ Result.marriage }}</span>
+            </div>
+            <div class="info-row">
+                <span>استان</span>
+                <span>{{ Result.province }}</span>
+            </div>
+            <div class="info-row">
+                <span>شهر</span>
+                <span>{{ Result.city }}</span>
+            </div>
+            <div class="info-row">
+                <span>تلفن</span>
+                <span>{{ Result.phone }}</span>
+            </div>
+
+            <div class="info-row">
+                <span>نشانی</span>
+                <span>{{ Result.address }}</span>
+            </div>
+        </div>
+        {% endif %}
+        <div class="status-card">
+            <div class="status-row">
+                {% if Result %}
+                <span>تاریخ پذیرش</span>
+                <span>1/1/1405</span>
+            </div>
+            <div class="status-row">
+                <span>وضعیت پذیرش</span>
+                <span>{{ Result.status }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+      </div>  
+     </section>
+    
+
+    <!-- button section  -->
+     <section class="button-section">
+        <button id="btn-first" type="submit" name="action" value="first_initial" {% if not enable_first_initial %}disabled{% endif %}>ثبت اولیه</button>
+
+        <a href="/dashboard/final_reception/" target="_"><button id="btn-list" type="button" name="action" value="first_initial_list">لیست</button></a>
+
+        <button id="btn-manual" type="button" name="action" value="manual">ثبت دستی</button>
+
+        <button id="btn-clear" type="reset" name="action" >پاک کردن</button>
+
+        <button id="btn-state" name="action" value="state" type="button">آمارگیری</button>
+
+        <button name="action" >بازگشت/انصراف</button>
+
+     </section>
+
+
+</form>
+</main>
+
+
+
 
 
 {% endblock content %}
+
+
+{% if open_modal %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("modalOverlay").style.display = "flex";
+});
+</script>
+{% endif %}
+
+<!-- reception page footer exclusive  -->
+{% block footer %}
+<footer class="footer">
+
+
+<div class="footer-text" style="display: flex; gap: 60px;">
+
+<span >ثبت اولیه F2</span>
+<span>ثبت نهایی F3</span>
+<span>ثبت دستی F4</span>
+<span>چاپ برگه پوشاک F6</span>
+<span>پاک کردن F7</span>
+<span>بازگشت/انصراف Esc</span>
+
+
+</div>
+
+{% block extra_script %}
+<script src="{{ url_for('static', filename='js/reception.js') }}"></script>
+{% endblock %}
+</footer>
+{% endblock %}
