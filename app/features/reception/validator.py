@@ -1,6 +1,4 @@
 # this file to validate user input in reception feature
-from flask import session , abort , render_template ,redirect , url_for
-
 
 
 class ReceptionValidator : 

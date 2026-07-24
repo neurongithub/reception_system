@@ -1,10 +1,11 @@
 {% extends 'base_2.html' %}
 
-{% block title %}create course{% endblock title %}
+{% block title %}ایجاد دوره جدید{% endblock title %}
 
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static' , filename='css/create_course_style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/persian-datepicker.min.css') }}">
 {% endblock extra_css %}
 
 
@@ -13,7 +14,15 @@
 
 
 
-<form action="{{ url_for('main.upload') }}" method="POST" enctype="multipart/form-data">
+<div class="page-header">
+    <div class="page-title">
+        <h3>ایجاد دوره جدید</h3>
+        <p>برای ساختن دوره جدید تمامی فیلد های زیر را پر و اتخاب کنید</p>
+        
+    </div>
+</div>
+
+<form action="{{ url_for('course.upload') }}" method="POST" enctype="multipart/form-data">
     <div class="container">
 
     <div class="basic-data-container">
@@ -35,7 +44,7 @@
                     </div>
                     <div class="course_date">
                         <p>تاریخ دوره:</p>
-                        <input id="course-date-input" type="date" name="course_date" >
+                        <input id="course-date-input" type="text" name="course_date" >
                     </div>
                    
                     <div class="excel-container">
@@ -77,7 +86,34 @@
                             <option value="option7">تحصیلاتی-سنی-معاف</option>
                             <option value="option8">دیپلم-سنی-معاف</option>
                             <option value="option9">کفایتی</option>
-                            
+                        </select>
+                        <label for="b1-c2">گروهان ۲</label>
+                        <select name="b1-c2" >
+                            <option value="option0"></option>
+                            <option value="option1">تحصیلاتی-شیعه-سالم</option>
+                            <option value="option2">دیپلم-شیعه-سالم</option>
+                            <option value="option3">تحصیلاتی-سنی-سالم</option>
+                            <option value="option4">دیپلم-سنی-سالم</option>
+                            <option value="option5">تحصیلاتی-شیعه-معاف</option>
+                            <option value="option6">دیپلم-شیعه-معاف</option>
+                            <option value="option7">تحصیلاتی-سنی-معاف</option>
+                            <option value="option8">دیپلم-سنی-معاف</option>
+                            <option value="option9">کفایتی</option>
+                        </select>
+                    </div>
+                    <div class="company-holder2">
+                        <label for="b1-c3">گروهان ۳</label>
+                        <select name="b1-c3" >
+                            <option value="option0"></option>
+                            <option value="option1">تحصیلاتی-شیعه-سالم</option>
+                            <option value="option2">دیپلم-شیعه-سالم</option>
+                            <option value="option3">تحصیلاتی-سنی-سالم</option>
+                            <option value="option4">دیپلم-سنی-سالم</option>
+                            <option value="option5">تحصیلاتی-شیعه-معاف</option>
+                            <option value="option6">دیپلم-شیعه-معاف</option>
+                            <option value="option7">تحصیلاتی-سنی-معاف</option>
+                            <option value="option8">دیپلم-سنی-معاف</option>
+                            <option value="option9">کفایتی</option>
                         </select>
                         <label for="b1-c4">گروهان ۴</label>
                         <select name="b1-c4" >
@@ -93,21 +129,7 @@
                             <option value="option9">کفایتی</option>
                         </select>
                     </div>
-                    <div class="company-holder2">
-                        <label for="b1-c2">گروهان ۲</label>
-                        <select name="b1-c2" >
-                            <option value="option0"></option>
-                            <option value="option1">تحصیلاتی-شیعه-سالم</option>
-                            <option value="option2">دیپلم-شیعه-سالم</option>
-                            <option value="option3">تحصیلاتی-سنی-سالم</option>
-                            <option value="option4">دیپلم-سنی-سالم</option>
-                            <option value="option5">تحصیلاتی-شیعه-معاف</option>
-                            <option value="option6">دیپلم-شیعه-معاف</option>
-                            <option value="option7">تحصیلاتی-سنی-معاف</option>
-                            <option value="option8">دیپلم-سنی-معاف</option>
-                            <option value="option9">کفایتی</option>
-                            
-                        </select>
+                    <div class="company-holder3">
                         <label for="b1-c5">گروهان ۵</label>
                         <select name="b1-c5" >
                             <option value="option0"></option>
@@ -120,27 +142,8 @@
                             <option value="option7">تحصیلاتی-سنی-معاف</option>
                             <option value="option8">دیپلم-سنی-معاف</option>
                             <option value="option9">کفایتی</option>
-                            
                         </select>
                     </div>
-                    <div class="company-holder3">
-                        <label for="b1-c3">گروهان ۳</label>
-                        <select name="b1-c3" >
-                            <option value="option0"></option>
-                            <option value="option1">تحصیلاتی-شیعه-سالم</option>
-                            <option value="option2">دیپلم-شیعه-سالم</option>
-                            <option value="option3">تحصیلاتی-سنی-سالم</option>
-                            <option value="option4">دیپلم-سنی-سالم</option>
-                            <option value="option5">تحصیلاتی-شیعه-معاف</option>
-                            <option value="option6">دیپلم-شیعه-معاف</option>
-                            <option value="option7">تحصیلاتی-سنی-معاف</option>
-                            <option value="option8">دیپلم-سنی-معاف</option>
-                            <option value="option9">کفایتی</option>
-                            
-                        </select>
-                        
-                    </div> 
-
                 </div>
                 
             </div> 
@@ -164,7 +167,34 @@
                             <option value="option7">تحصیلاتی-سنی-معاف</option>
                             <option value="option8">دیپلم-سنی-معاف</option>
                             <option value="option9">کفایتی</option>
-                            
+                        </select>
+                        <label for="b2-c2">گروهان ۲</label>
+                        <select name="b2-c2" >
+                            <option value="option0"></option>
+                            <option value="option1">تحصیلاتی-شیعه-سالم</option>
+                            <option value="option2">دیپلم-شیعه-سالم</option>
+                            <option value="option3">تحصیلاتی-سنی-سالم</option>
+                            <option value="option4">دیپلم-سنی-سالم</option>
+                            <option value="option5">تحصیلاتی-شیعه-معاف</option>
+                            <option value="option6">دیپلم-شیعه-معاف</option>
+                            <option value="option7">تحصیلاتی-سنی-معاف</option>
+                            <option value="option8">دیپلم-سنی-معاف</option>
+                            <option value="option9">کفایتی</option>
+                        </select>
+                    </div>
+                    <div class="company-holder2">
+                        <label for="b2-c3">گروهان ۳</label>
+                        <select name="b2-c3" >
+                            <option value="option0"></option>
+                            <option value="option1">تحصیلاتی-شیعه-سالم</option>
+                            <option value="option2">دیپلم-شیعه-سالم</option>
+                            <option value="option3">تحصیلاتی-سنی-سالم</option>
+                            <option value="option4">دیپلم-سنی-سالم</option>
+                            <option value="option5">تحصیلاتی-شیعه-معاف</option>
+                            <option value="option6">دیپلم-شیعه-معاف</option>
+                            <option value="option7">تحصیلاتی-سنی-معاف</option>
+                            <option value="option8">دیپلم-سنی-معاف</option>
+                            <option value="option9">کفایتی</option>
                         </select>
                         <label for="b2-c4">گروهان ۴</label>
                         <select name="b2-c4" >
@@ -180,21 +210,7 @@
                             <option value="option9">کفایتی</option>
                         </select>
                     </div>
-                    <div class="company-holder2">
-                        <label for="b2-c2">گروهان ۲</label>
-                        <select name="b2-c2" >
-                            <option value="option0"></option>
-                            <option value="option1">تحصیلاتی-شیعه-سالم</option>
-                            <option value="option2">دیپلم-شیعه-سالم</option>
-                            <option value="option3">تحصیلاتی-سنی-سالم</option>
-                            <option value="option4">دیپلم-سنی-سالم</option>
-                            <option value="option5">تحصیلاتی-شیعه-معاف</option>
-                            <option value="option6">دیپلم-شیعه-معاف</option>
-                            <option value="option7">تحصیلاتی-سنی-معاف</option>
-                            <option value="option8">دیپلم-سنی-معاف</option>
-                            <option value="option9">کفایتی</option>
-                            
-                        </select>
+                    <div class="company-holder3">
                         <label for="b2-c5">گروهان ۵</label>
                         <select name="b2-c5" >
                             <option value="option0"></option>
@@ -207,23 +223,6 @@
                             <option value="option7">تحصیلاتی-سنی-معاف</option>
                             <option value="option8">دیپلم-سنی-معاف</option>
                             <option value="option9">کفایتی</option>
-                            
-                        </select>
-                    </div>
-                    <div class="company-holder3">
-                        <label for="b2-c3">گروهان ۳</label>
-                        <select name="b2-c3" >
-                            <option value="option0"></option>
-                            <option value="option1">تحصیلاتی-شیعه-سالم</option>
-                            <option value="option2">دیپلم-شیعه-سالم</option>
-                            <option value="option3">تحصیلاتی-سنی-سالم</option>
-                            <option value="option4">دیپلم-سنی-سالم</option>
-                            <option value="option5">تحصیلاتی-شیعه-معاف</option>
-                            <option value="option6">دیپلم-شیعه-معاف</option>
-                            <option value="option7">تحصیلاتی-سنی-معاف</option>
-                            <option value="option8">دیپلم-سنی-معاف</option>
-                            <option value="option9">کفایتی</option>
-                            
                         </select>
                     </div>
                 </div> 
@@ -249,7 +248,34 @@
                             <option value="option7">تحصیلاتی-سنی-معاف</option>
                             <option value="option8">دیپلم-سنی-معاف</option>
                             <option value="option9">کفایتی</option>
-                            
+                        </select>
+                        <label for="b3-c2">گروهان ۲</label>
+                        <select name="b3-c2" >
+                            <option value="option0"></option>
+                            <option value="option1">تحصیلاتی-شیعه-سالم</option>
+                            <option value="option2">دیپلم-شیعه-سالم</option>
+                            <option value="option3">تحصیلاتی-سنی-سالم</option>
+                            <option value="option4">دیپلم-سنی-سالم</option>
+                            <option value="option5">تحصیلاتی-شیعه-معاف</option>
+                            <option value="option6">دیپلم-شیعه-معاف</option>
+                            <option value="option7">تحصیلاتی-سنی-معاف</option>
+                            <option value="option8">دیپلم-سنی-معاف</option>
+                            <option value="option9">کفایتی</option>
+                        </select>
+                    </div>
+                    <div class="company-holder2">
+                        <label for="b3-c3">گروهان ۳</label>
+                        <select name="b3-c3" >
+                            <option value="option0"></option>
+                            <option value="option1">تحصیلاتی-شیعه-سالم</option>
+                            <option value="option2">دیپلم-شیعه-سالم</option>
+                            <option value="option3">تحصیلاتی-سنی-سالم</option>
+                            <option value="option4">دیپلم-سنی-سالم</option>
+                            <option value="option5">تحصیلاتی-شیعه-معاف</option>
+                            <option value="option6">دیپلم-شیعه-معاف</option>
+                            <option value="option7">تحصیلاتی-سنی-معاف</option>
+                            <option value="option8">دیپلم-سنی-معاف</option>
+                            <option value="option9">کفایتی</option>
                         </select>
                         <label for="b3-c4">گروهان ۴</label>
                         <select name="b3-c4" >
@@ -265,21 +291,7 @@
                             <option value="option9">کفایتی</option>
                         </select>
                     </div>
-                    <div class="company-holder2">
-                        <label for="b3-c2">گروهان ۲</label>
-                        <select name="b3-c2" >
-                            <option value="option0"></option>
-                            <option value="option1">تحصیلاتی-شیعه-سالم</option>
-                            <option value="option2">دیپلم-شیعه-سالم</option>
-                            <option value="option3">تحصیلاتی-سنی-سالم</option>
-                            <option value="option4">دیپلم-سنی-سالم</option>
-                            <option value="option5">تحصیلاتی-شیعه-معاف</option>
-                            <option value="option6">دیپلم-شیعه-معاف</option>
-                            <option value="option7">تحصیلاتی-سنی-معاف</option>
-                            <option value="option8">دیپلم-سنی-معاف</option>
-                            <option value="option9">کفایتی</option>
-                            
-                        </select>
+                    <div class="company-holder3">
                         <label for="b3-c5">گروهان ۵</label>
                         <select name="b3-c5" >
                             <option value="option0"></option>
@@ -292,23 +304,6 @@
                             <option value="option7">تحصیلاتی-سنی-معاف</option>
                             <option value="option8">دیپلم-سنی-معاف</option>
                             <option value="option9">کفایتی</option>
-                            
-                        </select>
-                    </div>
-                    <div class="company-holder3">
-                        <label for="b3-c3">گروهان ۳</label>
-                        <select name="b3-c3" >
-                            <option value="option0"></option>
-                            <option value="option1">تحصیلاتی-شیعه-سالم</option>
-                            <option value="option2">دیپلم-شیعه-سالم</option>
-                            <option value="option3">تحصیلاتی-سنی-سالم</option>
-                            <option value="option4">دیپلم-سنی-سالم</option>
-                            <option value="option5">تحصیلاتی-شیعه-معاف</option>
-                            <option value="option6">دیپلم-شیعه-معاف</option>
-                            <option value="option7">تحصیلاتی-سنی-معاف</option>
-                            <option value="option8">دیپلم-سنی-معاف</option>
-                            <option value="option9">کفایتی</option>>
-                            
                         </select>
                     </div>
                 </div>
@@ -383,7 +378,30 @@
 </div>
 </form> 
 
+<script src="{{ url_for('static', filename='js/jquery-4.0.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/persian-date.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/persian-datepicker.min.js') }}"></script>
+<script>
+$(document).ready(function () {
 
+    $("#course-date-input").persianDatepicker({
+
+        format: "YYYY/MM/DD",
+
+        initialValue: false,
+
+        autoClose: true,
+
+        responsive: false,
+
+        inline: false,
+
+        position: "auto"
+
+    });
+
+});
+</script>
 {% endblock content %}
 
 {% block extra_script %}

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}ورود به سامانه{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
@@ -51,7 +51,7 @@
                             <br><h3>تغییر رمز عبور</h3><hr><br>
                             
 
-                            <form action="/dashboard/changepassword" method="POST" autocomplete="off" >
+                            <form action="/changepassword" method="POST" autocomplete="off" >
 
                                 <input type="text" placeholder="نام کاربری" name="username" autofocus>
 

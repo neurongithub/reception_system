@@ -1,7 +1,5 @@
-# this file use to find diffrent stuff in data base 
+# this file use to find different stuff in database
 
-
-from app.models import Course
 from app.models import Soldier
 
 class ReceptionFinder :
@@ -20,5 +18,9 @@ class ReceptionFinder :
         
         soldier = Soldier.query.filter_by(status="ثبت-اولیه").all()
         return soldier
+
+
+   
+
         
 

@@ -1,6 +1,6 @@
 {% extends 'base_2.html' %}
 
-{% block title %}reception{% endblock title %}
+{% block title %}پنل پذیرش فراگیران{% endblock title %}
 
 {% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/reception.css') }}">{% endblock %}
 
@@ -14,13 +14,13 @@
      <section class="reception-header">
 
         <div class="reception-title">
-            <h2>پنل ثبت و پذیرش فراگیران</h2>
+            <h3>پنل ثبت و پذیرش فراگیران</h3>
         </div>
         {% if Result %}
         <div class="course-info">
             <span>نام دوره:{{ Result.course_name }}</span>
             <span>کد دوره:{{ Result.course_code }}</span>
-            <span>تاریخ برگزاری: {{ Result.course_date }}</span>
+            <span>تاریخ برگزاری: {{ jdatetime.date.fromgregorian(date=Result.course_date).strftime("%Y/%m/%d") }}</span>
         </div>
         {% endif %}
      </section>
@@ -29,17 +29,8 @@
      <section class="b-c-panel">
         <div class="b-c-resutl">
             <div class="resutl-battalion">
-                <label for="">گردان :</label>
-                <span>
-                    { 1 }
-                </span>
-            </div>
-            <div class="result-company">
-                <label for="">گروهان:</label>
-                <span>
-                    { 2 }
-                </span>
-                <span>نوع تخصیصی : تحصیلاتی - معاف از رزم -شیعه</span>
+               <span>test</span>
+                <span></span>
             </div>
         
         </div>
@@ -101,9 +92,9 @@
 
      <!-- search area  -->
     <section class="search-area">
-        <span style="font-size: 18px;">کدملی:</span>
+        <span style="font-size: 18px;">icon</span>
         <div class="input-box">
-            <input type="text" placeholder="جستجو کد ملی..." name="national_code" value="{{ national_code }}">
+            <input type="text" placeholder="جستجو بر اساس کد ملی ...." name="national_code" value="{{ national_code }}">
         </div>
         <button type="submit" name="action" value="search">
             جستجو
@@ -135,7 +126,7 @@
             </div>
             <div class="info-row">
                 <span>تاریخ تولد</span>
-                <span>{{ Result.birth_date }} </span>
+                <span>{{ jdatetime.date.fromgregorian(date=Result.birth_date).strftime("%Y/%m/%d") }}</span>
             </div>
         </div>
             {% endif %}
@@ -194,11 +185,21 @@
             <div class="status-row">
                 {% if Result %}
                 <span>تاریخ پذیرش</span>
-                <span>1/1/1405</span>
+                <span>{{ jdatetime.date.fromgregorian(date=Result.course_date).strftime("%Y/%m/%d") }}</span>
             </div>
             <div class="status-row">
                 <span>وضعیت پذیرش</span>
-                <span>{{ Result.status }}</span>
+                <span class="
+                    {% if Result.status == 'پذیرش-نشده' %}
+                    status-red
+                    {% elif Result.status == 'ثبت-اولیه' %}
+                    status-yellow
+                    {% elif Result.status == 'پذیرش-شده' %}
+                    status-green
+                    {% endif %}
+                    ">
+                    {{ Result.status }}
+                </span>
             </div>
             {% endif %}
         </div>
@@ -211,7 +212,7 @@
      <section class="button-section">
         <button id="btn-first" type="submit" name="action" value="first_initial" {% if not enable_first_initial %}disabled{% endif %}>ثبت اولیه</button>
 
-        <a href="/dashboard/final_reception/" target="_"><button id="btn-list" type="button" name="action" value="first_initial_list">لیست</button></a>
+        <a href="/dashboard/final_reception/" target="_blank"><button id="btn-list" type="button" name="action" value="first_initial_list">لیست</button></a>
 
         <button id="btn-manual" type="button" name="action" value="manual">ثبت دستی</button>
 
@@ -250,10 +251,10 @@ document.addEventListener("DOMContentLoaded", function() {
 <div class="footer-text" style="display: flex; gap: 60px;">
 
 <span >ثبت اولیه F2</span>
-<span>ثبت نهایی F3</span>
+<span> لیست F3</span>
 <span>ثبت دستی F4</span>
-<span>چاپ برگه پوشاک F6</span>
 <span>پاک کردن F7</span>
+<span> آمار F6</span>
 <span>بازگشت/انصراف Esc</span>
 
 

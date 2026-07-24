@@ -34,3 +34,4 @@ class Config :
         #run.py configs
         DEBUG = True 
         HOST = 'localhost'
+        

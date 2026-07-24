@@ -16,12 +16,18 @@ def create_app () :
     app.config.from_object ('config.Config')
     
     db.init_app(app)
-    migrate.init_app(app, db )
+    migrate.init_app(app, db)
 
-    
-    from app.routes import main_bp
-    app.register_blueprint(main_bp)   
-    
+    from app.features.auth.routes import auth_bp
+    from app.features.dashboard.routes import dashboard_bp
+    from app.features.course.routes import course_bp
+    from app.features.reception.routes import reception_bp
+
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(dashboard_bp)
+    app.register_blueprint(course_bp)
+    app.register_blueprint(reception_bp)
+
     from app import models
     
     # create DATABASE TABLES if don't exsist 

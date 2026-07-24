@@ -19,7 +19,7 @@ document.addEventListener("keydown", function (event) {
 
         case "F3":
             event.preventDefault();
-            document.getElementById("btn-final").click();
+            document.getElementById("btn-list").click();
             break;
 
         case "F4":

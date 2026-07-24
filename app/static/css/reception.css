@@ -185,19 +185,23 @@ body{
 .battalion-choose select,
 .company-choose select{
 
-    height:48px;
+    height:40px;
 
     border:1px solid #d7dde5;
 
-    border-radius:10px;
+    /* border-radius:10px; */
 
-    padding:0 12px;
+    /* padding:0 12px; */
 
     background:#fff;
 
     font-size:15px;
 
     transition:.3s;
+
+    border-radius: 16px;
+    padding: 10px;
+     box-shadow: 0 8px 20px rgba(0,0,0,.08);
 
 }
 
@@ -211,7 +215,12 @@ body{
     box-shadow:0 0 8px rgba(13,110,253,.2);
 
 }
-
+.resutl-battalion{
+    display: flex;
+    border: 2px solid red;
+    width: 500px;
+    height: 90px;
+}
 
 /* =====================================================
     SEARCH
@@ -235,6 +244,8 @@ body{
 
     gap:8px;
 
+    
+
 }
 
 .input-box label{
@@ -247,7 +258,7 @@ body{
 
 .input-box input{
 
-    height:50px;
+    /* height:50px;
 
     border:1px solid #d8d8d8;
 
@@ -257,8 +268,19 @@ body{
 
     font-size:15px;
 
-    transition:.3s;
+    transition:.3s; */
 
+    width:100%;
+
+    height:35px;
+
+    border-radius:8px;
+
+    border:1px solid #777;
+
+    padding:5px 10px;
+
+    font-family:inherit;
 }
 
 .input-box input:focus{
@@ -273,9 +295,9 @@ body{
 
 .search-area button{
 
-    width:170px;
+    width:110px;
 
-    height:50px;
+    height:35px;
 
     border:none;
 
@@ -364,7 +386,7 @@ body{
 
     overflow:hidden;
 
-    background:#fff8e8;
+    background:#fdfdfd;
 
     border:1px solid #ffd87c;
 
@@ -436,22 +458,52 @@ body{
 
 }
 
+
 .status-row span:first-child{
 
     color:#9a6b00;
-
+    
     font-weight:bold;
 
 }
 
 .status-row span:last-child{
 
-    color:#d63384;
+    /* color:#000000; */
 
     font-weight:bold;
 
 }
+.status-red{
+    color:white;
+    border: 1px solid #b70101;
+    background:#e42222;
+    font-size: 13px;
+    font-weight: 600;
+    padding:5px;
+    border-radius: 10px;
+}
 
+.status-yellow{
+    color:#bba26d;
+    border: 1px solid #EDD99A;
+    background:#fdf3dc;
+    font-size: 13px;
+    font-weight: 600;
+    padding:5px;
+    border-radius: 10px;
+   
+}
+
+.status-green{
+    color:white;
+    border: 1px solid #247b41;
+    background:#38bd2f;
+    font-size: 13px;
+    font-weight: 600;
+    padding:5px;
+    border-radius: 10px;
+}
 
 /* =====================================================
     BUTTON SECTION
@@ -466,9 +518,9 @@ body{
 
 .button-section button{
 
-    height:48px;
+    height:40px;
 
-    min-width:150px;
+    min-width:115px;
 
     border:none;
 

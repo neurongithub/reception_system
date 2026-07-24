@@ -238,11 +238,9 @@ feature_4: Reception page
                 2-3:[+] search solider 
                     2-3-1:[+] srach national_code in database usign flask-sqlalchemy ORM [Done]
                 
-                2-4:[+] Check Reception Status (formater)
-                    2-4-1:[+] 
-                4-5:[+] Business Rules
-                4-6:[+] format result 
-                4-7:[+] render page 
+                2-4:[+] Check Reception Status (formater) [Done]
+                    2-4-1:[+] format and prepare query output to show in web page [Done]
+                 
 
 
 

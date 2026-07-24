@@ -42,7 +42,7 @@
 
             <div class="logo-image">
 
-                <a href="{{ url_for('main.dashboard') }}">
+                <a href="{{ url_for('dashboard.dashboard') }}">
 
                     <img src="{{ url_for('static', filename='images/logo.jpg') }}"
                          alt="logo">
@@ -74,7 +74,7 @@
         <nav class="nav-buttons">
 
 
-            <a href="{{ url_for('main.dashboard') }}" class="nav-btn">
+            <a href="{{ url_for('dashboard.dashboard') }}" class="nav-btn">
 
 
                 <span>
@@ -91,7 +91,7 @@
 
 
 
-            <a href="{{ url_for('main.logout') }}" class="nav-btn">
+            <a href="{{ url_for('auth.logout') }}" class="nav-btn">
 
 
                 <span>
@@ -247,7 +247,7 @@
 
 
 
-    <a href="{{ url_for('main.create_course') }}"
+    <a href="{{ url_for('course.create_course') }}"
     class="sidebar-btn">
 
 
@@ -257,7 +257,7 @@
     </a>
 
 
-    <a href="{{ url_for('main.reception') }}"
+    <a href="{{ url_for('reception.reception') }}"
     class="sidebar-btn">
 
 
@@ -266,7 +266,7 @@
 
     </a>
 
-    <a href="{{ url_for('main.last_courses') }}"
+    <a href="{{ url_for('dashboard.last_courses') }}"
     class="sidebar-btn">
 
 
@@ -275,7 +275,7 @@
 
     </a>
 
-    <a href="{{ url_for('main.help') }}"
+    <a href="{{ url_for('dashboard.help') }}"
     class="sidebar-btn">
         راهنما
     </a>
@@ -377,6 +377,34 @@ document.querySelectorAll(".flash").forEach(
 },4000);
 
 
+//real time function to get real time systemm
+function updateClock(){
+
+    let now = new Date();
+
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+
+
+    hours = String(hours).padStart(2, "0");
+    minutes = String(minutes).padStart(2, "0");
+    seconds = String(seconds).padStart(2, "0");
+
+
+    let time =
+        `${hours}:${minutes}:${seconds}`;
+
+
+    document.getElementById("live-time").innerHTML = time;
+
+}
+
+
+setInterval(updateClock, 1000);
+
+
+updateClock();
 
 </script>
 
