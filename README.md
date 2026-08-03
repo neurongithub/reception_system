@@ -39,8 +39,10 @@ This project created on feature based structure every feature develop in a direc
 ## Installation
 
 Receive the project
-- `git clone https://github.com/neurongithub/reception_system.git`
-- `cd reception_system`
+```bash
+-  git clone https://github.com/neurongithub/reception_system.git
+- cd reception_system 
+```
 
 Virtual env & requierments 
 - `python -m venv soldier_env`
