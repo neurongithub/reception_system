@@ -20,13 +20,13 @@ A web application for managing the reception process of new military trainees.
 
 ## Technologies used
 
-BackEnd
+🗄️ BackEnd
 - Language: Python
 - Web Framework: Flask
 - ORM: SQLAlchemy
-- DataBase: sqlite3(in development), MySQL
+- DataBase: sqlite3(in development), MySQL(on deployment)
 
-Frontend
+👨‍💻 Frontend
 - HTML
 - CSS + bootstrap
 - JavaScript
@@ -35,15 +35,16 @@ Frontend
 
 This project created on feature based structure every feature develop in a directory
 
+
 ## Installation
 
 Receive the project
-- git clone ... 
+- `git clone https://github.com/neurongithub/reception_system.git`
 - `cd reception_system`
 
 Virtual env & requierments 
-- `python -m venv venv`
-- `source venv/bin/activate`
+- `python -m venv soldier_env`
+- `source soldier_env/bin/activate`
 - `pip install -r requirements.txt`
 
 Runing
