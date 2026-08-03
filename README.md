@@ -1,10 +1,20 @@
-# Soldier Reception System - A web application for managing the reception process of new military trainees.
-
+# Soldier Reception System
+A web application for managing the reception process of new military trainees.
 ## Overview 
 
-This management system was designed to standardize the admission and registration process for training trainees at the barracks where I previously served as a soldier.
+✅ This management system was designed to standardize the admission and registration process for training trainees at the barracks where I previously served as a soldier.
 
-This web application replaces the old way of accepting work with paper and an Excel file that was done manually.
+✅ This web application replaces the old way of accepting work with paper and an Excel file that was done manually.
 
-this application,reducing errors,and improving the speed of processing new soldiers.
- 
+✅ this application,reducing errors,and improving the speed of processing new soldiers.
+
+## Features
+
+- User authenticaiton (login,change password)
+- User management
+- Create new course 
+- Course management
+- Admin panel
+- Exports (PDF,excel,print on paper)
+
+
