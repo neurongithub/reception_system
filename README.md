@@ -39,15 +39,15 @@ This project created on feature based structure every feature develop in a direc
 
 Receive the project
 - git clone ... 
-- cd reception_system
+- `cd reception_system`
 
 Virtual env & requierments 
-- python -m venv venv
-- source venv/bin/activate
-- pip install -r requirements.txt
+- `python -m venv venv`
+- `source venv/bin/activate`
+- `pip install -r requirements.txt`
 
 Runing
-- python run.py
+- `python run.py`
 
 
 ## Author
