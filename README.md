@@ -10,13 +10,13 @@ A web application for managing the reception process of new military trainees.
 
 ## Features
 
-- User authenticaiton (login,change password)
-- User management
-- Create new course 
-- Course management
-- Reception
-- Admin panel
-- Exports (PDF,excel,print on paper)
+- 📁 User authenticaiton (login,change password)
+- 📁 User management
+- 📁 Create new course 
+- 📁 Course management
+- 📁 Reception
+- 📁 Admin panel
+- 📁 Exports (PDF,excel,print on paper)
 
 ## Technologies used
 
@@ -37,19 +37,18 @@ This project created on feature based structure every feature develop in a direc
 
 ## Installation
 
-1. Get project 
-git clone ... 
-cd reception_system
+Receive the project
+- git clone ... 
+- cd reception_system
 
-2. create venv & requierments 
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+Virtual env & requierments 
+- python -m venv venv
+- source venv/bin/activate
+- pip install -r requirements.txt
 
-3. start application 
-python run.py
-or
-flask run
+Runing
+- python run.py
+
 
 ## Author
 
