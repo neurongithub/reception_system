@@ -1,4 +1,4 @@
-# Soldier Reception System
+# Soldier Reception System - v 1.0
 A web application for managing the reception process of new military trainees.
 ## Overview 
 
@@ -14,7 +14,45 @@ A web application for managing the reception process of new military trainees.
 - User management
 - Create new course 
 - Course management
+- Reception
 - Admin panel
 - Exports (PDF,excel,print on paper)
+
+## Technologies used
+
+BackEnd
+- Language: Python
+- Web Framework: Flask
+- ORM: SQLAlchemy
+- DataBase: sqlite3(in development), MySQL
+
+Frontend
+- HTML
+- CSS + bootstrap
+- JavaScript
+
+## Project File Structure 
+
+This project created on feature based structure every feature develop in a directory
+
+## Installation
+
+1. Get project 
+git clone ... 
+cd reception_system
+
+2. create venv & requierments 
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+3. start application 
+python run.py
+or
+flask run
+
+## Author
+
+Github profile: neurongithub
 
 
