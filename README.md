@@ -40,20 +40,20 @@ This project created on feature based structure every feature develop in a direc
 
 Receive the project
 ```bash
--  git clone https://github.com/neurongithub/reception_system.git
--  cd reception_system 
+git clone https://github.com/neurongithub/reception_system.git
+cd reception_system 
 ```
 
 Virtual env & requierments 
 ```bash
-- python -m venv soldier_env
-- source soldier_env/bin/activate
-- pip install -r requirements.txt
+python -m venv soldier_env
+source soldier_env/bin/activate
+pip install -r requirements.txt
 ```
 
 Runing
 ```bash
-- python run.py
+python run.py
 ```
 
 ## Author
