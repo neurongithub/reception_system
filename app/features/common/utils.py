@@ -21,5 +21,6 @@ def require_login():
 
 
 def require_admin():
-    if session.get('role') != 'admin':
+    if session.get("role") not in ("admin", "operator"):
         abort(403)
+   

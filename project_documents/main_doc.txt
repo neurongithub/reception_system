@@ -240,7 +240,45 @@ feature_4: Reception page
                 
                 2-4:[+] Check Reception Status (formater) [Done]
                     2-4-1:[+] format and prepare query output to show in web page [Done]
-                 
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+feature_5 : User managment page 
+
+هدف این ویژگی این است که ادمین سامانه امکان مدیریت کاربران سامانه را داشته باشد. بتواند کاربر ایجاد حذف تغییر دهد و لاگ های مربوط به احراز هویت کاربر ها  را ببیند
+
+    [Responsibilities]:
+
+        ** application have 1 admin user and more than 1 viewer users (10 viewer) **
+
+        -- View all users
+        - Create a new user (Viewer)
+        - Edit user information
+            - Username
+            - Password
+            - Full Name
+            - Role
+        - Delete a user
+        - Search users
+        - View authentication logs (login history)
+
+        
+    [featre moduls]:
+
+        -
+
+
+
+
+    [backlogs]:
+
+        -
+
+
+
+
+
 
 
 

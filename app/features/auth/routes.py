@@ -35,7 +35,7 @@ def login_page():
         session['user_id'] = user.id
         session['role'] = user.role
 
-        return redirect(url_for('dashboard.dashboard') if user.role == 'admin' else url_for('dashboard.view'))
+        return redirect(url_for('dashboard.dashboard') if user.role == 'admin' or user.role=='operator' else url_for('dashboard.view'))
 
     return render_with_time('login.html')
 

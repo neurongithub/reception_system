@@ -10,16 +10,16 @@ app = create_app()
 
 with app.app_context():
 
-    if User.query.filter_by(username="admin").first():
-        print("Admin already is exsist in database")
-        exit()
+    # if User.query.filter_by(username="admin").first():
+    #     print("Admin already is exsist in database")
+    #     exit()
 
 
     admin = User(
         username = "admin", 
         password_hashed = generate_password_hash(password="admin"), 
         role = "admin", 
-        full_name = "Administrator"
+        full_name = "administrator"
 
 
     ) 

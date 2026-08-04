@@ -22,11 +22,13 @@ def create_app () :
     from app.features.dashboard.routes import dashboard_bp
     from app.features.course.routes import course_bp
     from app.features.reception.routes import reception_bp
+    from app.features.user_management.routes import user_manage_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(course_bp)
     app.register_blueprint(reception_bp)
+    app.register_blueprint(user_manage_bp)
 
     from app import models
     
@@ -39,6 +41,6 @@ def create_app () :
         
 
     
-    return app 
+    return app  
 
     

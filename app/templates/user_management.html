@@ -1,0 +1,329 @@
+{% extends 'base_2.html' %}
+{% block title %}مدیریت کاربران{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/user_management.css')}}">{% endblock %}
+
+
+{% block content%}
+
+
+<form action="#"><div class="main-div" dir="ltr">
+
+    <div class="user-manage-container">
+        
+        <!-- Header -->
+        <div class="user-manage-header">
+            
+            <button class="new-user-btn" type="button" id="open-create-user-modal">
+                + کاربر جدید
+            </button>
+            
+        
+            
+        <div class="header-title">
+            
+
+    <div class="current-user-card" dir="rtl">
+        {% if current_user.role == "admin" %}
+        <div class="user-avatar">
+            <img src="{{ url_for('static', filename='icons/admin.svg') }}" alt="Delete" style="width: 50px; height: 50px;">
+        </div>
+        {% elif current_user.role == "operator" %}
+        <div class="user-avatar">
+            <img src="{{ url_for('static', filename='icons/op.svg') }}" alt="Delete" style="width: 40px; height: 40px;">
+        </div>
+        {% endif %}
+        <div class="user-info">
+
+            <span class="user-label">
+                کاربر وارد شده
+            </span>
+
+            <h4 class="user-name">
+                {{ current_user.full_name }}
+            </h4>
+
+            <div class="user-meta">
+
+                <span class="username" dir="ltr">
+                    @{{ current_user.username }}
+                </span>
+
+                <span class="role {{ current_user.role }}">
+                    {{ current_user.role|capitalize }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+            
+
+
+        </div>
+
+        <!-- Toolbar -->
+        <div class="user-manage-searchBar">
+
+            <input type="text" class="search-input" name="search-user" placeholder="جستجو نام کاربری..." dir="rtl">
+
+            <select class="filter-select">
+                <option>همه</option>
+                <option>مدیر سیستم</option>
+                <option>اپراتور</option>
+                <option>کاربر معمولی</option>
+                
+            </select>
+
+        </div>
+
+        <!-- Table -->
+        <div class="user-manage-table">
+
+            <table>
+
+                <thead>
+
+                    <tr style="background-color: #0d2240;color: white; font-size: 14px;">
+
+                        <th>نام کاربری</th>
+                        <th>نام</th>
+                        <th>نوع</th>
+                        <th>تاریخ ایجاد</th>
+                        <th>آخرین ورود</th>
+                        <th>عملیات</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+                    {% for user in all_users %}
+                    <tr>
+
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.full_name }}</td>
+                        <td>
+                            {% if user.role=='admin' %}
+                            <span class="role admin">{{ user.role }}</span>
+                            
+                            {% elif user.role=='viewer' %}
+                            <span class="role viewer">{{ user.role }}</span>
+                            
+                            {% elif user.role=='operator' %}
+                            <span class="role operator">{{ user.role }}</span>
+                            {% endif %}
+                            
+                        </td>
+                        <td>{{ user.create_at }}</td>
+                        <td>Today</td>
+
+                        <td>
+
+                    <div class="action-buttons">
+                    
+                        {% if session["role"] == "admin" %}
+                    
+                        <!-- Edit -->
+                        <button type="button" class="icon-btn edit-btn">
+                    
+                            <img src="{{ url_for('static', filename='icons/pen.svg') }}" alt="Edit">
+                    
+                        </button>
+                    
+                        <!-- Delete -->
+                        <button type="button" class="icon-btn delete-btn" data-user-id="{{ user.id }}" data-username="{{ user.username }}">
+                    
+                            <img src="{{ url_for('static', filename='icons/trash2.svg') }}" alt="Delete">
+                    
+                        </button>
+                    
+                        {% elif session["role"] == "operator" and user.role == "viewer" %}
+                    
+                        <!-- Edit -->
+                        <button type="button" class="icon-btn edit-btn">
+                    
+                            <img src="{{ url_for('static', filename='icons/pen.svg') }}" alt="Edit">
+                    
+                        </button>
+                    
+                        <!-- Delete -->
+                        <button type="button" class="icon-btn delete-btn" data-user-id="{{ user.id }}" data-username="{{ user.username }}">
+                    
+                            <img src="{{ url_for('static', filename='icons/trash2.svg') }}" alt="Delete">
+                    
+                        </button>
+                    
+                        {% endif %}
+                    
+                            </div>
+                    
+                        </td>
+                    
+                    </tr>
+                            {% endfor %}
+                    
+                    
+                    </tbody>
+                    
+                    </table>
+                    
+                    </div>
+                    
+                    </div>
+                    
+                    
+                    </div>
+                    </form>
+
+<!-- ================================================== creata new user modal ============================================== -->
+
+<div id="create-user-modal" class="modal">
+
+    <div class="modal-content">
+
+        <br>
+        <h3>ایجاد کاربر جدید</h3>
+        <hr>
+        <br>
+
+        <form action="/dashboard/create_user/" method="POST" autocomplete="off">
+
+            <input
+                type="text"
+                name="username"
+                placeholder="نام کاربری"
+                required
+            >
+            <input
+                type="text"
+                name="full_name"
+                placeholder="نام و نام خانوادگی"
+                required
+                autofocus
+            >
+
+            
+
+            <input
+                type="password"
+                name="password"
+                placeholder="رمز عبور"
+                required
+            >
+
+            <input
+                type="password"
+                name="confirm_password"
+                placeholder="تکرار رمز عبور"
+                required
+            >
+
+            <select name="role" required>
+                <option value="" selected disabled>
+                    انتخاب نقش
+                </option>
+                {% for role in allowed_roles %}
+            
+                <option value="{{ role }}">
+                   {% if role == 'operator' %}اپراتور
+                   {% elif role == 'viewer' %}کاربر معمولی {% endif %}
+                </option>
+
+                
+                {% endfor %}
+
+            </select>
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                ایجاد کاربر
+            </button>
+
+            <button
+                type="button"
+                id="close-create-user-modal"
+                class="cancel-btn"
+            >
+                انصراف
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+    const createUserModal = document.getElementById("create-user-modal");
+
+    document
+        .getElementById("open-create-user-modal")
+        .addEventListener("click", () => {
+
+            createUserModal.style.display = "flex";
+
+        });
+
+    document
+        .getElementById("close-create-user-modal")
+        .addEventListener("click", () => {
+
+            createUserModal.style.display = "none";
+
+        });
+
+    window.addEventListener("click", (event) => {
+
+        if (event.target === createUserModal) {
+
+            createUserModal.style.display = "none";
+
+        }
+
+    });
+
+
+
+    //==================================================================
+
+  document.querySelectorAll(".delete-btn").forEach(button => {
+
+    button.addEventListener("click", function () {
+
+        const userId = this.dataset.userId;
+        const username = this.dataset.username;
+
+        const confirmed = confirm(
+            `آیا از حذف کاربر "${username}" مطمئن هستید؟`
+        );
+
+        if (!confirmed)
+            return;
+
+        // Create POST Form
+        const form = document.createElement("form");
+
+        form.method = "POST";
+        form.action = "/dashboard/delete_user/" + userId;
+
+        document.body.appendChild(form);
+
+        form.submit();
+
+    });
+
+});
+
+</script>
+
+{% endblock %}
+

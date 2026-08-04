@@ -1,13 +1,19 @@
-#this file hold DataBase models (every modle is a class)
+#this file hold DataBase models (every modle is a single class)
 
 from app import db 
 from datetime import datetime
+from sqlalchemy import CheckConstraint
 
-
+#==================================================
 #model #1: users table 
+#==================================================
 class User(db.Model) :  
     __tablename__ = 'users'
     
+    #به منظرو این که فقط سه نقش مجاز در دیتابیس قابل ذخیره کردن باشند
+    __table_args__ = (
+        CheckConstraint("role IN ('admin','operator','viewer')",name="check_user_role",),)
+
     id = db.Column(db.Integer , primary_key=True ,  unique =True , nullable=False , autoincrement=True )
     username= db.Column(db.String(50) , unique=True , nullable=False, )
     password_hashed = db.Column(db.String(255) , nullable=False)
@@ -15,8 +21,9 @@ class User(db.Model) :
     full_name = db.Column(db.String(100) , nullable=True )
     create_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     
-
-#model #2:a model for courses table 
+#==================================================
+#model #2: model for courses table 
+#==================================================
 class Course (db.Model):
     __tablename__ = 'courses'
 
@@ -31,8 +38,9 @@ class Course (db.Model):
     
 
 
-
+#==================================================
 #model #3:model for soldier informations
+#==================================================
 # discreption:‌this tabel fill with data_frame (parsing result)
 class Soldier(db.Model):
     __tablename__='soldiers'
