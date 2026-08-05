@@ -170,19 +170,19 @@ body {
 }
 
 .role.admin{
-
+    border-radius: 15px;
     background:#d32f2f;
 
 }
 
 .role.operator{
-
+    border-radius: 15px;
     background:#f39c12;
 
 }
 
 .role.viewer{
-
+    border-radius: 15px;
     background:#2e7d32;
 
 }

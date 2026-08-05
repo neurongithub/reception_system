@@ -11,7 +11,7 @@ auth_bp = Blueprint('auth', __name__)
 #===============================================================
 @auth_bp.route('/')
 def root():
-    return redirect(url_for('auth.login_page'))
+    return redirect(url_for('setup.setup'))
 
 #===============================================================
 # 2. route => login (return login page & login buissness logic)

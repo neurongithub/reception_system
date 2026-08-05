@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تنظیم اولیه سیستم</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/seed.css') }}">
+</head>
+<body>
+
+
+
+<div class="page-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="seed-container">
+
+        <!-- Brand -->
+        <div class="brand">
+            <div class="brand-icon">
+                
+                    <rect width="48" height="48" rx="14" fill="#1B3A6B"/>
+                    <path d="M24 10L29 20H39L31 26.5L34 37L24 30.5L14 37L17 26.5L9 20H19L24 10Z"
+                          fill="#C8A84B" stroke="#C8A84B" stroke-width="0.5" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="brand-text">
+                <span class="brand-title">سیستم پذیرش فراگیران آموزشی</span>
+                <span class="brand-sub">دردیتابیس اپلیکیشن کاربری یافت نشد. ابتدا کاربر ادمین سامانه رو ایجاد کنید</span>
+                <span class="brand-sub">توجه: کاربر ادمین ایجاد شده قابل حذف نمیباشد و سامانه فقط یک ادمین دارد</span>
+            </div>
+        </div>
+
+        <!-- Card -->
+        <div class="card">
+            <div class="card-header">
+                <h1>ایجاد حساب مدیر</h1>
+                <p>اطلاعات ادمین اصلی سیستم را وارد کنید</p>
+            </div>
+
+            <form action="/setup/" method="POST" autocomplete="off" class="setup-form">
+
+                <div class="field-group">
+                    <label for="username">نام کاربری</label>
+                    <div class="input-wrap">
+                        <svg class="field-icon" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.7"/>
+                            <path d="M3 17c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                        </svg>
+                        <input type="text" id="username" name="username"
+                                spellcheck="false" />
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="full_name">نام و نام خانوادگی</label>
+                    <div class="input-wrap">
+                        <svg class="field-icon" viewBox="0 0 20 20" fill="none">
+                            <rect x="3" y="4" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.7"/>
+                            <path d="M7 8h6M7 12h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                        </svg>
+                        <input type="text" id="full_name" name="full-name"
+                                />
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="password">رمز عبور</label>
+                    <div class="input-wrap">
+                        <svg class="field-icon" viewBox="0 0 20 20" fill="none">
+                            <rect x="4" y="9" width="12" height="8" rx="2" stroke="currentColor" stroke-width="1.7"/>
+                            <path d="M7 9V7a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                            <circle cx="10" cy="13" r="1.2" fill="currentColor"/>
+                        </svg>
+                        <input type="password" id="password" name="password"
+                         />
+                        <button type="button" class="toggle-pass"
+                                onclick="togglePass('password', this)" tabindex="-1">
+                            <svg viewBox="0 0 20 20" fill="none">
+                                <path d="M2 10s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6z" stroke="currentColor" stroke-width="1.6"/>
+                                <circle cx="10" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="confirm_password">تکرار رمز عبور</label>
+                    <div class="input-wrap">
+                        <svg class="field-icon" viewBox="0 0 20 20" fill="none">
+                            <rect x="4" y="9" width="12" height="8" rx="2" stroke="currentColor" stroke-width="1.7"/>
+                            <path d="M7 9V7a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                            <path d="M7.5 13.5l1.5 1.5 3-3" stroke="currentColor" stroke-width="1.6"
+                                  stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="password" id="confirm_password" name="confirm-password"
+                                />
+                        <button type="button" class="toggle-pass"
+                                onclick="togglePass('confirm_password', this)" tabindex="-1">
+                            <svg viewBox="0 0 20 20" fill="none">
+                                <path d="M2 10s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6z" stroke="currentColor" stroke-width="1.6"/>
+                                <circle cx="10" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <svg viewBox="0 0 20 20" fill="none">
+                        <path d="M4 10l4.5 4.5L16 6" stroke="currentColor" stroke-width="2.2"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    ایجاد حساب مدیر
+                </button>
+
+            </form>
+        </div>
+
+        <p class="footer-note">این صفحه فقط یک بار قابل دسترسی است</p>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+
+    <div class="flash-container">
+
+
+    {% for category, message in messages %}
+
+
+    <div class="flash {{ category }}">
+
+        {{ message }}
+
+    </div>
+
+
+{% endfor %}
+
+
+</div>
+
+
+{% endif %}
+
+
+{% endwith %}
+    </div>
+</div>
+
+
+<script>
+function togglePass(id, btn) {
+    const input = document.getElementById(id);
+    const isText = input.type === 'text';
+    input.type = isText ? 'password' : 'text';
+    btn.classList.toggle('active', !isText);
+}
+</script>
+</body>
+</html>

@@ -72,12 +72,40 @@
 
             <input type="text" class="search-input" name="search-user" placeholder="جستجو نام کاربری..." dir="rtl">
 
-            <select class="filter-select">
-                <option>همه</option>
-                <option>مدیر سیستم</option>
-                <option>اپراتور</option>
-                <option>کاربر معمولی</option>
-                
+                <select class="filter-select" name="role" onchange="this.form.submit()">
+
+                        <option value="all"
+                            {% if request.args.get('role', 'all') == 'all' %}selected{% endif %}>
+                            همه کاربران
+                        </option>
+
+                        <option value="admin"
+                            {% if request.args.get('role') == 'admin' %}selected{% endif %}>
+                            Admin
+                        </option>
+
+                        <option value="operator"
+                            {% if request.args.get('role') == 'operator' %}selected{% endif %}>
+                            Operator
+                        </option>
+
+                        <option value="viewer"
+                            {% if request.args.get('role') == 'viewer' %}selected{% endif %}>
+                            Viewer
+                        </option>
+
+            </select>
+           
+
+            <select name="sort" class="filter-select" onchange="this.form.submit()">
+                <option disabled>تاریخ ایجاد</option>
+                <option value="desc" {% if request.args.get('sort', 'desc') == 'desc' %}selected{% endif %}>جدید به قدیم</option>
+                <option value="asc"
+                    {% if request.args.get('sort') == 'asc' %}selected{% endif %}>
+                    قدیمی به جدید
+                </option>
+
+
             </select>
 
         </div>
@@ -94,9 +122,12 @@
                         <th>نام کاربری</th>
                         <th>نام</th>
                         <th>نوع</th>
-                        <th>تاریخ ایجاد</th>
+                        <th>تاریخ</th>
+                        <td>زمان</td>
+                        <td>سازنده</td>
+                        <td>test</td>
                         <th>آخرین ورود</th>
-                        <th>عملیات</th>
+                        
 
                     </tr>
 
@@ -120,8 +151,11 @@
                             {% endif %}
                             
                         </td>
-                        <td>{{ user.create_at }}</td>
-                        <td>Today</td>
+                        <td>{{ user.create_at.strftime("%Y-%m-%d ") }}</td>
+                        <td>{{ user.create_at.strftime("%H:%M:%S ") }}</td>
+                        <td>ادمین</td>
+                        <td>امروز</td>
+                        
 
                         <td>
 
@@ -199,13 +233,14 @@
                 name="username"
                 placeholder="نام کاربری"
                 required
+                autofocus
             >
             <input
                 type="text"
                 name="full_name"
-                placeholder="نام و نام خانوادگی"
+                placeholder="نام دلخواه"
                 required
-                autofocus
+                
             >
 
             

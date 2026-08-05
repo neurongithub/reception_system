@@ -1,16 +1,24 @@
 from flask import Blueprint , flash ,redirect , url_for , request , render_template , abort ,session
 
 from app.features.common.utils import render_with_time , require_admin , require_login
-# import user management service 
+# user management service (user management main service)
 from app.features.user_management.services import UserManageService
-#import validator modul
+# validator modul
 from app.features.user_management.validator import NewUserValidate
-
-#user management blueprint
-user_manage_bp = Blueprint("user_management" ,__name__,url_prefix="/dashboard")
+# seed service  
+from app.features.user_management.seed import SeedService
 
 #==============================================================
-#user management main route 
+# Blueprints
+#==============================================================
+user_manage_bp = Blueprint("user_management" ,__name__,url_prefix="/dashboard")
+setup_bp = Blueprint('setup', __name__)
+
+#create user authorization check (frontend side)
+ALLOWED_ROLE_CREATION ={"admin":["operator" , "viewer"],"operator" : ["viewer"]}
+
+#==============================================================
+# route => user management main route 
 #==============================================================
 @user_manage_bp.route('/user_management/' , methods=['GET'])
 def user_manage():
@@ -18,28 +26,24 @@ def user_manage():
     login_redirect = require_login()
     if login_redirect:
         return login_redirect
-    require_admin() 
+    require_admin()
 
-   
+    sort = request.args.get("sort", "desc")
+    role = request.args.get("role", "all")
 
     # query to get all users in database  
-    all_users =  UserManageService.show_all_users()
+    all_users = UserManageService.show_all_users(sort, role)
 
     current_user = UserManageService.get_current_user()
 
-    #create user authorization check (frontend side)
-    ALLOWED_ROLE_CREATION ={
-        "admin":["operator" , "viewer"],
-        "operator" : ["viewer"]}
-
-    current_role = session["role"] #curren user's role from session
+    current_role = session.get("role")
+     #curren user's role from session
     allowed_roles = ALLOWED_ROLE_CREATION[current_role]
     
 
-
     return render_with_time('user_management.html',all_users=all_users,allowed_roles=allowed_roles,current_user=current_user) 
 #==============================================================
-#Create new user route 
+# route => Create new user  
 #==============================================================
 @user_manage_bp.route('/create_user/' , methods=["POST"])
 def create_new_user ():
@@ -49,11 +53,6 @@ def create_new_user ():
         return login_redirect
     require_admin() 
 
-    ALLOWED_ROLE_CREATION ={
-        "admin":["operator" , "viewer"],
-        "operator" : ["viewer"]}
-    
-    
     #get inputs from modal form 
     username = request.form.get('username' ,'').strip()
     full_name = request.form.get('full_name','').strip()
@@ -67,10 +66,10 @@ def create_new_user ():
         NewUserValidate.user_validate(username, full_name, password, confirm_password,role)
     except ValueError as ex : 
         flash (str(ex) ,"error")
-        return render_with_time("user_management.html")
+        return redirect(url_for('user_management.user_manage'))
 
     #create user authorization check (backend side)
-    current_role = session["role"]
+    current_role = session.get("role")
 
     allowed_roles = ALLOWED_ROLE_CREATION[current_role]
 
@@ -79,16 +78,23 @@ def create_new_user ():
         abort(403)
     
     #runnig create new user servic  e 
-    user = UserManageService.create_new_user(password ,username,full_name,role)
+    UserManageService.create_new_user(password ,username,full_name,role)
     flash("کاربر جدید با موفقیت ایجاد شد" , "success")
 
     return redirect(url_for('user_management.user_manage'))
 
 
 #==============================================================
-# remove users route 
+# route =>  Edit users  
 #==============================================================
-@user_manage_bp.route("/delete_user/<int:user_id>/" , methods=['GET','POST'])
+
+
+
+
+#==============================================================
+# route =>  remove users  
+#==============================================================
+@user_manage_bp.route("/delete_user/<int:user_id>/" , methods=['POST'])
 def delete_user (user_id):
 
     login_redirect = require_login()
@@ -98,11 +104,35 @@ def delete_user (user_id):
 
     UserManageService.delete_user(user_id)
 
-    
-
     return redirect(url_for('user_management.user_manage'))
 
+#==============================================================
+# route => first initial Wizard(setup route)
+#==============================================================
+@setup_bp.route('/setup/' , methods=['GET', 'POST'])
+def setup() :
 
+    # if admin is exsist => redirect to login page 
+    admin_exists = SeedService.admin_exists()
+    if admin_exists : 
+        return redirect(url_for("auth.login_page"))
+
+    if request.method =='POST': 
+
+        username = request.form.get('username').strip()
+        full_name = request.form.get('full-name').strip()
+        password = request.form.get('password').strip()
+        confirm_password = request.form.get('confirm-password').strip()
+        try:
+            SeedService.create_admin(username,full_name,password, confirm_password)
+            return redirect(url_for("auth.login_page"))
+        except ValueError as ex : 
+            flash(str(ex), "error")
+            return redirect(url_for("setup.setup"))
+
+    
+
+    return render_template('seed.html')
 
 
 

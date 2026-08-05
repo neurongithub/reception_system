@@ -11,8 +11,8 @@ class NewUserValidate:
             raise ValueError("همه مقادیر را وارد کنید.")
         
         #search query to check user is exsist or not 
-        user = db.session.execute(db.select(User).filter_by(username=username)).scalar()
-        if user : 
+        current_user = db.session.execute(db.select(User).filter_by(username=username)).scalar()
+        if current_user : 
             raise ValueError("این نام کاربری قبلا استفاده شده است")
 
         if len(password) < 4 :

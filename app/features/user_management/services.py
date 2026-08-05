@@ -7,9 +7,22 @@ class UserManageService :
 
     #service 1 - show all users in database 
     @staticmethod
-    def show_all_users (): 
+    def show_all_users (sort="desc",role='all'): 
+        
 
-        all_users = db.session.execute(db.select(User)).scalars().all()
+        query = db.select(User)
+
+        # Role Filter
+        if role != "all":
+            query = query.where(User.role == role)
+
+        # Sort
+        if sort == "asc":
+            query = query.order_by(User.create_at.asc())
+        else:
+            query = query.order_by(User.create_at.desc())
+
+        all_users = db.session.execute(query).scalars().all()
 
         return all_users
 

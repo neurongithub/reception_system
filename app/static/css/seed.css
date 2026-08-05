@@ -1,0 +1,317 @@
+/* =====================================================
+   SEED / SETUP PAGE
+   Admin account creation — centered card
+=====================================================*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --navy:      #1B3A6B;
+  --navy-dk:   #0D2240;
+  --gold:      #C8A84B;
+  --gold-lt:   #F5EDD3;
+
+  --bg-from:   #E8EDF8;
+  --bg-to:     #F2F0EA;
+
+  --surface:   #FFFFFF;
+  --border:    #E2E0D8;
+  --border-focus: #1B3A6B;
+
+  --text-900:  #111827;
+  --text-600:  #4B5563;
+  --text-400:  #9CA3AF;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+}
+
+/* ── Background ── */
+.page-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--bg-from) 0%, var(--bg-to) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  position: relative;
+  overflow: hidden;
+  font-family: "Vazirmatn", "Tahoma", system-ui, sans-serif;
+  direction: rtl;
+}
+
+/* Decorative blobs */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: .18;
+  pointer-events: none;
+}
+
+.blob-1 {
+  width: 500px;
+  height: 500px;
+  background: var(--navy);
+  top: -160px;
+  right: -120px;
+}
+
+.blob-2 {
+  width: 400px;
+  height: 400px;
+  background: var(--gold);
+  bottom: -140px;
+  left: -100px;
+}
+
+/* ── Outer container ── */
+.seed-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Brand ── */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-icon svg {
+  width: 48px;
+  height: 48px;
+  filter: drop-shadow(0 4px 12px rgba(27,58,107,.35));
+}
+
+.brand-title {
+  display: block;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy-dk);
+  letter-spacing: .01em;
+}
+
+.brand-sub {
+  display: block;
+  font-size: 12px;
+  color: var(--text-400);
+  margin-top: 2px;
+}
+
+/* ── Card ── */
+.card {
+  width: 100%;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow:
+    0 4px 6px rgba(0,0,0,.04),
+    0 20px 50px rgba(27,58,107,.1);
+  overflow: hidden;
+}
+
+/* Card header strip */
+.card-header {
+  background: var(--navy-dk);
+  padding: 24px 28px 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 120px; height: 120px;
+  background: var(--gold);
+  opacity: .06;
+  border-radius: 50%;
+  transform: translate(30%, 40%);
+}
+
+.card-header h1 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: .01em;
+}
+
+.card-header p {
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
+  margin-top: 4px;
+}
+
+/* ── Form ── */
+.setup-form {
+  padding: 24px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Field group */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-600);
+}
+
+/* Input wrap */
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-icon {
+  position: absolute;
+  right: 13px;
+  width: 17px;
+  height: 17px;
+  color: var(--text-400);
+  pointer-events: none;
+  flex-shrink: 0;
+  transition: color .2s;
+}
+
+.input-wrap input {
+  width: 100%;
+  height: 46px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0 42px 0 42px; /* space for both icons */
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-900);
+  background: #FAFAF8;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+  outline: none;
+}
+
+/* Only right icon, no toggle */
+.input-wrap:not(:has(.toggle-pass)) input {
+  padding-left: 14px;
+}
+
+.input-wrap input::placeholder {
+  color: var(--text-400);
+  font-size: 13px;
+}
+
+.input-wrap input:focus {
+  border-color: var(--navy);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(27,58,107,.1);
+}
+
+.input-wrap input:focus + .field-icon,
+.input-wrap:focus-within .field-icon {
+  color: var(--navy);
+}
+
+/* Toggle password button */
+.toggle-pass {
+  position: absolute;
+  left: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  color: var(--text-400);
+  display: flex;
+  align-items: center;
+  transition: color .15s, background .15s;
+}
+
+.toggle-pass svg {
+  width: 17px;
+  height: 17px;
+}
+
+.toggle-pass:hover,
+.toggle-pass.active {
+  color: var(--navy);
+  background: rgba(27,58,107,.06);
+}
+
+/* ── Submit button ── */
+.btn-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 50px;
+  margin-top: 4px;
+  background: var(--navy);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: .02em;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-submit svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.btn-submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(200,168,75,.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.btn-submit:hover {
+  background: var(--navy-dk);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(27,58,107,.3);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ── Footer note ── */
+.footer-note {
+  font-size: 12px;
+  color: var(--text-400);
+  text-align: center;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .seed-container { max-width: 100%; }
+  .card-header,
+  .setup-form { padding-right: 20px; padding-left: 20px; }
+}
