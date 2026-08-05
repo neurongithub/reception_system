@@ -27,8 +27,8 @@ A web application for managing the reception process of new military trainees.
 - DataBase: sqlite3(in development), MySQL(on deployment)
 
 👨‍💻 Frontend
-- HTML
-- CSS + bootstrap
+- HTML + AI(idea,wire_frames,improve) 
+- CSS + bootstrap +AI 
 - JavaScript
 
 ## Project File Structure 
