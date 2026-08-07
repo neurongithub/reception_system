@@ -8,7 +8,8 @@
 {% block content%}
 
 
-<form action="#"><div class="main-div" dir="ltr">
+<form action="{{ url_for('user_management.user_manage') }}" method="GET">
+    <div class="main-div" dir="ltr">
 
     <div class="user-manage-container">
         
@@ -19,11 +20,19 @@
                 + کاربر جدید
             </button>
             
+            
         
             
         <div class="header-title">
             
-
+    <div class="user-statistics-card">
+       
+        <div>Admin       : 1</div>
+        <div>Operator    : 2 </div>
+         <div>Viewer      : 14</div>
+       <div> Total       : 17 </div>
+       
+    </div> 
     <div class="current-user-card" dir="rtl">
         {% if current_user.role == "admin" %}
         <div class="user-avatar">
@@ -33,7 +42,9 @@
         <div class="user-avatar">
             <img src="{{ url_for('static', filename='icons/op.svg') }}" alt="Delete" style="width: 40px; height: 40px;">
         </div>
+        
         {% endif %}
+        
         <div class="user-info">
 
             <span class="user-label">
@@ -47,7 +58,7 @@
             <div class="user-meta">
 
                 <span class="username" dir="ltr">
-                    @{{ current_user.username }}
+                    @{{ current_user.username }}- نام کاربری 
                 </span>
 
                 <span class="role {{ current_user.role }}">
@@ -55,6 +66,7 @@
                 </span>
 
             </div>
+            
 
         </div>
 
@@ -70,7 +82,11 @@
         <!-- Toolbar -->
         <div class="user-manage-searchBar">
 
-            <input type="text" class="search-input" name="search-user" placeholder="جستجو نام کاربری..." dir="rtl">
+            
+                <button type="submit" id="search-username-button">جستجو</button>
+
+                <input type="text" class="search-input" name="search-username" placeholder="جستجو نام کاربری..." dir="rtl" autocomplete="off" maxlength="30">
+            
 
                 <select class="filter-select" name="role" onchange="this.form.submit()">
 
@@ -125,8 +141,8 @@
                         <th>تاریخ</th>
                         <td>زمان</td>
                         <td>سازنده</td>
-                        <td>test</td>
                         <th>آخرین ورود</th>
+                        <td>حذف / ویرایش</td>
                         
 
                     </tr>
@@ -222,7 +238,7 @@
     <div class="modal-content">
 
         <br>
-        <h3>ایجاد کاربر جدید</h3>
+        <h3 id="create-user-modal-tilte">ایجاد کاربر جدید</h3>
         <hr>
         <br>
 
@@ -234,6 +250,8 @@
                 placeholder="نام کاربری"
                 required
                 autofocus
+                maxlength="30"
+                id="username"
             >
             <input
                 type="text"
@@ -250,6 +268,7 @@
                 name="password"
                 placeholder="رمز عبور"
                 required
+                minlength="4"
             >
 
             <input
@@ -296,69 +315,7 @@
 
 </div>
 
-<script>
-
-    const createUserModal = document.getElementById("create-user-modal");
-
-    document
-        .getElementById("open-create-user-modal")
-        .addEventListener("click", () => {
-
-            createUserModal.style.display = "flex";
-
-        });
-
-    document
-        .getElementById("close-create-user-modal")
-        .addEventListener("click", () => {
-
-            createUserModal.style.display = "none";
-
-        });
-
-    window.addEventListener("click", (event) => {
-
-        if (event.target === createUserModal) {
-
-            createUserModal.style.display = "none";
-
-        }
-
-    });
-
-
-
-    //==================================================================
-
-  document.querySelectorAll(".delete-btn").forEach(button => {
-
-    button.addEventListener("click", function () {
-
-        const userId = this.dataset.userId;
-        const username = this.dataset.username;
-
-        const confirmed = confirm(
-            `آیا از حذف کاربر "${username}" مطمئن هستید؟`
-        );
-
-        if (!confirmed)
-            return;
-
-        // Create POST Form
-        const form = document.createElement("form");
-
-        form.method = "POST";
-        form.action = "/dashboard/delete_user/" + userId;
-
-        document.body.appendChild(form);
-
-        form.submit();
-
-    });
-
-});
-
-</script>
+<script src="{{ url_for('static', filename='js/user_management.js') }}"></script>
 
 {% endblock %}
 

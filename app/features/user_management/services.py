@@ -7,11 +7,13 @@ class UserManageService :
 
     #service 1 - show all users in database 
     @staticmethod
-    def show_all_users (sort="desc",role='all'): 
+    def show_all_users (sort="desc",role='all', search_username=""): 
         
 
         query = db.select(User)
 
+        if search_username : 
+            query = query.filter(User.username.contains(search_username))
         # Role Filter
         if role != "all":
             query = query.where(User.role == role)
@@ -22,9 +24,22 @@ class UserManageService :
         else:
             query = query.order_by(User.create_at.desc())
 
+
+
         all_users = db.session.execute(query).scalars().all()
 
         return all_users
+
+    
+    @staticmethod
+    def search_one_username (search_username): 
+        searched_user = User.query.filter_by(username=search_username).first()
+
+        
+
+        return searched_user
+
+
 
 
 
@@ -67,6 +82,7 @@ class UserManageService :
 
         db.session.delete(user)
         db.session.commit()
+        flash(f"کاربر {user.username} با موفیت حذف گردید!",'warning')
 
     #service 4 - get logged user information from db and return to user_management web page 
     @staticmethod

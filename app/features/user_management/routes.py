@@ -5,6 +5,7 @@ from app.features.common.utils import render_with_time , require_admin , require
 from app.features.user_management.services import UserManageService
 # validator modul
 from app.features.user_management.validator import NewUserValidate
+
 # seed service  
 from app.features.user_management.seed import SeedService
 
@@ -30,9 +31,12 @@ def user_manage():
 
     sort = request.args.get("sort", "desc")
     role = request.args.get("role", "all")
+    search_username = request.args.get("search-username", "").strip()
+
+    
 
     # query to get all users in database  
-    all_users = UserManageService.show_all_users(sort, role)
+    all_users = UserManageService.show_all_users(sort, role,search_username)
 
     current_user = UserManageService.get_current_user()
 
@@ -41,7 +45,11 @@ def user_manage():
     allowed_roles = ALLOWED_ROLE_CREATION[current_role]
     
 
-    return render_with_time('user_management.html',all_users=all_users,allowed_roles=allowed_roles,current_user=current_user) 
+    return render_with_time('user_management.html',all_users=all_users,allowed_roles=allowed_roles,current_user=current_user )
+
+
+
+
 #==============================================================
 # route => Create new user  
 #==============================================================
