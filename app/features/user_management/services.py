@@ -28,7 +28,15 @@ class UserManageService :
 
         all_users = db.session.execute(query).scalars().all()
 
-        return all_users
+        # sort users count by role (Segmenting users by role)
+        admin_count = sum(1 for user in all_users if user.role == "admin")
+        operator_count = sum (1 for user in all_users if user.role =="operator")
+        viewer_count = sum(1 for user in all_users if user.role == "viewer")
+
+        users_count = {"admin":admin_count, "operator":operator_count,"viewer":viewer_count, "total":len(all_users)}
+
+
+        return all_users , users_count
 
     
     @staticmethod
@@ -45,7 +53,7 @@ class UserManageService :
 
     #service 2 - create new user 
     @staticmethod
-    def create_new_user (password , username , full_name, role): 
+    def create_new_user (password , username , full_name, role, created_by): 
 
         #hasing password & create new user
         hashed_password = generate_password_hash(password) 
@@ -53,7 +61,8 @@ class UserManageService :
         user = User (username=username,
                     full_name=full_name,
                     password_hashed=hashed_password,
-                    role=role)
+                    role=role,
+                    created_by=created_by)
 
         db.session.add(user)
         db.session.commit()
@@ -94,5 +103,42 @@ class UserManageService :
             return None 
 
         return User.query.get(user_id)
+
+
+
+    @staticmethod
+    def edit_user (validated_data):
+
+        user = User.query.get(validated_data["user_id"])
+
+        if not user : 
+            raise ValueError("User Not found")
+
+        existing_user = User.query.filter(User.username == validated_data["username"],User.id != user.id).first()
+        if existing_user : 
+            raise ValueError("این نام کاربری قبلا استفاده شده است")
+        
+        
+        current_role = user.role
+        new_role = validated_data["role"]
+
+        if current_role == "admin" and new_role != "admin":
+            raise ValueError("امکان تغییر سطح دسترسی مدیر سامانه وجود ندارد.")
+
+        if current_role != "admin" and new_role == "admin":
+            raise ValueError("امکان انتخاب نقش مدیر سامانه وجود ندارد.")
+
+        #update basic informatinos 
+        user.username = validated_data["username"]
+        user.full_name = validated_data["full_name"]
+        user.role = validated_data["role"]
+
+        # update password if user want to change it 
+
+        if validated_data["password"]: 
+            user.password_hashed = generate_password_hash(validated_data["password"])
+
+        db.session.commit()
+        
 
         

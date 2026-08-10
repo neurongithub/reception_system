@@ -4,7 +4,7 @@ from app.features.common.utils import render_with_time , require_admin , require
 # user management service (user management main service)
 from app.features.user_management.services import UserManageService
 # validator modul
-from app.features.user_management.validator import NewUserValidate
+from app.features.user_management.validator import NewUserValidate ,EditUserValidate
 
 # seed service  
 from app.features.user_management.seed import SeedService
@@ -36,7 +36,7 @@ def user_manage():
     
 
     # query to get all users in database  
-    all_users = UserManageService.show_all_users(sort, role,search_username)
+    all_users, users_count = UserManageService.show_all_users(sort, role,search_username)
 
     current_user = UserManageService.get_current_user()
 
@@ -45,7 +45,7 @@ def user_manage():
     allowed_roles = ALLOWED_ROLE_CREATION[current_role]
     
 
-    return render_with_time('user_management.html',all_users=all_users,allowed_roles=allowed_roles,current_user=current_user )
+    return render_with_time('user_management.html',all_users=all_users,allowed_roles=allowed_roles,current_user=current_user ,users_count=users_count)
 
 
 
@@ -84,9 +84,9 @@ def create_new_user ():
     if role not in allowed_roles:
         flash("شما دسترسی لازم برای این عملیات را ندارید.")
         abort(403)
-    
+    current_user_id = session['user_id']
     #runnig create new user servic  e 
-    UserManageService.create_new_user(password ,username,full_name,role)
+    UserManageService.create_new_user(password ,username,full_name,role,current_user_id)
     flash("کاربر جدید با موفقیت ایجاد شد" , "success")
 
     return redirect(url_for('user_management.user_manage'))
@@ -95,7 +95,34 @@ def create_new_user ():
 #==============================================================
 # route =>  Edit users  
 #==============================================================
+@user_manage_bp.route('/edit_user/' , methods=['POST'])
+def edit_user():
+    
+    login_redirect = require_login()
+    if login_redirect:
+        return login_redirect
+    require_admin() 
 
+    user_id = request.form.get("user_id","").strip()
+    username = request.form.get("username","").strip()
+    full_name = request.form.get("full_name","").strip()
+    password = request.form.get("password","").strip()
+    confirm_password = request.form.get("confirm_password","").strip()
+    role = request.form.get("role","").strip()
+    print("USER ID FROM FORM:", repr(user_id))
+    
+    try : 
+    # runnig validation service on inputs 
+       validated_data =  EditUserValidate.edit_user_validate (user_id,username,full_name,password,confirm_password,role) 
+       # edit user service running 
+       UserManageService.edit_user(validated_data)
+    except ValueError as ex : 
+        flash (str(ex) ,"error")
+        return redirect(url_for('user_management.user_manage'))
+
+    
+    flash("تغییرات با موفقیت اعمال شد!" , "success")
+    return redirect(url_for('user_management.user_manage'))
 
 
 

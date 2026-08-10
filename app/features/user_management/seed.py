@@ -40,7 +40,8 @@ class SeedService :
             raise ValueError (" نام کاربری قبلا انتخاب شده است - یک نام کاربری دیگر انتخاب کنید")
 
        
-        admin = User(username=username , password_hashed=generate_password_hash(password) ,role='admin' ,full_name=full_name)
+        
+        admin = User(username=username,password_hashed=generate_password_hash(password),role="admin",full_name=full_name,created_by=None)
         db.session.add(admin)
         db.session.commit()
         flash ("کاربر ادمین ایجاد شد - لاگین کنید.")
