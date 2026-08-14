@@ -1,28 +1,28 @@
 {
     "course_id": 1,
     "course_code": "123",
-    "course_name": "test",
+    "course_name": "شهید غلامرضا نادری مقدم",
     "battalions": {
         "1": {
-            "1": "option2",
-            "2": "option0",
-            "3": "option4",
-            "4": "option0",
-            "5": "option5"
+            "1": "option3",
+            "2": null,
+            "3": null,
+            "4": "option2",
+            "5": "option6"
         },
         "2": {
-            "1": "option0",
-            "2": "option9",
-            "3": "option7",
-            "4": "option6",
-            "5": "option3"
+            "1": null,
+            "2": null,
+            "3": null,
+            "4": null,
+            "5": null
         },
         "3": {
-            "1": "option7",
-            "2": "option0",
-            "3": "option0",
-            "4": "option0",
-            "5": "option7"
+            "1": null,
+            "2": null,
+            "3": null,
+            "4": null,
+            "5": null
         }
     }
 }

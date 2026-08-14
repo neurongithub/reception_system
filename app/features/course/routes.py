@@ -4,7 +4,7 @@ from app.features.common.utils import render_with_time, require_admin, require_l
 from app.features.course.services import CourseService
 
 # create blueprint for course routes 
-course_bp = Blueprint('course', __name__, url_prefix='/dashboard') # استفاده از url_prefix  چون ساخت دوره و اپلود زیر مجموعه داشبورد هستند
+course_bp = Blueprint('course', __name__, url_prefix='/dashboard') 
 
 #==========================================================
 # 1. route => create course (return create_course web page)
@@ -34,3 +34,4 @@ def upload():
     except ValueError as exc:
         flash(str(exc), 'error')
         return redirect(url_for('course.create_course'))
+    

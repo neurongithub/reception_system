@@ -2,7 +2,10 @@
 
 {% block title %}پنل پذیرش فراگیران{% endblock title %}
 
-{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/reception.css') }}">{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reception.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/persian-datepicker.min.css') }}">
+{% endblock %}
 
 {% block content %}
 
@@ -28,17 +31,25 @@
     <!-- battalion & company area  -->
      <section class="b-c-panel">
         <div class="b-c-resutl">
-            <div class="resutl-battalion">
-               <span>test</span>
-                <span></span>
+            <div class="allocation-summary" aria-live="polite">
+                <div class="allocation-summary__allocation">
+                    <span class="allocation-summary__label">نوع تخصیص</span>
+                    <strong id="allocation-value">
+                        {% if allocation %}
+                            {{ allocation }}
+                        {% else %}
+                            تخصیصی ثبت نشده است
+                        {% endif %}
+                    </strong>
+                </div>
             </div>
-        
         </div>
+        
 
-        <div class="b-c-chooser">
+        <div class="b-c-chooser" >
             <div class="battalion-choose">
                 <label for="">انتخاب گردان</label>
-                <select name="battalion_option" id="">
+                <select name="battalion_option" id="battalion_option">
                         <option value=""></option>
                     
                         <option value="1"
@@ -60,7 +71,7 @@
 
             <div class="company-choose">
                 <label for="">انتخاب گروهان</label>
-                <select name="company_option" id="">
+                <select name="company_option" id="company_option">
                    <option value=""></option>
                      <option value="1"
                         {% if company_option == "1" %}selected{% endif %}>
@@ -90,11 +101,18 @@
         </div>
      </section>
 
+     {% if Result and Result.course_code %}
+     <input type="hidden" id="current-course-code" value="{{ Result.course_code }}">
+     {% endif %}
+
      <!-- search area  -->
     <section class="search-area">
-        <span style="font-size: 18px;">icon</span>
         <div class="input-box">
-            <input type="text" placeholder="جستجو بر اساس کد ملی ...." name="national_code" value="{{ national_code }}">
+             <img src="{{ url_for('static', filename='icons/search-icon.svg') }}" alt="search-icon" class="search-icon">
+            <span class="search-icon-wrap">
+               
+            </span>
+            <input type="text" placeholder="جستجو بر اساس کد ملی ...." name="national_code" value="{{ national_code }}" {% if not national_code %}autofocus{% endif %}>
         </div>
         <button type="submit" name="action" value="search">
             جستجو
@@ -126,7 +144,13 @@
             </div>
             <div class="info-row">
                 <span>تاریخ تولد</span>
-                <span>{{ jdatetime.date.fromgregorian(date=Result.birth_date).strftime("%Y/%m/%d") }}</span>
+                <span>
+                    {% if Result.birth_date %}
+                        {{ jdatetime.date.fromgregorian(date=Result.birth_date).strftime("%Y/%m/%d") }}
+                    {% else %}
+                        ثبت نشده
+                    {% endif %}
+                </span>
             </div>
         </div>
             {% endif %}
@@ -228,20 +252,197 @@
 </form>
 </main>
 
+<!-- manual reception modal  -->
+<form method="POST" action="{{ url_for('reception.manual_reception') }}" id="manual-reception-form">
+<div id = "manual-reception-modal" class="manual-reception-modal" >
 
+    <div id="manual-reception-modal-container" class ="manual-reception-modal-container">
+        
+        <!-- modal header -->
+        <div id="manual-reception-modal-hedaer" class="manual-reception-modal-header">
+            <div class="manual-reception-modal-title">
+                <h2>پذیرش دستی </h2>
+                <p>در این صفحه میتوانید شخصی را که در اکسل ورودی وجود ندارد را به دیتابیس اضافه کنید- ⚠️ وارد کردن فیلد های ستاره دار اجباری است ⚠️.</p>
+            </div>
+
+            <button type="button" id="close-manual-header-btn" class="close-manual-header-btn" aria-label="بستن پنجره">
+                ×
+            </button>
+        </div>
+        <!-- modal body (content) -->
+        <div id="manual-reception-modal-body" class="manual-reception-modal-body">
+            <!-- personal information nessessary fields  -->
+            <div class="form-section-title">
+                <span class="form-section-title__dot"></span>
+                <span>اطلاعات فردی</span>
+            </div>
+            <div id="personal-info" class="personal-info" >
+                <div class="info-row">
+                    <label for="national_code">کد ملی <span style="color: red;">*</span></label>
+                    <input type="text" id="national_code" name="national_code" placeholder="کد ملی را وارد کنید" autofocus autocomplete="off" required maxlength="10" minlength="10">
+                </div>
+                <div class="info-row">
+                    <label for="first_name">نام <span style="color: red;">*</span></label>
+                    <input type="text" id="first_name" name="first_name" placeholder="نام را وارد کنید"  autocomplete="off" required maxlength="50">
+                </div>
+                <div class="info-row">
+                    <label for="last_name">نام خانوادگی <span style="color: red;">*</span></label>
+                    <input type="text" id="last_name" name="last_name" placeholder="نام خانوادگی را وارد کنید"  autocomplete="off" required maxlength="50"> 
+                </div>
+                <div class="info-row">
+                    <label for="father_name">نام پدر <span style="color: red;">*</span></label>
+                    <input type="text" id="father_name" name="father_name" placeholder="نام پدر را وارد کنید"  autocomplete="off" required maxlength="50">
+                </div>
+                <div class="info-row">
+                    <label for="course_code">کد دوره <span style="color: red;">*</span></label>
+                    <input type="text" id="course_code" name="course_code" placeholder="کد دوره را وارد کنید" autocomplete="off" inputmode="latin" value="{{ Result.course_code if Result and Result.course_code else '' }}">
+                </div>
+                <div class="info-row">
+                    <label for="birth_date">تاریخ تولد </label>
+                    <input type="text" id="birth_date" name="birth_date" autocomplete="off" placeholder="YYYY/MM/DD" maxlength="10">
+                </div>
+        
+            </div>
+            <!-- education , health , religion fileds -->
+            <div class="form-section-title">
+                <span class="form-section-title__dot"></span>
+                <span>تحصیلات » وضعیت فرد</span>
+            </div>
+            <div class="none-req-fileds-1">
+                <div class="info-row">
+                    <label for="education">مدرك تحصیلی</label>
+                    <!-- <input type="text" id="education" name="education" placeholder="مدرك تحصیلی را وارد کنید" autocomplete="off"> -->
+                     <select id="education" name="education" autocomplete="off">
+                        <option value=""></option>
+                        <option value="زیر دیپلم">زیر دیپلم</option>
+                        <option value="دیپلم">دیپلم</option>
+                        <option value="فوق دیپلم">فوق دیپلم</option>
+                        <option value="کارشناسی">کارشناسی</option>
+                        <option value="کارشناسی ارشد">کارشناسی ارشد</option>
+                        <option value="دکتری">دکتری</option>
+                    </select>
+                </div>
+                <div class="info-row">
+                    <label for="field">رشته تحصیلی</label>
+                    <input type="text" id="field" name="field" placeholder="رشته تحصیلی را وارد کنید" autocomplete="off" maxlength="100">
+                </div>
+                <div class="info-row">
+                    <label for="health_status">وضعیت سلامت</label>
+                    <select id="health_status" name="health_status" autocomplete="off">
+                        <option value=""></option>
+                        <option value="سالم">سالم</option>
+                        <option value="دارای بیماری">معاف از رزم</option>
+                        
+                    </select>
+                </div>
+                <div class="info-row">
+                    <label for="religion">مذهب</label>
+                    <!-- <input type="text" id="religion" name="religion_type"  placeholder="مذهب را وارد کنید" autocomplete="off"> -->
+                     <select id="religion" name="religion" autocomplete="off">
+                        <option value=""></option>
+                        <option value="شیعه">شیعه</option>
+                        <option value="سنی">سنی</option>
+                        <option value="مسیحی">سایر</option>
+                    </select>
+                </div>
+                <div class="info-row">
+                    <label for="religion_type">دین</label>
+                    <input type="text" id="religion_type"  placeholder="دین را وارد کنید" name="religion" value="اسلام" readonly disabled>
+                </div>
+            </div>
+
+             <!-- is_marrage , city , phone, address  -->
+            <div class="form-section-title">
+                <span class="form-section-title__dot"></span>
+                <span>سکونت » وضعیت تاهل</span>
+            </div>
+            <div class="none-req-fileds-2">
+                <div class="info-row">
+                    <label for="is_marriage">وضعیت تاهل</label>
+                     <select id="is_marriage" name="is_marriage" autocomplete="off">
+                        <option value=""></option>
+                        <option value="مجرد">مجرد</option>
+                        <option value="متاهل">متاهل</option>
+                    </select>
+                </div>
+                <div class="info-row">
+                    <label for="province">استان</label>
+                    <!-- <input type="text" id="province" name="province" placeholder="استان را وارد کنید" autocomplete="off"> -->
+                     <select id="province" name="province" autocomplete="off">
+                        <option value=""></option>
+                        <option value="تهران">تهران</option>
+                        <option value="اصفهان">اصفهان</option>
+                        <option value="خراسان رضوی">خراسان رضوی</option>
+                        <option value="فارس">فارس</option>
+                        <option value="گیلان">گیلان</option>
+                        <option value="مازندران">مازندران</option>
+                        <option value="آذربایجان شرقی">آذربایجان شرقی</option>
+                        <option value="آذربایجان غربی">آذربایجان غربی</option>
+                        <option value="کردستان">کردستان</option>
+                        <option value="کرمانشاه">کرمانشاه</option>
+                        <option value="خوزستان">خوزستان</option>
+                        <option value="سیستان و بلوچستان">سیستان و بلوچستان</option>
+                        <option value="هرمزگان">هرمزگان</option>
+                        <option value="کرمان">کرمان</option>
+                        <option value="یزد">یزد</option>
+                        <option value="سمنان">سمنان</option>
+                        <option value="البرز">البرز</option>
+                        <option value="قم">قم</option>
+                        <option value="ایلام">ایلام</option>
+                        <option value="چهارمحال و بختیاری">چهارمحال و بختیاری</option>
+                        <option value="خراسان شمالی">خراسان شمالی</option>
+                        <option value="خراسان جنوبی">خراسان جنوبی</option>
+                        <option value="زنجان">زنجان</option>
+                        <option value="قزوین">قزوین</option>
+                        <option value="لرستان">لرستان</option>
+                        <option value="بوشهر">بوشهر</option>
+                        <option value="کهگیلویه و بویراحمد">کهگیلویه و بویراحمد</option>
+                        <option value="گلستان">گلستان</option>
+                        <option value="اردبیل">اردبیل</option>
+                        <option value="همدان">همدان</option>
+                        <option value="مرکزی">مرکزی</option>  
+                        
+                    </select>
+                </div>
+                <div class="info-row">
+                    <label for="city">شهر</label>
+                    <input type="text" id="city" name="city" placeholder="شهر را وارد کنید" autocomplete="off">
+                </div>
+                <div class="info-row">
+                    <label for="phone">تلفن(همراه/ثابت)</label>
+                    <input type="text" id="phone" name="phone" placeholder="09x-xxxx-xxxx" autocomplete="off">
+                </div>
+                <div class="info-row">
+                    <label for="address">آدرس محل سکونت</label>
+                    <!-- <input type="text" id="address" name="address" placeholder="آدرس را وارد کنید" autocomplete="off"> -->
+                     <textarea id="address" name="address" placeholder="آدرس را وارد کنید" autocomplete="off" rows="4" maxlength="500"></textarea>    
+                </div>
+            </div>
+
+        </div>
+        <!-- modal footer (buttons) -->
+        <div id="manual-reception-modal-footer" class="manual-reception-modal-footer">
+            
+            <!-- manual reception submit button -->
+            <button id="manual-reception-submit-btn" class="manual-reception-submit-btn" type="submit">ثبت</button>
+            <!-- colse modal button  -->
+            <button id="close-manual-btn" class="close-manual-btn">بستن</button>
+        </div>
+    </div>
+    
+</div>
+</form>
 
 
 
 {% endblock content %}
 
-
-{% if open_modal %}
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("modalOverlay").style.display = "flex";
-});
-</script>
-{% endif %}
+{% block extra_script %}
+<script src="{{ url_for('static', filename='js/jquery-4.0.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/persian-date.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/persian-datepicker.min.js') }}"></script>
+<script src="{{ url_for('static',filename='js/reception.js') }}"></script>
+{% endblock extra_script %}
 
 <!-- reception page footer exclusive  -->
 {% block footer %}
@@ -259,9 +460,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 </div>
-
-{% block extra_script %}
-<script src="{{ url_for('static', filename='js/reception.js') }}"></script>
-{% endblock %}
 </footer>
 {% endblock %}

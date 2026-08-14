@@ -23,4 +23,12 @@ def require_login():
 def require_admin():
     if session.get("role") not in ("admin", "operator"):
         abort(403)
+
    
+#convert persian or arabic number to english numbers (۱۲۳ -> 123)
+def normalize_digits (digit):
+    if not digit : 
+        return digit
+    translation_table =  str.maketrans("۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩","01234567890123456789")
+
+    return digit.translate(translation_table) 

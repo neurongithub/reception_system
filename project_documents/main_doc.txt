@@ -241,6 +241,12 @@ feature_4: Reception page
                 2-4:[+] Check Reception Status (formater) [Done]
                     2-4-1:[+] format and prepare query output to show in web page [Done]
 
+    [manual reception]
+        - user interface => modal box 
+        
+
+
+
 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -252,29 +258,21 @@ feature_5 : User managment page
 
         ** application have 1 admin user and more than 1 viewer users (10 viewer) **
 
-        -- View all users
-        - Create a new user (Viewer)
-        - Edit user information
+        -- View all users [Done]
+        - Create a new user (Viewer)[Done]
+        - Edit user information[Done]
             - Username
             - Password
             - Full Name
             - Role
-        - Delete a user
-        - Search users
-        - View authentication logs (login history)
-
-        
-    [featre moduls]:
-
-        -
-
-
-
+        - Delete a user[Done]
+        - Search users[Done]
+    
 
     [backlogs]:
+        - add email address, phone number , to create user (not requier)
 
-        -
-
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 

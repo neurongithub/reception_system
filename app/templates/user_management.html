@@ -17,7 +17,7 @@
         <div class="user-manage-header">
             
             <button class="new-user-btn" type="button" id="open-create-user-modal">
-                + کاربر جدید
+                ➕ کاربر جدید
             </button>
             
             
@@ -25,14 +25,13 @@
             
         <div class="header-title">
             
-    <div class="user-statistics-card">
-       
-        <div>Admin       : 1</div>
-        <div>Operator    : 2 </div>
-         <div>Viewer      : 14</div>
-       <div> Total       : 17 </div>
-       
-    </div> 
+    <div class="user-stat-container">
+        <div class="user-stat-card"> <span class="stat-title">جمع 🪧</span> <strong class="stat-value">{{users_count.total }}</strong> </div>
+        <div class="user-stat-card"> <span class="stat-title">مدیر 🪧</span> <strong class="stat-value">{{ users_count.admin}}</strong> </div>
+        <div class="user-stat-card"> <span class="stat-title">اپراتورها 🪧</span> <strong class="stat-value">{{users_count.operator }}</strong> </div>
+        <div class="user-stat-card"> <span class="stat-title">کاربران معمولی 🪧</span> <strong class="stat-value">{{users_count.viewer }}</strong> </div>
+    </div>
+
     <div class="current-user-card" dir="rtl">
         {% if current_user.role == "admin" %}
         <div class="user-avatar">
@@ -83,7 +82,7 @@
         <div class="user-manage-searchBar">
 
             
-                <button type="submit" id="search-username-button">جستجو</button>
+                <button type="submit" id="search-username-button">🔍 جستجو</button>
 
                 <input type="text" class="search-input" name="search-username" placeholder="جستجو نام کاربری..." dir="rtl" autocomplete="off" maxlength="30">
             
@@ -92,22 +91,22 @@
 
                         <option value="all"
                             {% if request.args.get('role', 'all') == 'all' %}selected{% endif %}>
-                            همه کاربران
+                            همه کاربران 📁
                         </option>
 
                         <option value="admin"
                             {% if request.args.get('role') == 'admin' %}selected{% endif %}>
-                            Admin
+                            Admin 📁
                         </option>
 
                         <option value="operator"
                             {% if request.args.get('role') == 'operator' %}selected{% endif %}>
-                            Operator
+                            Operator 📁
                         </option>
 
                         <option value="viewer"
                             {% if request.args.get('role') == 'viewer' %}selected{% endif %}>
-                            Viewer
+                            Viewer 📁
                         </option>
 
             </select>
@@ -115,10 +114,10 @@
 
             <select name="sort" class="filter-select" onchange="this.form.submit()">
                 <option disabled>تاریخ ایجاد</option>
-                <option value="desc" {% if request.args.get('sort', 'desc') == 'desc' %}selected{% endif %}>جدید به قدیم</option>
+                <option value="desc" {% if request.args.get('sort', 'desc') == 'desc' %}selected{% endif %}>جدید به قدیم 📁</option>
                 <option value="asc"
                     {% if request.args.get('sort') == 'asc' %}selected{% endif %}>
-                    قدیمی به جدید
+                    قدیمی به جدید 📁
                 </option>
 
 
@@ -169,7 +168,7 @@
                         </td>
                         <td>{{ user.create_at.strftime("%Y-%m-%d ") }}</td>
                         <td>{{ user.create_at.strftime("%H:%M:%S ") }}</td>
-                        <td>ادمین</td>
+                        <td>{{ user.creator.username }}</td>
                         <td>امروز</td>
                         
 
@@ -180,7 +179,7 @@
                         {% if session["role"] == "admin" %}
                     
                         <!-- Edit -->
-                        <button type="button" class="icon-btn edit-btn">
+                        <button type="button" class="icon-btn edit-btn" data-user-id="{{ user.id }}" data-username="{{ user.username }}" data-full-name="{{ user.full_name }}"  data-role="{{ user.role }}">
                     
                             <img src="{{ url_for('static', filename='icons/pen.svg') }}" alt="Edit">
                     
@@ -193,10 +192,10 @@
                     
                         </button>
                     
-                        {% elif session["role"] == "operator" and user.role == "viewer" %}
+                        {% elif session["role"] == "operator" and user.role == "viewer"%}
                     
                         <!-- Edit -->
-                        <button type="button" class="icon-btn edit-btn">
+                        <button type="button" class="icon-btn edit-btn" data-user-id="{{ user.id }}" data-username="{{ user.username }}" data-full-name="{{ user.full_name }}"  data-role="{{ user.role }}">
                     
                             <img src="{{ url_for('static', filename='icons/pen.svg') }}" alt="Edit">
                     
@@ -231,90 +230,395 @@
                     </div>
                     </form>
 
-<!-- ================================================== creata new user modal ============================================== -->
+<!-- ========================================================= -->
+<!-- Create User Modal -->
+<!-- ========================================================= -->
 
-<div id="create-user-modal" class="modal">
+<div id="create-user-modal" class="create-modal">
 
-    <div class="modal-content">
+    <div class="create-modal-content" dir="rtl">
 
-        <br>
-        <h3 id="create-user-modal-tilte">ایجاد کاربر جدید</h3>
-        <hr>
-        <br>
+        <!-- Modal Header -->
+        <div class="create-modal-header">
 
-        <form action="/dashboard/create_user/" method="POST" autocomplete="off">
+            <div class="create-modal-title">
 
-            <input
-                type="text"
-                name="username"
-                placeholder="نام کاربری"
-                required
-                autofocus
-                maxlength="30"
-                id="username"
-            >
-            <input
-                type="text"
-                name="full_name"
-                placeholder="نام دلخواه"
-                required
-                
-            >
+                <h2>
+                    ایجاد کاربر جدید
+                </h2>
 
-            
+                <p>
+                    اطلاعات کاربر جدید را وارد کنید.
+                </p>
 
-            <input
-                type="password"
-                name="password"
-                placeholder="رمز عبور"
-                required
-                minlength="4"
-            >
-
-            <input
-                type="password"
-                name="confirm_password"
-                placeholder="تکرار رمز عبور"
-                required
-            >
-
-            <select name="role" required>
-                <option value="" selected disabled>
-                    انتخاب نقش
-                </option>
-                {% for role in allowed_roles %}
-            
-                <option value="{{ role }}">
-                   {% if role == 'operator' %}اپراتور
-                   {% elif role == 'viewer' %}کاربر معمولی {% endif %}
-                </option>
-
-                
-                {% endfor %}
-
-            </select>
-
-            <button
-                type="submit"
-                class="submit-btn"
-            >
-                ایجاد کاربر
-            </button>
+            </div>
 
             <button
                 type="button"
                 id="close-create-user-modal"
-                class="cancel-btn"
+                class="create-modal-close-btn"
+                aria-label="بستن"
             >
-                انصراف
+                &times;
             </button>
 
-        </form>
+        </div>
+
+
+        <!-- Modal Body -->
+        <div class="create-modal-body">
+
+            <form
+                id="create-user-form"
+                action="{{ url_for('user_management.create_new_user') }}"
+                method="POST"
+                autocomplete="off"
+            >
+
+                <!-- Username -->
+                <div class="create-form-group">
+
+                    <label for="create-username">
+                        نام کاربری
+                    </label>
+
+                    <input
+                        type="text"
+                        id="create-username"
+                        name="username"
+                        placeholder="نام کاربری"
+                        maxlength="30"
+                        required
+                        autofocus
+                    >
+
+                </div>
+
+
+                <!-- Full Name -->
+                <div class="create-form-group">
+
+                    <label for="create-full-name">
+                        نام
+                    </label>
+
+                    <input
+                        type="text"
+                        id="create-full-name"
+                        name="full_name"
+                        placeholder="نام کامل کاربر"
+                        maxlength="100"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="create-form-group">
+
+                    <label for="create-password">
+                        رمز عبور
+                    </label>
+
+                    <input
+                        type="password"
+                        id="create-password"
+                        name="password"
+                        placeholder="رمز عبور"
+                        minlength="4"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Confirm Password -->
+                <div class="create-form-group">
+
+                    <label for="create-confirm-password">
+                        تکرار رمز عبور
+                    </label>
+
+                    <input
+                        type="password"
+                        id="create-confirm-password"
+                        name="confirm_password"
+                        placeholder="تکرار رمز عبور"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Role -->
+                <div class="create-form-group">
+
+                    <label for="create-role">
+                        نقش کاربر
+                    </label>
+
+                    <select
+                        id="create-role"
+                        name="role"
+                        required
+                    >
+
+                        <option
+                            value=""
+                            selected
+                            disabled
+                        >
+                            انتخاب نقش
+                        </option>
+
+                        {% for role in allowed_roles %}
+
+                            <option value="{{ role }}">
+
+                                {% if role == "operator" %}
+
+                                    اپراتور
+
+                                {% elif role == "viewer" %}
+
+                                    کاربر معمولی
+
+                                {% elif role == "admin" %}
+
+                                    مدیر
+
+                                {% else %}
+
+                                    {{ role|capitalize }}
+
+                                {% endif %}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- Modal Actions -->
+                <div class="create-modal-actions">
+
+                    <button
+                        type="button"
+                        id="create-user-cancel"
+                        class="create-cancel-btn"
+                    >
+                        انصراف
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="create-submit-btn"
+                    >
+                        ایجاد کاربر ➕
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
 
     </div>
 
 </div>
 
+<!-- ================================================== Edit current users modal ============================================== -->
+
+
+<div id="edit-user-modal" class="edit-modal">
+
+    <div class="edit-modal-content" dir="rtl">
+
+        <!-- Modal Header -->
+        <div class="edit-modal-header">
+
+            <div class="edit-modal-title">
+                <h2>ویرایش کاربر</h2>
+                <p>اطلاعات کاربر را ویرایش کنید.</p>
+            </div>
+
+            <button
+                type="button"
+                id="close-edit-user-modal"
+                class="modal-close-btn"
+                aria-label="بستن"
+            >
+                &times;
+            </button>
+
+        </div>
+
+
+        <!-- Modal Body -->
+        <div class="edit-modal-body">
+
+            <form
+                id="edit-user-form"
+                action="{{ url_for('user_management.edit_user') }}"
+                method="POST"
+                autocomplete="off"
+            >
+
+                <!-- User ID -->
+                <input
+                    type="hidden"
+                    id="edit-user-id"
+                    name="user_id"
+                >
+
+
+                <!-- Username -->
+                <div class="form-group">
+
+                    <label for="edit-username">
+                        نام کاربری*
+                    </label>
+
+                    <input
+                        type="text"
+                        id="edit-username"
+                        name="username"
+                        placeholder="نام کاربری"
+                        maxlength="50"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Full Name -->
+                <div class="form-group">
+
+                    <label for="edit-full-name">
+                        نام*
+                    </label>
+
+                    <input
+                        type="text"
+                        id="edit-full-name"
+                        name="full_name"
+                        placeholder="نام کامل کاربر"
+                        maxlength="100"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="form-group">
+
+                    <label for="edit-password">
+                        رمز عبور جدید
+                    </label>
+
+                    <input
+                        type="password"
+                        id="edit-password"
+                        name="password"
+                        placeholder="رمز عبور جدید"
+                    >
+
+                    <small>
+                        اگر نمی‌خواهید رمز عبور تغییر کند، این قسمت را خالی بگذارید.
+                    </small>
+
+                </div>
+
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+
+                    <label for="edit-confirm-password">
+                        تکرار رمز عبور
+                    </label>
+
+                    <input
+                        type="password"
+                        id="edit-confirm-password"
+                        name="confirm_password"
+                        placeholder="تکرار رمز عبور جدید"
+                    >
+
+                </div>
+
+
+                <!-- Role -->
+                <div class="form-group">
+
+                    <label for="edit-role">
+                        نقش کاربر*
+                    </label>
+
+                    <select
+                        id="edit-role"
+                        name="role"
+                        required
+                    >
+
+                        {% for role in allowed_roles %}
+
+                            <option value="{{ role }}">
+
+                                {% if role == "operator" %}
+                                    اپراتور
+
+                                {% elif role == "viewer" %}
+                                    کاربر معمولی
+
+                                {% elif role == "admin" %}
+                                    مدیر
+
+                                {% else %}
+                                    {{ role|capitalize }}
+
+                                {% endif %}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- Modal Actions -->
+                <div class="edit-modal-actions">
+
+                    <button
+                        type="button"
+                        id="cancel-edit-user"
+                        class="cancel-btn"
+                    >
+                        انصراف
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+                        ذخیره تغییرات
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
 <script src="{{ url_for('static', filename='js/user_management.js') }}"></script>
 
 {% endblock %}

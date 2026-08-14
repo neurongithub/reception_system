@@ -1,4 +1,4 @@
-# seed.py -> is a service to  Initial Setup Wizard , seed initial Administrator 
+# seed.py -> is a service to  Initial Setup Wizard page , seed initial Administrator 
 
 from app import db
 from flask import redirect , url_for ,flash

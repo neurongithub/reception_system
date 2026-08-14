@@ -19,7 +19,9 @@ class User(db.Model) :
     password_hashed = db.Column(db.String(255) , nullable=False)
     role = db.Column(db.String(20), nullable=False)
     full_name = db.Column(db.String(100) , nullable=True )
+    created_by = db.Column(db.Integer,db.ForeignKey("users.id"),nullable=True , name="fk_users_created_by")
     create_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    creator = db.relationship("User",remote_side=[id],backref="created_users")
     
 #==================================================
 #model #2: model for courses table 

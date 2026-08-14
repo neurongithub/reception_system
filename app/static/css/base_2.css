@@ -340,131 +340,204 @@ body{
     min-height:0;
 }
 
-
 /* ===============================
    SIDEBAR
 ================================ */
 
-
-.sidebar-container{
-
-    width:260px;
-
-    flex-shrink:0;
+.sidebar-container {
+  width: 240px;
+  flex-shrink: 0;
 }
 
-.sidebar{
-
-    height:100%;
-    background:linear-gradient(
-        180deg,
-        #ffffff,
-        #eeeeee
-    );
-
-    border-radius:5px;
-
-    padding:20px;
-
-
-    box-shadow:
-    0 10px 25px rgba(0,0,0,.15);
-
-
-    display:flex;
-
-
-    flex-direction:column;
-
-
-    gap:35px;
-
-
+.sidebar {
+  height: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e8e6e0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
 }
 
-
-.sidebar-header{
-
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-    align-items:center;
+/* ── Header ── */
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-
-
-.sidebar-header h3{
-    font-size:20px;
+.sidebar-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 4px;
 }
 
-
-
-#search-input{
-
-    width:100%;
-
-    height:35px;
-
-    border-radius:8px;
-
-    border:1px solid #777;
-
-    padding:5px 10px;
-
-    font-family:inherit;
+.sidebar-title i {
+  font-size: 16px;
+  color: #1473e6;
 }
 
-.sidebar-menu{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:20px;
-
+.sidebar-title h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
 }
 
-
-.sidebar-btn{
-
-    height:55px;
-
-    display:flex;
-
-    align-items:center;
-
-
-    justify-content:center;
-
-
-    border-radius:10px;
-
-
-    background:#1473e6;
-
-
-    color:white;
-
-
-    text-decoration:none;
-
-
-    font-weight:600;
-
-
-    transition:.2s;
-
-
+/* ── Search ── */
+.search-wrap {
+  position: relative;
 }
 
-
-.sidebar-btn:hover{
-    background:#095bbd;
-
-    transform:translateY(-2px);
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: #9ca3af;
+  pointer-events: none;
 }
 
+#search-input {
+  width: 100%;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background: #fafaf8;
+  padding: 0 34px 0 10px;
+  font-family: inherit;
+  font-size: 13px;
+  color: #111827;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
 
+#search-input:focus {
+  border-color: #1473e6;
+  box-shadow: 0 0 0 3px rgba(20,115,230,.1);
+}
+
+#search-input::placeholder { color: #9ca3af; }
+
+/* ── Menu ── */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 52px;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  transition: background .15s, color .15s, border-color .15s, transform .15s;
+  background: #1976D2;
+}
+
+.sidebar-btn-label {
+  flex: 1;
+  min-width: 0;
+  text-align: right;
+}
+
+.sidebar-btn-symbol,
+.sidebar-btn-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  display: block;
+  object-fit: contain;
+}
+
+.sidebar-btn i {
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.sidebar-btn:hover {
+  background: #f3f4f6;
+  color: #111827;
+  border-color: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.sidebar-btn.active {
+  background: #eff6ff;
+  color: #1473e6;
+  border-color: #bfdbfe;
+}
+
+/* ── User card ── */
+.sidebar-user {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: #f9fafb;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1473e6;
+  flex-shrink: 0;
+}
+
+.user-info { flex: 1; }
+
+.user-name {
+  font-size: .8rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.user-role {
+  font-size: 11px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.logout-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  /* اگه آیکون تک‌رنگ سیاه بود و می‌خوای رنگش عوض بشه: */
+  filter: invert(60%) sepia(0%) saturate(0%) hue-rotate(0deg);
+  transition: filter .15s;
+}
+
+.logout-btn:hover .logout-icon {
+  filter: invert(27%) sepia(80%) saturate(600%) hue-rotate(330deg);
+  /* این filter آیکون رو قرمز می‌کنه موقع hover */
+}
 
 /* ===============================
    CONTENT

@@ -1,7 +1,8 @@
 
     const createUserModal = document.getElementById("create-user-modal");
     const createUserForm = document.querySelector("#create-user-modal form");
-    const usernameInput = document.getElementById("username");
+    const usernameInput = document.getElementById("create-username");
+    const closeModalWindow = document.getElementById("close-create-user-modal")
 
     document
         .getElementById("open-create-user-modal")
@@ -15,7 +16,7 @@
 
 
     document
-        .getElementById("close-create-user-modal")
+        .getElementById("create-user-cancel")
         .addEventListener("click", () => {
 
             createUserForm.reset();
@@ -37,9 +38,102 @@
 
     });
 
+  
+//=============================edit user modal==================================
+
+const editUserModal = document.getElementById("edit-user-modal");
+
+const editButtons = document.querySelectorAll(".edit-btn");
 
 
-    //==================================================================
+editButtons.forEach((button) => {
+
+    button.addEventListener("click", () => {
+        
+
+        // Get user data from data-* attributes
+
+        const userId = button.dataset.userId;
+        const username = button.dataset.username;
+        const fullName = button.dataset.fullName;
+        const role = button.dataset.role;
+
+
+        // Put user ID into hidden input
+
+        document.getElementById("edit-user-id").value = userId;
+
+
+        // Put user information into form
+
+        document.getElementById("edit-username").value = username;
+
+        document.getElementById("edit-full-name").value = fullName;
+
+        document.getElementById("edit-role").value = role;
+
+
+        // Password fields must always be empty
+
+        document.getElementById("edit-password").value = "";
+
+        document.getElementById("edit-confirm-password").value = "";
+
+
+        // Show modal
+
+        editUserModal.style.display = "flex";
+
+    });
+
+});
+
+
+
+
+document
+    .getElementById("close-edit-user-modal")
+    .addEventListener("click", () => {
+
+        editUserModal.style.display = "none";
+
+    });
+
+
+
+
+document
+    .getElementById("cancel-edit-user")
+    .addEventListener("click", () => {
+
+        editUserModal.style.display = "none";
+
+    });
+
+
+// ==========================================================
+// Close Modal - Click Outside
+// ==========================================================
+
+window.addEventListener("click", (event) => {
+
+    if (event.target === editUserModal) {
+
+        editUserModal.style.display = "none";
+
+    }
+
+});
+
+
+
+
+
+
+
+
+
+    //=============================delete user =====================================
 
   document.querySelectorAll(".delete-btn").forEach(button => {
 
@@ -68,3 +162,5 @@
     });
 
 });
+
+

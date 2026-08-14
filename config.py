@@ -20,6 +20,11 @@ class Config :
         SESSION_COOKIE_NAME = "login_session"
         SESSION_COOKIE_SECURE = True
         SESSION_COOKIE_HTTPONLY = True
+        SESSION_TYPE = "filesystem"
+        SESSION_FILE_DIR = BASE_DIR / "flask_session"
+        SESSION_USE_SIGNER = True
+        SESSION_PERMANENT = True
+        SESSION_REFRESH_EACH_REQUEST = True
         #when using real domain
         # SESSION_COOKIE_DOMAIN = ".example.com"
         #====================================

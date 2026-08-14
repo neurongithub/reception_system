@@ -69,27 +69,90 @@ body {
     gap: 10px;
 
 }
-.user-statistics-card{
+
+.user-stat-container {
+    width: 100%;
     display: flex;
-        flex-direction: column;
-        align-items:flex-end;
-        gap: 30px;
-    
-        min-width: 320px;
-    
-        padding: 16px 22px;
-    
-        border-radius: 14px;
-    
-        background: #ffffff;
-    
-        border: 1px solid #0d2240;
-    
-        box-shadow: 0 8px 22px rgba(0, 0, 0, .08);
-        height: 123px;
-        font-size: 15px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+    direction: rtl;
 }
 
+/* ========================================= User Statistics Card ========================================= */
+.user-stat-container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+
+    direction: rtl;
+}
+
+
+.user-stat-card {
+    flex: 1 1 0;
+
+    height: 110px;
+    min-width: 0;
+
+    padding: 16px 22px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #0d2240;
+
+    border-radius: 14px;
+
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .08);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.user-stat-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 26px rgba(0, 0, 0, .11);
+}
+
+
+.stat-title {
+    color: #7b7b7b;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+
+.stat-value {
+    margin: 0;
+
+    color: #1d1d1d;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    line-height: 1;
+}
 .current-user-card{
 
     display:flex;
@@ -576,169 +639,910 @@ td button {
     font-size:.8rem;
 
 }
-.modal{
+/* =========================================================
+   Create User Modal
+   ========================================================= */
 
-    display:none;
+.create-modal {
 
-    position:fixed;
+    display: none;
 
-    inset:0;
+    position: fixed;
 
-    background:rgba(0,0,0,.45);
+    inset: 0;
 
-    justify-content:center;
+    width: 100%;
+    height: 100%;
 
-    align-items:center;
-
-    z-index:9999;
-
-}
-#create-user-modal-tilte{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid rgb(0, 73, 128);
-    border-radius: 8px;
-    background: silver;
     padding: 20px;
+
+    box-sizing: border-box;
+
+
+    backdrop-filter: blur(4px);
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 1000;
 }
 
-.modal-content{
 
-    width:430px;
+/* =========================================================
+   Modal Content
+   ========================================================= */
 
-    background:#fff;
+.create-modal-content {
 
-    border-radius:12px;
+    width: 100%;
 
-    padding:25px;
+    max-width: 480px;
 
-    box-shadow:0 8px 25px rgba(0,0,0,.25);
+    background: #ffffff;
 
-    animation:modalAnimation .25s ease;
+    border-radius: 12px;
 
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.18);
+
+    animation: createModalOpen 0.18s ease-out;
 }
 
-.modal-content h3{
 
-    text-align:center;
+/* =========================================================
+   Modal Animation
+   ========================================================= */
 
-    margin-bottom:10px;
+@keyframes createModalOpen {
 
-}
+    from {
 
-.modal-content form{
+        opacity: 0;
 
-    display:flex;
-
-    flex-direction:column;
-
-    gap:14px;
-
-}
-
-.modal-content input,
-.modal-content select{
-
-    height:45px;
-
-    padding:0 12px;
-
-    border: 1px solid #0d2240;
-
-    border-radius:8px;
-
-    font-size:15px;
-
-    outline:none;
-
-    transition:.25s;
-
-}
-
-.modal-content input:focus,
-.modal-content select:focus{
-
-    border-color:#2d8cff;
-
-}
-
-.submit-btn{
-
-    height:45px;
-
-    border:none;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    background:#2d8cff;
-    border: 1px solid #0d2240;
-
-    color:white;
-
-    font-size:15px;
-
-    /* transition:.2s; */
-    transition: transform 0.15s ease;
-
-}
-.submit-btn:active {
-        transform: scale(0.92);
-}
-
-.submit-btn:hover{
-
-    background:#2274d4;
-
-}
-
-.cancel-btn{
-
-    height:45px;
-
-    border:none;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    background:#e96b6b;
-
-    font-size:15px;
-
-    transition: transform 0.15s ease;
-
-}
-
-.cancel-btn:hover{
-
-    background:#bdbdbd;
-
-}
-.cancel-btn:active{
-
-        transform: scale(0.92);
-
-}
-
-@keyframes modalAnimation{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(-20px);
+        transform:
+            translateY(-12px)
+            scale(0.97);
 
     }
 
-    to{
+    to {
 
-        opacity:1;
+        opacity: 1;
 
-        transform:translateY(0);
+        transform:
+            translateY(0)
+            scale(1);
 
+    }
+
+}
+
+
+/* =========================================================
+   Modal Header
+   ========================================================= */
+
+.create-modal-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 20px 24px;
+
+    background: #640cc1;
+
+    border-bottom: 1px solid #e5e7eb;
+
+}
+
+
+.create-modal-title {
+
+    text-align: right;
+
+}
+
+
+.create-modal-title h2 {
+
+    margin: 0;
+
+    color: white;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+}
+
+
+.create-modal-title p {
+
+    margin: 6px 0 0;
+
+    color: white;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   Close Button
+   ========================================================= */
+
+.create-modal-close-btn {
+
+    width: 34px;
+
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #6b7280;
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        transform 0.1s ease;
+}
+
+
+.create-modal-close-btn:hover {
+
+    background: #e9eef5;
+
+    color: #0d2240;
+
+}
+
+
+.create-modal-close-btn:active {
+
+    transform: scale(0.92);
+
+}
+
+
+/* =========================================================
+   Modal Body
+   ========================================================= */
+
+.create-modal-body {
+
+    padding: 24px;
+
+}
+
+
+/* =========================================================
+   Form
+   ========================================================= */
+
+#create-user-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+}
+
+
+/* =========================================================
+   Form Group
+   ========================================================= */
+
+.create-form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+.create-form-group label {
+
+    color: #374151;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-align: right;
+
+}
+
+
+/* =========================================================
+   Inputs & Select
+   ========================================================= */
+
+#create-user-form input,
+#create-user-form select {
+
+    width: 100%;
+
+    min-height: 42px;
+
+    box-sizing: border-box;
+
+    padding: 9px 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #1f2937;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+}
+
+
+#create-user-form input:focus,
+#create-user-form select:focus {
+
+    border-color: #1976d2;
+
+    box-shadow:
+        0 0 0 3px rgba(25, 118, 210, 0.10);
+
+}
+
+
+#create-user-form input::placeholder {
+
+    color: #9ca3af;
+
+}
+
+
+/* =========================================================
+   Select
+   ========================================================= */
+
+#create-user-form select {
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+   Modal Actions
+   ========================================================= */
+
+.create-modal-actions {
+
+    display: flex;
+
+    justify-content: flex-start;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 8px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #e5e7eb;
+
+}
+
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+
+.create-modal-actions button {
+
+    min-width: 100px;
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.1s ease,
+        background 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+/* =========================================================
+   Submit Button
+   ========================================================= */
+
+.create-submit-btn {
+
+    background: #1d9b60;
+
+    color: #ffffff;
+
+}
+
+
+.create-submit-btn:hover {
+
+    background: #0d7142;
+
+    box-shadow:
+        0 4px 10px rgba(25, 118, 210, 0.20);
+
+}
+
+
+.create-submit-btn:active {
+
+    transform: scale(0.95);
+
+}
+
+
+/* =========================================================
+   Cancel Button
+   ========================================================= */
+
+.create-cancel-btn {
+
+    
+    background: #e96b6b;
+
+    color: #374151;
+
+}
+
+
+.create-cancel-btn:hover {
+    background: #f24646;
+    
+
+}
+
+
+.create-cancel-btn:active {
+
+    transform: scale(0.95);
+
+}
+
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+    .create-modal {
+
+        padding: 12px;
+
+    }
+
+
+    .create-modal-content {
+
+        max-width: 100%;
+
+        border-radius: 10px;
+
+    }
+
+
+    .create-modal-header {
+
+        padding: 17px 18px;
+        background-color: #463ea2;;
+
+    }
+
+
+    .create-modal-body {
+
+        padding: 18px;
+
+    }
+
+
+    .create-modal-title h2 {
+
+        font-size: 18px;
+
+    }
+
+
+    .create-modal-actions {
+
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+
+    }
+
+
+    .create-modal-actions button {
+
+        width: 100%;
+
+    }
+
+}
+
+
+/* ================================ edit user modal sytle =================================== */
+
+
+
+.edit-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+
+/* =========================================================
+   Modal Content
+   ========================================================= */
+
+.edit-modal-content {
+    width: 30%;
+    
+
+    background: #ffffff;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.18);
+
+    animation: editModalOpen 0.18s ease-out;
+}
+
+
+/* =========================================================
+   Modal Open Animation
+   ========================================================= */
+
+@keyframes editModalOpen {
+
+    from {
+        opacity: 0;
+        transform: translateY(-12px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   Modal Header
+   ========================================================= */
+
+.edit-modal-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 24px;
+
+    background: rgb(231, 197, 6);
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.edit-modal-title {
+    text-align: right;
+}
+
+
+.edit-modal-title h2 {
+    margin: 0;
+
+    color: #0d2240;
+
+    font-size: 21px;
+
+    font-weight: 700;
+}
+
+
+.edit-modal-title p {
+    margin: 6px 0 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   Close Button
+   ========================================================= */
+
+.modal-close-btn {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #6b7280;
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        transform 0.1s ease;
+}
+
+
+.modal-close-btn:hover {
+    background: #e9eef5;
+
+    color: #0d2240;
+}
+
+
+.modal-close-btn:active {
+    transform: scale(0.92);
+}
+
+
+/* =========================================================
+   Modal Body
+   ========================================================= */
+
+.edit-modal-body {
+    padding: 24px;
+}
+
+
+/* =========================================================
+   Form
+   ========================================================= */
+
+#edit-user-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   Form Group
+   ========================================================= */
+
+#edit-user-form .form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+#edit-user-form label {
+    color: #374151;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   Inputs
+   ========================================================= */
+
+#edit-user-form input,
+#edit-user-form select {
+
+    width: 100%;
+
+    min-height: 42px;
+
+    box-sizing: border-box;
+
+    padding: 9px 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #1f2937;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+}
+
+
+#edit-user-form input:focus,
+#edit-user-form select:focus {
+
+    border-color: #1976d2;
+
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.10);
+}
+
+
+/* =========================================================
+   Placeholder
+   ========================================================= */
+
+#edit-user-form input::placeholder {
+    color: #9ca3af;
+}
+
+
+/* =========================================================
+   Password Help Text
+   ========================================================= */
+
+#edit-user-form small {
+
+    margin-top: -2px;
+
+    color: red;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   Select
+   ========================================================= */
+
+#edit-user-form select {
+
+    cursor: pointer;
+
+    appearance: auto;
+}
+
+
+/* =========================================================
+   Modal Actions
+   ========================================================= */
+
+.edit-modal-actions {
+
+    display: flex;
+
+    justify-content: flex-start;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 8px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+
+.edit-modal-actions button {
+
+    min-width: 100px;
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.1s ease,
+        background 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+/* =========================================================
+   Save Button
+   ========================================================= */
+
+.edit-modal-actions .save-btn {
+
+    background: #1976d2;
+
+    color: #ffffff;
+}
+
+
+.edit-modal-actions .save-btn:hover {
+
+    background: #198754;
+
+    box-shadow:
+        0 4px 10px rgba(25, 118, 210, 0.20);
+}
+
+
+.edit-modal-actions .save-btn:active {
+
+    transform: scale(0.95);
+}
+
+
+/* =========================================================
+   Cancel Button
+   ========================================================= */
+
+.edit-modal-actions .cancel-btn {
+
+    background: #eef1f5;
+
+    color: #374151;
+}
+
+
+.edit-modal-actions .cancel-btn:hover {
+
+    background: #f24646;
+}
+
+
+.edit-modal-actions .cancel-btn:active {
+
+    transform: scale(0.95);
+}
+
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+    .edit-modal {
+        padding: 12px;
+    }
+
+
+    .edit-modal-content {
+        
+
+        border-radius: 10px;
+    }
+
+
+    .edit-modal-header {
+        padding: 17px 18px;
+    }
+
+
+    .edit-modal-body {
+        padding: 18px;
+    }
+
+
+    .edit-modal-title h2 {
+        font-size: 18px;
+    }
+
+
+    .edit-modal-actions {
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+
+    .edit-modal-actions button {
+        width: 100%;
     }
 
 }

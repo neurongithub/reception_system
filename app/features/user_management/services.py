@@ -42,9 +42,6 @@ class UserManageService :
     @staticmethod
     def search_one_username (search_username): 
         searched_user = User.query.filter_by(username=search_username).first()
-
-        
-
         return searched_user
 
 

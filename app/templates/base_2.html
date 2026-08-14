@@ -218,74 +218,55 @@
 
 
 <!-- ================= SIDEBAR ================= -->
-
-
 <aside class="sidebar-container">
-
-
-<div class="sidebar">
-
-
+  <div class="sidebar">
 
     <div class="sidebar-header">
-
-
-    <h3>
-        گزینه‌ها
-    </h3>
-
-
-    <input type="text"
-        id="search-input"
-        placeholder="جستجو">
-
-
+      <div class="sidebar-title">
+        <i class="ti ti-layout-sidebar" aria-hidden="true"></i>
+        <h3>دسترسی سریع</h3>
+      </div>
+      <div class="search-wrap">
+        <i class="ti ti-search search-icon" aria-hidden="true"></i>
+        <input type="text" id="search-input" placeholder="جستجو کدملی ..." />
+      </div>
     </div>
 
+    <nav class="sidebar-menu" aria-label="منوی دسترسی سریع">
+      <a href="{{ url_for('course.create_course') }}" class="sidebar-btn">
+        <i class="ti ti-plus sidebar-btn-symbol" aria-hidden="true"></i>
+        <span class="sidebar-btn-label">ایجاد دوره جدید</span>
+        <img class="sidebar-btn-icon" src="{{ url_for('static', filename='icons/create-course.svg') }}" alt="">
+      </a>
+      
+      <a href="{{ url_for('reception.reception') }}" class="sidebar-btn">
+        <i class="ti ti-clipboard-list sidebar-btn-symbol" aria-hidden="true"></i>
+        <span class="sidebar-btn-label">پذیرش</span>
+        <img class="sidebar-btn-icon" src="{{ url_for('static', filename='icons/reception.svg') }}" alt="">
+      </a>
+      
+      <a href="/dashboard/last_courses/" class="sidebar-btn">
+        <i class="ti ti-books sidebar-btn-symbol" aria-hidden="true"></i>
+        <span class="sidebar-btn-label">مدیریت دوره‌ها</span>
+        <img class="sidebar-btn-icon" src="{{ url_for('static', filename='icons/manage.svg') }}" alt="">
+      </a>
+      <a href="{{ url_for('dashboard.help') }}" class="sidebar-btn">
+        <i class="ti ti-help-circle sidebar-btn-symbol" aria-hidden="true"></i>
+        <span class="sidebar-btn-label">راهنما</span>
+        <img class="sidebar-btn-icon" src="{{ url_for('static', filename='icons/help.svg') }}" alt="">
+      </a>
+    </nav>
 
-    <div class="sidebar-menu">
-
-
-
-    <a href="{{ url_for('course.create_course') }}"
-    class="sidebar-btn">
-
-
-        ایجاد دوره جدید
-
-
-    </a>
-
-
-    <a href="{{ url_for('reception.reception') }}"
-    class="sidebar-btn">
-
-
-        پذیرش
-
-
-    </a>
-
-    <a href="{{ url_for('dashboard.last_courses') }}"
-    class="sidebar-btn">
-
-
-        همه دوره‌ها
-
-
-    </a>
-
-    <a href="{{ url_for('dashboard.help') }}"
-    class="sidebar-btn">
-        راهنما
-    </a>
-
-
-     </div>
-
-    </div>
-
-
+    <div class="sidebar-user">
+  <div class="user-avatar">🚪</div>
+  <div class="user-info">
+    <p class="user-name">خروج از سامانه</p>
+  </div>
+  <a href="/dashboard/logout/" class="logout-btn" title="خروج">
+    <img src="/static/icons/exit2.svg" alt="خروج" class="logout-icon">
+  </a>
+</div>
+  
 </aside>
 
 

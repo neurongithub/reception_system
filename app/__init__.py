@@ -3,6 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate 
 from config import Config
 
+try:
+    from flask_session import Session
+except ImportError:
+    Session = None
+
 
 db = SQLAlchemy() 
 migrate = Migrate() 
@@ -17,6 +22,9 @@ def create_app () :
     
     db.init_app(app)
     migrate.init_app(app, db)
+
+    if Session is not None:
+        Session(app)
 
     from app.features.auth.routes import auth_bp
     from app.features.dashboard.routes import dashboard_bp

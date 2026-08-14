@@ -1,12 +1,7 @@
 from flask import Blueprint , flash ,redirect , url_for , request , render_template , abort ,session
-
 from app.features.common.utils import render_with_time , require_admin , require_login
-# user management service (user management main service)
 from app.features.user_management.services import UserManageService
-# validator modul
 from app.features.user_management.validator import NewUserValidate ,EditUserValidate
-
-# seed service  
 from app.features.user_management.seed import SeedService
 
 #==============================================================
@@ -14,7 +9,7 @@ from app.features.user_management.seed import SeedService
 #==============================================================
 user_manage_bp = Blueprint("user_management" ,__name__,url_prefix="/dashboard")
 setup_bp = Blueprint('setup', __name__)
-
+#===============================================================
 #create user authorization check (frontend side)
 ALLOWED_ROLE_CREATION ={"admin":["operator" , "viewer"],"operator" : ["viewer"]}
 
@@ -109,7 +104,6 @@ def edit_user():
     password = request.form.get("password","").strip()
     confirm_password = request.form.get("confirm_password","").strip()
     role = request.form.get("role","").strip()
-    print("USER ID FROM FORM:", repr(user_id))
     
     try : 
     # runnig validation service on inputs 
@@ -164,8 +158,6 @@ def setup() :
         except ValueError as ex : 
             flash(str(ex), "error")
             return redirect(url_for("setup.setup"))
-
-    
 
     return render_template('seed.html')
 

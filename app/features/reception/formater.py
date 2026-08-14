@@ -2,6 +2,27 @@
 
 class ReceptionFormatter:
 
+    @staticmethod
+    def normalize_marriage(value):
+        if value is None:
+            return "نامشخص"
+
+        if isinstance(value, str):
+            normalized = value.strip()
+            if normalized in {"0", "False", "false", "مجرد"}:
+                return "مجرد"
+            if normalized in {"1", "True", "true", "متاهل"}:
+                return "متاهل"
+            return normalized
+
+        if value is False or value == 0:
+            return "مجرد"
+
+        if value is True or value == 1:
+            return "متاهل"
+
+        return str(value)
+
     @staticmethod 
     def prepare (soldier):
         return {
@@ -23,7 +44,7 @@ class ReceptionFormatter:
 
             "health": soldier.health_status,
 
-            "marriage": soldier.is_marriage,
+            "marriage": ReceptionFormatter.normalize_marriage(soldier.is_marriage),
 
             "address": soldier.address, 
 

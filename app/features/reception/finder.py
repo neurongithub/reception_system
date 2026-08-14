@@ -18,6 +18,8 @@ class ReceptionFinder :
         
         soldier = Soldier.query.filter_by(status="ثبت-اولیه").all()
         return soldier
+    
+    
 
 
    
