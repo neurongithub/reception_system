@@ -250,6 +250,13 @@
         <span class="sidebar-btn-label">مدیریت دوره‌ها</span>
         <img class="sidebar-btn-icon" src="{{ url_for('static', filename='icons/manage.svg') }}" alt="">
       </a>
+
+      <a href="{{ url_for('result_page.result') }}" class="sidebar-btn" target="_blank">
+        <i class="ti ti-clipboard-list sidebar-btn-symbol" aria-hidden="true"></i>
+        <span class="sidebar-btn-label">نتایج پذیرش</span>
+        <img class="sidebar-btn-icon" src="{{ url_for('static', filename='icons/result.svg') }}" alt="">
+      </a>
+
       <a href="{{ url_for('dashboard.help') }}" class="sidebar-btn">
         <i class="ti ti-help-circle sidebar-btn-symbol" aria-hidden="true"></i>
         <span class="sidebar-btn-label">راهنما</span>

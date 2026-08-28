@@ -125,10 +125,13 @@ const manualModal = document.getElementById('manual-reception-modal'); // modal 
 const openManualModalButton = document.getElementById('btn-manual'); // open modal buttonn 
 const closeManualModalButton = document.getElementById('close-manual-btn'); // close modal button
 const closeManualHeaderButton = document.getElementById('close-manual-header-btn'); // close modal button in header
+const manualModalForm = document.querySelector('#manual-reception-form')
 
 function closeManualModal() {
     if (manualModal) {
         manualModal.style.display = 'none';
+        manualModalForm.reset ()
+
     }
 }
 

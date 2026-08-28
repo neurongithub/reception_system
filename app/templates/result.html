@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتایج لحظه ای پذیرش</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/result.css')}}">
+</head>
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-title">
+            <h3>سامانه پذیرش</h3>
+        </div>
+        <button class="sidebar-close" id="sidebarClose" aria-label="بستن">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+
+    <nav class="sidebar-nav">
+        <div class="nav-section">
+            <h4 class="nav-section-title">📊 صفحات اصلی</h4>
+            <ul>
+                <li><a href="{{ url_for('auth.login_page') }}" class="nav-link">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-label">صفحه ورود به سامانه</span>
+                </a></li>
+                
+                <li><a href="#results" class="nav-link active">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">نتایج</span>
+                </a></li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <h4 class="nav-section-title">📋 دریافت خروجی</h4>
+            <ul>
+                
+                
+                <li><a href="#exports" class="nav-link">
+                    <span class="nav-icon">💾</span>
+                    <span class="nav-label">EXCEL</span>
+                </a></li>
+                <li><a href="#exports" class="nav-link">
+                    <span class="nav-icon">💾</span>
+                    <span class="nav-label">PDF</span>
+                </a></li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <h4 class="nav-section-title"> تنظیمات حساب کاربری</h4>
+            <ul>
+                <li><a href="#settings-general" class="nav-link">
+                    <span class="nav-icon">🔧</span>
+                    <span class="nav-label">تنظیمات عمومی</span>
+                </a></li>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <div class="sidebar-footer">
+        <div class="user-info">
+            <div class="user-avatar">👤</div>
+            <div class="user-details">
+                <div class="user-name">کاربر</div>
+                <div class="user-role">مدیر سیستم</div>
+            </div>
+        </div>
+        <button class="logout-btn" id="logoutBtn">
+            <span class="logout-icon">🚪</span>
+            <span class="logout-text">خروج</span>
+        </button>
+    </div>
+</aside>
+
+<main class="result-container">
+
+    <!-- ===== RESULT HEADER ===== -->
+    <section class="result-header">
+        
+        <div class="result-title">
+            <button class="menu-btn" id="menuBtn" aria-label="menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <h4>سامانه یکپارچه پذیرش فراگیران</h4>
+            
+        </div>
+        
+        <div class="course-info">
+            <span>نام دوره: نام دوره</span>
+            <span>کد دوره: کد دوره</span>
+            <span>تاریخ برگزاری: 1402/12/15</span>
+        </div>
+
+        <div class="refresh-box">
+            <button class="refresh-btn" id="refreshBtn" title="تازه سازی صفحه">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 4v6h-6"></path>
+                    <path d="M1 20v-6h6"></path>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36M20.49 15a9 9 0 0 1-14.85 3.36"></path>
+                </svg>
+            </button>
+            <span class="refresh-text">تازه سازی صفحه</span>
+        </div>
+
+    </section>
+
+    
+
+    
+
+    <!-- ===== RESULTS CONTENT CARDS ===== -->
+<section class="results-content">
+
+    <div class="results-summary">
+        <span>
+            نتایج یافت شده:
+            <strong id="results-count">0</strong>
+        </span>
+    </div>
+
+    <!-- ===== BATTALION CARDS ===== -->
+
+    <!-- Battalion 1 -->
+    <article class="battalion-card">
+
+        <!-- Card Header -->
+        <header class="battalion-card-header">
+
+            <div class="battalion-title">
+                <span class="battalion-label">گردان</span>
+                <h3>۱</h3>
+            </div>
+
+            <div class="battalion-total">
+                <strong>199</strong>
+                <span>نفر</span>
+            </div>
+
+        </header>
+
+        <!-- Capacity -->
+        <div class="battalion-capacity">
+
+            <div class="capacity-info">
+                <span>ظرفیت: 250 نفر</span>
+                <strong>79.6%</strong>
+            </div>
+
+            <div class="capacity-bar">
+                <div
+                    class="capacity-progress"
+                    style="width: 79.6%;">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Companies Table -->
+        <div class="companies-wrapper">
+
+            <table class="companies-table">
+
+                <thead>
+                    <tr>
+                        <th>گروهان</th>
+                        <th>تعداد</th>
+                        <th>سالم</th>
+                        <th>معاف از رزم</th>
+                        <th>شیعه</th>
+                        <th>سنی</th>
+                        <th>تحصیلاتی</th>
+                        <th>دیپلم/زیردیپلم</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>۱</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                       
+                    </tr>
+
+                    <tr>
+                        <td>۲</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+
+                    <tr>
+                        <td>۳</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+
+                    <tr>
+                        <td>۴</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+
+                    <tr>
+                        <td>۵</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </article>
+
+
+    <!-- Battalion 2 -->
+    <article class="battalion-card">
+
+        <header class="battalion-card-header">
+
+            <div class="battalion-title">
+                <span class="battalion-label">گردان</span>
+                <h3>۲</h3>
+            </div>
+
+            <div class="battalion-total">
+                <strong>0</strong>
+                <span>نفر</span>
+            </div>
+
+        </header>
+
+        <div class="battalion-capacity">
+
+            <div class="capacity-info">
+                <span>ظرفیت: 250 نفر</span>
+                <strong>0%</strong>
+            </div>
+
+            <div class="capacity-bar">
+                <div
+                    class="capacity-progress"
+                    style="width: 0%;">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="companies-wrapper">
+
+            <table class="companies-table">
+
+                <thead>
+                    <tr>
+                        <th>گروهان</th>
+                        <th>تعداد</th>
+                        <th>سالم</th>
+                        <th>معاف از رزم</th>
+                        <th>شیعه</th>
+                        <th>سنی</th>
+                        <th>تحصیلاتی</th>
+                        <th>دیپلم/زیردیپلم</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>۱</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+
+                    <tr>
+                        <td>۲</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+
+                    <tr>
+                        <td>۳</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+
+                    <tr>
+                        <td>۴</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+
+                    <tr>
+                        <td>۵</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </article>
+
+
+    <!-- Battalion 3 -->
+    <article class="battalion-card">
+
+        <header class="battalion-card-header">
+
+            <div class="battalion-title">
+                <span class="battalion-label">گردان</span>
+                <h3>۳</h3>
+            </div>
+
+            <div class="battalion-total">
+                <strong>0</strong>
+                <span>نفر</span>
+            </div>
+
+        </header>
+
+        <div class="battalion-capacity">
+
+            <div class="capacity-info">
+                <span>ظرفیت: 250 نفر</span>
+                <strong>0%</strong>
+            </div>
+
+            <div class="capacity-bar">
+                <div
+                    class="capacity-progress"
+                    style="width: 0%;">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="companies-wrapper">
+
+            <table class="companies-table">
+
+                <thead>
+                    <tr>
+                        <th>گروهان</th>
+                        <th>تعداد</th>
+                        <th>سالم</th>
+                        <th>معاف از رزم</th>
+                        <th>شیعه</th>
+                        <th>سنی</th>
+                        <th>تحصیلاتی</th>
+                        <th>دیپلم/زیردیپلم</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>۱</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+
+                    <tr>
+                        <td>۲</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+
+                    <tr>
+                        <td>۳</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+
+                    <tr>
+                        <td>۴</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+
+                    <tr>
+                        <td>۵</td>
+                        <td>40</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </article>
+
+</section>
+
+
+</main>
+
+<script src="{{url_for('static',filename='js/result_page.js')}}\"></script>
+</body>
+</html>

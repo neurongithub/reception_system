@@ -243,11 +243,9 @@ feature_4: Reception page
 
     [manual reception]
         - user interface => modal box 
+
         
-
-
-
-
+        
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 feature_5 : User managment page 
@@ -274,7 +272,49 @@ feature_5 : User managment page
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+feature_6 : Result page 
+هدف این ویژگی این است که هر سه نوع کاربر اپلیکیشن : ادمین - اپراتور و کاربر معمولی نتایج افراد پذیرش شده را در یک صفحه وب با امکان فیلتر ها و جستجو هر شخص مشاهده کنند
 
+    [Responsibilities]:
+
+        -Show all accepted people (Deafult)
+        - Display accepted people with different filters such as: 
+            -- battalion & company فلیتر بر اساس گردان و گروهان - source: (soldiers_table)
+            -- provice and city فیلتر بر اساس استان - source: (soldiers_table)
+            -- health status فیلتر بر اساس وضعیت سلامت - source: (soldiers_table)
+            -- relegin فیلتر بر اساس دین و مذهب - source: (soldiers_table)
+            -- education فیلتر بر اساس میزان تحصیلات - source: (soldiers_table)
+            ** فیلتر فقط باید روی افراد پذیرش شده باشد یعینی مقدار ها برای افرادی که پذیرش نشده اند و یا  ثبت اولیه اند نمایش داده نمیشوند
+
+        - Ability to search for any person based on national code - source: (soldiers_table + course_table)
+
+    [data sources]:
+
+        - #table -> courses - اطلاعات دوره 
+        - #table -> soldiers - اطلاعات مربوطه به فراگیران 
+    
+    [refresh type]: 
+        - Manual refresh کاربر با تازه سازی صفحه اطلاعات را جدید می کند
+
+    [permissions]: 
+        Admin
+        → Full Result
+
+        Operator
+        → full Result
+
+        Viewer
+        → full result
+
+    [file structure]: 
+        .
+        ├── __init__.py
+        ├── __pycache__
+        │   ├── __init__.cpython-314.pyc
+        │   └── routes.cpython-314.pyc
+        ├── README.md
+        ├── routes.py
+        └── services.py
 
 
 

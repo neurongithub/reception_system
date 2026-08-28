@@ -30,10 +30,10 @@ def last_courses():
     require_admin()
     return render_with_time('last_courses.html')
 
-
-@dashboard_bp.route('/view/')
-def view():
-    login_redirect = require_login()
-    if login_redirect:
-        return login_redirect
-    return render_with_time('view.html')
+# this route canceld - i change it to result route 
+# @dashboard_bp.route('/view/')
+# def view():
+#     login_redirect = require_login()
+#     if login_redirect:
+#         return login_redirect
+#     return render_with_time('view.html')
